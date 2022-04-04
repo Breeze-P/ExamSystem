@@ -4,7 +4,7 @@
       <div class="clever-main-menu">
         <div class="classy-nav-container breakpoint-off">
           <nav class="classy-navbar justify-content-between" id="cleverNav">
-            <a class="nav-brand" href="/">硕果云</a>
+            <a class="nav-brand" href="/">HelloTeam</a>
             <div class="classy-menu">
               <div class="classynav">
                 <div class="search-area">

@@ -5,7 +5,7 @@
       <filter id="blur">
         <feGaussianBlur stdDeviation="5"></feGaussianBlur>
       </filter>
-      <image xlink:href="static/img/login/login-bg.jpg" width="1440" height="480" filter="url(#blur)"></image>
+      <image xlink:href="static/img/login/bg_web.jpg" width="1440" height="480" filter="url(#blur)"></image>
     </svg>
     <!-- 注册、登录表单 -->
     <div class="login-wrap">
@@ -57,7 +57,7 @@
                 </span>
               </span>
               </el-form-item>
-              <el-form-item prop="code">
+              <!-- <el-form-item prop="code">
                 <el-row :span="24">
                   <el-col :span="14">
                     <el-input :maxlength="login.code.len" v-model="login.form.code" auto-complete="off" placeholder="请输入验证码" @keyup.enter.native="handleLogin" />
@@ -69,7 +69,7 @@
                     </div>
                   </el-col>
                 </el-row>
-              </el-form-item>
+              </el-form-item> -->
               <el-form-item>
                 <el-button :loading="login.loading" type="primary" @click.native.prevent="handleLogin">登录</el-button>
               </el-form-item>
