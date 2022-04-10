@@ -3,7 +3,7 @@
     <el-row class="hero-area" type="flex" justify="center" align="middle">
       <el-col :span="24">
         <div class="hero-content">
-          <h2>硕果云教学管理平台</h2>
+          <h2>HelloTeam 教考分离系统</h2>
           <h4>基于Spring Cloud搭建的新一代微服务教学管理平台</h4>
           <h4>提供多租户、权限管理、考试、练习等功能</h4>
           <router-link to="/courses" class="btn clever-btn">开始使用</router-link>

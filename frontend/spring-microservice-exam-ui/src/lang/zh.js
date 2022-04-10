@@ -81,17 +81,17 @@ export default {
     lock: '锁屏'
   },
   login: {
-    title: '硕果云教育管理系统',
+    title: 'HelloTeam 教务分离系统',
     logIn: '登录',
     tenantCode: '单位ID',
     identifier: '账号',
     credential: '密码',
     password: '密码',
-    any: '随便填',
+    any: 'Good Try',
     thirdparty: '第三方登录',
     thirdpartyTips: '本地不能模拟，请结合自己业务进行模拟！！！',
-    forget: '忘记密码？',
-    info: '你咋忘不了吃呢？'
+    forget: 'Do u forget ur secret number?',
+    info: 'This is info'
   },
   documentation: {
     documentation: '文档',

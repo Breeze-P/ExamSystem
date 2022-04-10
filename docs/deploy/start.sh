@@ -1,7 +1,11 @@
 #!/bin/sh
 
 # 配置文件根目录，固定是spring-microservice-exam
+<<<<<<< HEAD
 DOCKERHOME=/D:/Develop/publicProjects/spring-microservice-exam-master/docs/deploy
+=======
+DOCKERHOME=/Users/bytedance/code/2022/ExamSystem/docs/deploy
+>>>>>>> web
 
 # 镜像名称前缀、标签
 BASE_IMAGE_NAME=registry.cn-hangzhou.aliyuncs.com/spring-microservice-exam

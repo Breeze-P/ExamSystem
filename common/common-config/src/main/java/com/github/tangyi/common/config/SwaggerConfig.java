@@ -80,7 +80,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("硕果云")
+                .title("HelloTeam")
                 .description("https://gitee.com/wells2333/spring-microservice-exam")
                 .termsOfServiceUrl("https://gitee.com/wells2333/spring-microservice-exam")
                 .contact(new Contact("tangyi", "https://gitee.com/wells2333/spring-microservice-exam", "1633736729@qq.com"))
