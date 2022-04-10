@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 /**
  * ID生成配置
  *
- * @author tangyi
- * @date 2019/4/26 10:47
+ * @author zdz
+ * @date 2022/04/10 14:48
  */
 @Data
 @Configuration
@@ -24,4 +24,5 @@ public class SnowflakeProperties {
      * 数据中心ID
      */
     private String dataCenterId;
+
 }

@@ -7,10 +7,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 用户Vo
+ * 用户 VO类
  *
- * @author tangyi
- * @date 2018-08-25 13:57
+ * @author zdz
+ * @date 2022/04/10 14:55
  */
 @Data
 public class UserVo extends BaseEntity<UserVo> {

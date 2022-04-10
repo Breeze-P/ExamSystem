@@ -9,13 +9,16 @@ import org.springframework.context.annotation.Configuration;
 /**
  * ID生成配置
  *
- * @author tangyi
- * @date 2019/4/26 11:17
+ * @author zdz
+ * @date 2022/04/10 14:53
  */
 @Configuration
 @AllArgsConstructor
 public class SnowFlake {
 
+	/**
+	 * SnowFlake属性
+	 */
 	private final SnowflakeProperties snowflakeProperties;
 
 	@Bean
@@ -23,4 +26,5 @@ public class SnowFlake {
 		return new SnowflakeIdWorker(Integer.parseInt(snowflakeProperties.getWorkId()),
 				Integer.parseInt(snowflakeProperties.getDataCenterId()));
 	}
+
 }

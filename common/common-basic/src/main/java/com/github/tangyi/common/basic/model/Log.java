@@ -6,10 +6,10 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 /**
- * 日志
+ * 日志模型类
  *
- * @author tangyi
- * @date 2018/10/31 20:29
+ * @author zdz
+ * @date 2022/04/10 14:47
  */
 @Data
 public class Log extends BaseEntity<Log> {

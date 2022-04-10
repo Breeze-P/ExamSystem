@@ -4,10 +4,10 @@ import com.github.tangyi.common.core.persistence.BaseEntity;
 import lombok.Data;
 
 /**
- * 附件VO
+ * 附件 VO类
  *
- * @author tangyi
- * @date 2019/1/1 20:40
+ * @author zdz
+ * @date 2022/04/10 14:54
  */
 @Data
 public class AttachmentVo extends BaseEntity<AttachmentVo> {
@@ -36,4 +36,5 @@ public class AttachmentVo extends BaseEntity<AttachmentVo> {
      * 业务模块
      */
     private String busiModule;
+
 }

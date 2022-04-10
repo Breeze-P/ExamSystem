@@ -4,8 +4,10 @@ import com.github.tangyi.common.core.persistence.BaseEntity;
 import lombok.Data;
 
 /**
- * @author tangyi
- * @date 2018-08-28 20:40
+ * 菜单 VO类
+ *
+ * @author zdz
+ * @date 2022/04/10 14:55
  */
 @Data
 public class MenuVo extends BaseEntity<MenuVo> {
@@ -54,4 +56,5 @@ public class MenuVo extends BaseEntity<MenuVo> {
      * VUE页面
      */
     private String component;
+
 }

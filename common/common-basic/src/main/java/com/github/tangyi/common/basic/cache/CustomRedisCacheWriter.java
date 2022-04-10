@@ -20,12 +20,13 @@ import java.util.function.Function;
 /**
  * 源码：org.springframework.data.redis.cache.DefaultRedisCacheWriter
  *
- * @author tangyi
- * @date 2019/6/9 15:28
+ * @author zdz
+ * @date 2022/04/10 14:51
  */
 public class CustomRedisCacheWriter implements RedisCacheWriter {
 
     private final RedisConnectionFactory connectionFactory;
+
     private final Duration sleepTime;
 
     /**

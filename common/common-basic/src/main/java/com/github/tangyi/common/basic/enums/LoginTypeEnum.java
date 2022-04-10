@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 登录类型
+ * 登录类型枚举类
  *
- * @author tangyi
- * @date 2019/07/02 09:45
+ * @author zdz
+ * @date 2022/04/10 14:43
  */
 @Getter
 @AllArgsConstructor
@@ -47,4 +47,5 @@ public enum LoginTypeEnum {
      * 接口uri
      */
     private String uri;
+
 }

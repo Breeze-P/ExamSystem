@@ -5,8 +5,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author tangyi
- * @date 2019/4/26 11:54
+ * 一些系统属性配置
+ *
+ * @author zdz
+ * @date 2022/04/10 14:48
  */
 @Data
 @Configuration
@@ -33,6 +35,9 @@ public class SysProperties {
      */
     private String cacheExpire;
 
+    /**
+     * 网关
+     */
     private String gatewaySecret;
 
     /**
@@ -69,4 +74,5 @@ public class SysProperties {
      * 支持预览的附件后缀名，多个用逗号隔开，如：png,jpeg
      */
     private String canPreview;
+
 }

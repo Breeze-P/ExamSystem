@@ -23,13 +23,19 @@ import java.util.Map;
 /**
  * redis配置
  *
- * @author tangyi
- * @date 2019/3/16 20:40
+ * @author zdz
+ * @date 2022/04/10 14:51
  */
 @Configuration
 @EnableCaching
 public class RedisConfig {
 
+    /**
+     * 配置redis template
+     *
+     * @param redisConnectionFactory redis connection工厂类
+     * @return 配置好的redis template实例
+     */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
@@ -63,4 +69,5 @@ public class RedisConfig {
             ObjectProvider<List<CacheManagerCustomizer<?>>> customizers) {
         return new CacheManagerCustomizers(customizers.getIfAvailable());
     }
+
 }
