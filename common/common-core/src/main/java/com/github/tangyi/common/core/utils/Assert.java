@@ -1,8 +1,10 @@
 package com.github.tangyi.common.core.utils;
 
 /**
- * @author tangyi
- * @date 2019/1/23 19:59
+ * 封装常见的断言操作的utils类
+ *
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 public class Assert {
 
@@ -11,12 +13,13 @@ public class Assert {
      *
      * @param object  object
      * @param message message
-     * @author tangyi
-     * @date 2019/01/23 20:00
+     * @author zdz
+     * @date 2022/04/10 15:24
      */
     public static void notNull(Object object, String message) {
         if (object == null) {
             throw new IllegalArgumentException(message);
         }
     }
+
 }

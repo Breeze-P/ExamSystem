@@ -1,10 +1,10 @@
 package com.github.tangyi.common.core.web;
 
 /**
- * 基础Controller
+ * Controller基类
  *
- * @author tangyi
- * @date 2018-08-23 12:01
+ * @author zdz
+ * @date 2022/04/10 15:22
  */
 public abstract class BaseController {
 

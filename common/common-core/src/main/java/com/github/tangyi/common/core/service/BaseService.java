@@ -3,8 +3,8 @@ package com.github.tangyi.common.core.service;
 /**
  * Service基类
  *
- * @author tangyi
- * @date 2018-08-24 18:54
+ * @author zdz
+ * @date 2022/04/10 15:21
  */
 public abstract class BaseService {
 }

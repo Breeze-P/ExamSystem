@@ -22,10 +22,10 @@ import java.util.Hashtable;
 import java.util.Random;
 
 /**
- * 二维码工具类
+ * 封装常见的二维码相关操作的utils类
  *
- * @author tangyi
- * @date 2019/3/22 15:24
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 public class QRCodeUtils {
 

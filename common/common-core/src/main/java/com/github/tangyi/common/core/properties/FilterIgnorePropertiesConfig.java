@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 不做权限拦截的URL
+ * 存储不进行权限拦截操作的URL
  *
- * @author tangyi
- * @date 2019/3/16 20:39
+ * @author zdz
+ * @date 2022/04/10 15:16
  */
 @Data
 @Configuration
@@ -22,8 +22,14 @@ import java.util.List;
 @ConfigurationProperties(prefix = "ignore")
 public class FilterIgnorePropertiesConfig {
 
+    /**
+     * URL
+     */
     private List<String> urls = new ArrayList<>();
 
+    /**
+     * Client名
+     */
     private List<String> clients = new ArrayList<>();
 
 }

@@ -1,10 +1,10 @@
 package com.github.tangyi.common.core.exceptions;
 
 /**
- * 验证码过期异常
+ * 验证码过期异常类
  *
- * @author tangyi
- * @date 2019/3/29 12:07
+ * @author zdz
+ * @date 2022/04/10 15:16
  */
 public class ValidateCodeExpiredException extends CommonException {
 
@@ -16,4 +16,5 @@ public class ValidateCodeExpiredException extends CommonException {
     public ValidateCodeExpiredException(String msg) {
         super(msg);
     }
+
 }

@@ -5,10 +5,13 @@ import jp.sourceforge.qrcode.data.QRCodeImage;
 import java.awt.image.BufferedImage;
 
 /**
- * @author tangyi
- * @date 2019/3/22 15:27
+ * 二维码实体类
+ *
+ * @author zdz
+ * @date 2022/04/10 15:28
  */
 public class QRCode implements QRCodeImage {
+
     BufferedImage bufImg;
 
     public QRCode(BufferedImage bufImg) {
@@ -29,5 +32,6 @@ public class QRCode implements QRCodeImage {
     public int getWidth() {
         return bufImg.getWidth();
     }
+
 }
 

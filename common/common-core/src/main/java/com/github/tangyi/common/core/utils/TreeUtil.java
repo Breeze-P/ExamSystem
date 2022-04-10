@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author tangyi
- * @date 2018-10-01 15:38
+ * 封装常见的树实体操作的utils类
+ *
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 public class TreeUtil {
 
@@ -33,4 +35,5 @@ public class TreeUtil {
         });
         return (List<T>) treeEntityArrayList;
     }
+
 }

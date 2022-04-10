@@ -3,10 +3,10 @@ package com.github.tangyi.common.core.utils;
 import java.util.UUID;
 
 /**
- * id生成工具类
+ * 封装ID生成操作的utils类
  *
- * @author tangyi
- * @date 2018-08-23 12:03
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 public class IdGen {
 
@@ -27,4 +27,5 @@ public class IdGen {
     public static long snowflakeId() {
         return SpringContextHolder.getApplicationContext().getBean(SnowflakeIdWorker.class).nextId();
     }
+
 }

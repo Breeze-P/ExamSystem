@@ -6,10 +6,10 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * Crud Mapper
+ * 封装常用Crud操作的DAO类
  *
- * @author tangyi
- * @date 2018-08-24 18:59
+ * @author zdz
+ * @date 2022/04/10 15:16
  */
 public interface CrudMapper<T> extends BaseMapper {
 
@@ -84,5 +84,6 @@ public interface CrudMapper<T> extends BaseMapper {
      * @return int
      */
     int deleteAll(@Param(CommonConstant.PARAM_IDS) Long[] ids);
+
 }
 

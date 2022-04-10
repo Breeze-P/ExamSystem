@@ -1,10 +1,10 @@
 package com.github.tangyi.common.core.exceptions;
 
 /**
- * token非法异常
+ * token非法异常类
  *
- * @author tangyi
- * @date 2019/5/27 17:52
+ * @author zdz
+ * @date 2022/04/10 15:16
  */
 public class InvalidAccessTokenException extends CommonException {
 
@@ -16,4 +16,5 @@ public class InvalidAccessTokenException extends CommonException {
     public InvalidAccessTokenException(String msg) {
         super(msg);
     }
+
 }

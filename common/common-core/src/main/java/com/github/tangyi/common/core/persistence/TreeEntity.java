@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * 树形实体
  *
- * @author tangyi
- * @date 2018-09-13 20:40
+ * @author zdz
+ * @date 2022/04/10 15:19
  */
 @Data
 public abstract class TreeEntity<T> extends BaseEntity<T> {
@@ -37,12 +37,18 @@ public abstract class TreeEntity<T> extends BaseEntity<T> {
     protected Integer sort;
 
     /**
-     * 子节点
+     * 子节点集合
      */
     protected List<TreeEntity> children = new ArrayList<>();
 
+    /**
+     * 添加结点
+     *
+     * @param node 新结点
+     */
     public void add(TreeEntity node) {
         children.add(node);
     }
+
 }
 

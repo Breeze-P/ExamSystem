@@ -1,10 +1,10 @@
 package com.github.tangyi.common.core.exceptions;
 
 /**
- * 验证码错误异常
+ * 验证码错误异常类
  *
- * @author tangyi
- * @date 2019/3/18 16:46
+ * @author zdz
+ * @date 2022/04/10 15:16
  */
 public class InvalidValidateCodeException extends CommonException {
 
@@ -16,4 +16,5 @@ public class InvalidValidateCodeException extends CommonException {
     public InvalidValidateCodeException(String msg) {
         super(msg);
     }
+
 }

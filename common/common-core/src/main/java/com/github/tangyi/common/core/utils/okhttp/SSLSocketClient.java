@@ -6,10 +6,10 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
 /**
- * SSLSocketFactory
+ * SSL Socket Factory类
  *
- * @author tangyi
- * @date 2018-12-04 16:53
+ * @author zdz
+ * @date 2022/04/10 15:29
  */
 public class SSLSocketClient {
 

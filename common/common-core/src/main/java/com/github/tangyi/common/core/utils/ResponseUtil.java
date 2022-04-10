@@ -4,8 +4,10 @@ import com.github.tangyi.common.core.constant.ApiMsg;
 import com.github.tangyi.common.core.model.ResponseBean;
 
 /**
- * @author tangyi
- * @date 2019-10-08 12:03
+ * 封装常见的response操作的utils类
+ *
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 public class ResponseUtil {
 
@@ -13,11 +15,13 @@ public class ResponseUtil {
 	}
 
 	/**
-	 * 是否成功
+	 * 返回请求是否成功
+	 *
 	 * @param responseBean responseBean
 	 * @return boolean
 	 */
 	public static boolean isSuccess(ResponseBean<?> responseBean) {
 		return responseBean != null && responseBean.getCode() == ApiMsg.KEY_SUCCESS;
 	}
+
 }

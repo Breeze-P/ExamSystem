@@ -7,10 +7,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
- * Servlet工具类
+ * 封装常见的Servlet操作的utils类
  *
- * @author tangyi
- * @date 2018/10/30 22:34
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 public class Servlets {
 
@@ -53,4 +53,5 @@ public class Servlets {
         }
         return result;
     }
+
 }

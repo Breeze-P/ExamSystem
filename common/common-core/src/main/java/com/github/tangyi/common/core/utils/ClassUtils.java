@@ -12,8 +12,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 /**
- * @author tangyi
- * @date 2019/3/12 23:45
+ * 封装常见的类操作的utils类
+ *
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 public class ClassUtils extends org.springframework.util.ClassUtils {
 

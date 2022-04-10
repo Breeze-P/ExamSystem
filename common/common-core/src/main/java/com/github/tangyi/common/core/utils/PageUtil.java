@@ -4,10 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 /**
- * 分页查询工具类
+ * 封装常见的分页查询操作的utils类
  *
- * @author tangyi
- * @date 2018/12/4 20:16
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 public class PageUtil {
 

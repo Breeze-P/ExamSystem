@@ -8,10 +8,10 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 /**
- * 日期工具类
+ * 封装常见的日期操作的utils类
  *
- * @author tangyi
- * @date 2019/4/28 16:03
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 @Slf4j
 public class DateUtils {

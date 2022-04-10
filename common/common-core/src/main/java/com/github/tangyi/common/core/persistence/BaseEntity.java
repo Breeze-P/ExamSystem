@@ -14,8 +14,8 @@ import java.util.Date;
 /**
  * Entity基类
  *
- * @author tangyi
- * @date 2018-08-24 18:58
+ * @author zdz
+ * @date 2022/04/10 14:54
  */
 @Data
 @NoArgsConstructor
@@ -23,6 +23,9 @@ public class BaseEntity<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * ID
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     protected Long id;
 
@@ -71,6 +74,10 @@ public class BaseEntity<T> implements Serializable {
 	 */
 	protected String ext;
 
+    /**
+     * 构造器
+     * @param id ID
+     */
     public BaseEntity(Long id) {
         this();
         this.id = id;
@@ -119,5 +126,6 @@ public class BaseEntity<T> implements Serializable {
     	this.applicationCode = null;
     	this.tenantCode = null;
 	}
+
 }
 

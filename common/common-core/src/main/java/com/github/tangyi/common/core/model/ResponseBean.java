@@ -6,10 +6,10 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 封装返回数据
+ * 封装返回数据的可序列化Bean类
  *
- * @author tangyi
- * @date 2019/3/17 12:08
+ * @author zdz
+ * @date 2022/04/10 15:16
  */
 @Data
 public class ResponseBean<T> implements Serializable {
@@ -43,4 +43,5 @@ public class ResponseBean<T> implements Serializable {
 		this.data = data;
 		this.msg = msg;
 	}
+	
 }

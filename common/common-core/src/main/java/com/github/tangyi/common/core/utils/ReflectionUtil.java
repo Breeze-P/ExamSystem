@@ -8,10 +8,10 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
- * 反射工具类
+ * 封装常见的反射操作的utils类
  *
- * @author tangyi
- * @date 2018-08-25 17:28
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 public class ReflectionUtil {
 

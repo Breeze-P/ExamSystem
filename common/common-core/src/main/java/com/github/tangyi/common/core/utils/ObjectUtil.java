@@ -1,8 +1,10 @@
 package com.github.tangyi.common.core.utils;
 
 /**
- * @author tangyi
- * @date 2018/11/26 22:47
+ * 封装常见的Object操作的utils类
+ *
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 public class ObjectUtil {
 

@@ -9,15 +9,21 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 /**
- * 日志拦截器
+ * 日志拦截器类
  *
- * @author tangyi
- * @date 2018-09-12 17:03
+ * @author zdz
+ * @date 2022/04/10 15:31
  */
 public class LogInterceptor implements Interceptor {
 
     private static Logger logger = LoggerFactory.getLogger(LogInterceptor.class);
 
+    /**
+     * 具体拦截操作逻辑
+     *
+     * @param chain Chain
+     * @return 拦截结果反馈
+     */
     @Override
     public Response intercept(Chain chain) throws IOException {
         long t1 = System.nanoTime();
@@ -30,4 +36,5 @@ public class LogInterceptor implements Interceptor {
                 (t2 - t1) / 1e6d, response.headers()));
         return response;
     }
+
 }

@@ -1,10 +1,10 @@
 package com.github.tangyi.common.core.constant;
 
 /**
- * 服务名常量
+ * 封装常用的服务名常量
  *
- * @author tangyi
- * @date 2019/3/23 23:35
+ * @author zdz
+ * @date 2022/04/10 15:14
  */
 public class ServiceConstant {
 
@@ -27,4 +27,5 @@ public class ServiceConstant {
      * 消息中心服务名称
      */
     public static final String MSC_SERVICE = "msc-service";
+
 }

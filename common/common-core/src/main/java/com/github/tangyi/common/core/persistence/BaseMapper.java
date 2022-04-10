@@ -1,10 +1,10 @@
 package com.github.tangyi.common.core.persistence;
 
 /**
- * Dao接口
+ * DAO接口基类
  *
- * @author tangyi
- * @date 2018-08-24 18:59
+ * @author zdz
+ * @date 2022/04/10 15:16
  */
 public interface BaseMapper {
 }

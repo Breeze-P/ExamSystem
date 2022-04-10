@@ -34,5 +34,6 @@ public class AesUtil {
 		byte[] result = cipher.doFinal(Base64.decode(data.getBytes(StandardCharsets.UTF_8)));
 		return new String(result, StandardCharsets.UTF_8);
 	}
+
 }
 

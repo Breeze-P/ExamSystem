@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 /**
  * 以静态变量保存Spring ApplicationContext
  *
- * @author tangyi
- * @date 2018-08-24 19:04
+ * @author zdz
+ * @date 2022/04/10 15:30
  */
 @Service
 @Lazy(false)
@@ -53,4 +53,5 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
         }
         applicationContext.publishEvent(event);
     }
+
 }

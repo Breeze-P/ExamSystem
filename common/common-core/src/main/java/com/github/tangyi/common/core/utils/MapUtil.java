@@ -13,8 +13,10 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 /**
- * @author tangyi
- * @date 2018/11/26 22:29
+ * 封装常见的Map操作的utils类
+ *
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 public class MapUtil {
 

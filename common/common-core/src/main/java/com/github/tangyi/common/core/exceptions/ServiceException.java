@@ -1,11 +1,10 @@
 package com.github.tangyi.common.core.exceptions;
 
 /**
+ * 服务异常类
  *
- * 服务异常
- *
- * @author tangyi
- * @date 2019-10-08 12:56
+ * @author zdz
+ * @date 2022/04/10 15:16
  */
 public class ServiceException extends CommonException {
 
@@ -17,4 +16,5 @@ public class ServiceException extends CommonException {
 	public ServiceException(String msg) {
 		super(msg);
 	}
+
 }

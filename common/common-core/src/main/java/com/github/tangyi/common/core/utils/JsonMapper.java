@@ -9,7 +9,10 @@ import org.apache.commons.lang.StringUtils;
 import java.io.IOException;
 
 /**
- * Created by tangyi on 2017/3/14.
+ * 封装常见的Json数据操作的utils类
+ *
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 @Slf4j
 public class JsonMapper extends ObjectMapper {
@@ -25,6 +28,12 @@ public class JsonMapper extends ObjectMapper {
         return mapper;
     }
 
+    /**
+     * 将所给对象转化为Json对象
+     *
+     * @param object 所给对象
+     * @return 转化的Json对象
+     */
     public String toJson(Object object) {
         try {
             return this.writeValueAsString(object);

@@ -1,8 +1,10 @@
 package com.github.tangyi.common.core.constant;
 
 /**
- * @author tangyi
- * @date 2019/4/2 20:48
+ * 封装消息队列常用的常量
+ *
+ * @author zdz
+ * @date 2022/04/10 15:11
  */
 public class MqConstant {
 
@@ -10,4 +12,5 @@ public class MqConstant {
      * 提交考试
      */
     public static final String SUBMIT_EXAMINATION_QUEUE = "submit_examination_queue";
+
 }

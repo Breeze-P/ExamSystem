@@ -1,10 +1,10 @@
 package com.github.tangyi.common.core.constant;
 
 /**
- * 公用常量
+ * 封装常用的公用常量
  *
- * @author tangyi
- * @date 2018-08-23 12:00
+ * @author zdz
+ * @date 2022/04/10 15:11
  */
 public class CommonConstant {
 
@@ -191,5 +191,6 @@ public class CommonConstant {
 	 * 逗号
 	 */
 	public static final String COMMA = ",";
+
 }
 

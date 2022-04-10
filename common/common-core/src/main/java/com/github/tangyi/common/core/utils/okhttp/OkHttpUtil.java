@@ -13,10 +13,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * okHttp工具类
+ * 封装常见的OkHttp相关操作的utils类
  *
- * @author tangyi
- * @date 2018-09-07 20:31
+ * @author zdz
+ * @date 2022/04/10 15:29
  */
 public class OkHttpUtil {
 

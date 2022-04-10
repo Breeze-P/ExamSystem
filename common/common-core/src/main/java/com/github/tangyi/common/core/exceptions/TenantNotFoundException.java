@@ -1,10 +1,10 @@
 package com.github.tangyi.common.core.exceptions;
 
 /**
- * 租户不存在异常
+ * 租户不存在异常类
  *
- * @author tangyi
- * @date 2019/5/26 10:14
+ * @author zdz
+ * @date 2022/04/10 15:16
  */
 public class TenantNotFoundException extends CommonException {
 
@@ -16,4 +16,5 @@ public class TenantNotFoundException extends CommonException {
     public TenantNotFoundException(String msg) {
         super(msg);
     }
+
 }

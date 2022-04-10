@@ -11,11 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author tangyi
- * @date 2018-08-25 17:22
+ * 封装常用的Service Service
+ *
+ * @author zdz
+ * @date 2022/04/10 15:21
  */
 public abstract class CrudService<D extends CrudMapper<T>, T extends BaseEntity<T>> extends BaseService {
 
+    /**
+     * Dao类
+     */
     @Autowired
     protected D dao;
 
@@ -141,5 +146,6 @@ public abstract class CrudService<D extends CrudMapper<T>, T extends BaseEntity<
     public int update(T entity) {
         return dao.update(entity);
     }
+
 }
 

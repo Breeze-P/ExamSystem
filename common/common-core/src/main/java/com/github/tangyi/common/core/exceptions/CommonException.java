@@ -1,18 +1,16 @@
 package com.github.tangyi.common.core.exceptions;
 
 /**
- * 公共异常
+ * 常见公共异常类
  *
- * @author tangyi
- * @date 2019/3/16 20:28
+ * @author zdz
+ * @date 2022/04/10 15:16
  */
 public class CommonException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    public CommonException() {
-
-    }
+    public CommonException() {}
 
     public CommonException(String msg) {
         super(msg);

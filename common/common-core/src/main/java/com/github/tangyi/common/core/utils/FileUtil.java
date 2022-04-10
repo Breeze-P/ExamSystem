@@ -5,10 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.File;
 
 /**
- * 文件工具类
+ * 封装常见的文件操作的utils类
  *
- * @author tangyi
- * @date 2018/10/30 22:05
+ * @author zdz
+ * @date 2022/04/10 15:24
  */
 @Slf4j
 public class FileUtil {
