@@ -23,10 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Swagger配置
+ * Swagger配置类
  *
- * @author tangyi
- * @date 2019/3/26 16:26
+ * @author zdz
+ * @date 2022/04/10 15:04
  */
 @Configuration
 @EnableSwagger2
@@ -81,9 +81,9 @@ public class SwaggerConfig implements WebMvcConfigurer {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("硕果云")
-                .description("https://gitee.com/wells2333/spring-microservice-exam")
-                .termsOfServiceUrl("https://gitee.com/wells2333/spring-microservice-exam")
-                .contact(new Contact("tangyi", "https://gitee.com/wells2333/spring-microservice-exam", "1633736729@qq.com"))
+                .description("https://github.com/Breeze-P/ExamSystem")
+                .termsOfServiceUrl("https://github.com/Breeze-P/ExamSystem")
+                .contact(new Contact("zdz", "https://github.com/Breeze-P/ExamSystem", "1015864587@qq.com"))
                 .version("3.7.0")
                 .build();
     }

@@ -24,8 +24,8 @@ import java.util.stream.Collectors;
 /**
  * 全局异常处理
  *
- * @author tangyi
- * @date 2019/05/25 15:36
+ * @author zdz
+ * @date 2022/04/10 15:10
  */
 @RestControllerAdvice
 public class CustomGlobalExceptionHandler {
@@ -56,7 +56,7 @@ public class CustomGlobalExceptionHandler {
      * 参数类型转换错误
      *
      * @param exception 错误
-     * @return 错误信息 
+     * @return 错误信息
      */
     @ExceptionHandler(HttpMessageConversionException.class)
     public ResponseEntity<ResponseBean<String>> parameterTypeException(HttpMessageConversionException exception) {
@@ -112,4 +112,5 @@ public class CustomGlobalExceptionHandler {
             return new CommonException(JsonMapper.toJsonString(errorMsgs));
         }
     }
+
 }
