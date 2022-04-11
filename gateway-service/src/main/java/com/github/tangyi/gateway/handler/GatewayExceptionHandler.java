@@ -30,8 +30,8 @@ import java.util.List;
 /**
  * 网关统一异常处理
  *
- * @author tangyi
- * @date 2019/3/18 20:52
+ * @author zdz
+ * @date 2022/04/11 21:56
  */
 @Slf4j
 public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
@@ -56,20 +56,6 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
      */
     private ThreadLocal<ResponseBean<?>> exceptionHandlerResult = new ThreadLocal<>();
 
-    public void setMessageReaders(List<HttpMessageReader<?>> messageReaders) {
-        Assert.notNull(messageReaders, "'messageReaders' must not be null");
-        this.messageReaders = messageReaders;
-    }
-
-    public void setViewResolvers(List<ViewResolver> viewResolvers) {
-        this.viewResolvers = viewResolvers;
-    }
-
-    public void setMessageWriters(List<HttpMessageWriter<?>> messageWriters) {
-        Assert.notNull(messageWriters, "'messageWriters' must not be null");
-        this.messageWriters = messageWriters;
-    }
-
     /**
      * 处理逻辑
      *
@@ -83,38 +69,40 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
         // 返回给前端用的状态码
         int keyCode = ApiMsg.KEY_UNKNOWN;
         int msgCode = ApiMsg.ERROR;
+
         if (ex instanceof NotFoundException) {
-        	// 服务不可用
-			keyCode = ApiMsg.KEY_SERVICE;
-			msgCode = ApiMsg.UNAVAILABLE;
+            // 服务不可用
+            keyCode = ApiMsg.KEY_SERVICE;
+            msgCode = ApiMsg.UNAVAILABLE;
         } else if (ex instanceof ResponseStatusException) {
+            // 服务响应错误
             ResponseStatusException responseStatusException = (ResponseStatusException) ex;
             msg = responseStatusException.getMessage();
-			// 服务响应错误
-			keyCode = ApiMsg.KEY_SERVICE;
-			msgCode = ApiMsg.ERROR;
+            keyCode = ApiMsg.KEY_SERVICE;
+            msgCode = ApiMsg.ERROR;
         } else if (ex instanceof InvalidValidateCodeException) {
-            msg = ex.getMessage();
             // 验证码错误
-			keyCode = ApiMsg.KEY_VALIDATE_CODE;
-		} else if (ex instanceof ValidateCodeExpiredException) {
             msg = ex.getMessage();
+            keyCode = ApiMsg.KEY_VALIDATE_CODE;
+        } else if (ex instanceof ValidateCodeExpiredException) {
             // 验证码过期
-			keyCode = ApiMsg.KEY_VALIDATE_CODE;
-			msgCode = ApiMsg.EXPIRED;
-        } else if (ex instanceof InvalidAccessTokenException) {
             msg = ex.getMessage();
+            keyCode = ApiMsg.KEY_VALIDATE_CODE;
+            msgCode = ApiMsg.EXPIRED;
+        } else if (ex instanceof InvalidAccessTokenException) {
             // token非法
-			keyCode = ApiMsg.KEY_TOKEN;
-			msgCode = ApiMsg.INVALID;
+            msg = ex.getMessage();
+            keyCode = ApiMsg.KEY_TOKEN;
+            msgCode = ApiMsg.INVALID;
         }
         // 封装响应体
         ResponseBean<String> responseBean = new ResponseBean<>(msg, keyCode, msgCode);
         // 错误记录
         ServerHttpRequest request = exchange.getRequest();
         log.error("GatewayExceptionHandler: {}, error: {}", request.getPath(), ex.getMessage());
-        if (exchange.getResponse().isCommitted())
+        if (exchange.getResponse().isCommitted()) {
             return Mono.error(ex);
+        }
         exceptionHandlerResult.set(responseBean);
         ServerRequest newRequest = ServerRequest.create(exchange, this.messageReaders);
         return RouterFunctions.route(RequestPredicates.all(), this::renderErrorResponse).route(newRequest)
@@ -123,6 +111,12 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
                 .flatMap((response) -> write(exchange, response));
     }
 
+    /**
+     * 渲染error响应
+     *
+     * @param request 请求
+     * @return error响应
+     */
     private Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
         ResponseBean<?> responseBean = exceptionHandlerResult.get();
         return ServerResponse.status(HttpStatus.OK)
@@ -130,12 +124,28 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
                 .body(BodyInserters.fromObject(responseBean));
     }
 
-    private Mono<? extends Void> write(ServerWebExchange exchange,
-                                       ServerResponse response) {
+    private Mono<? extends Void> write(ServerWebExchange exchange, ServerResponse response) {
         exchange.getResponse().getHeaders().setContentType(response.headers().getContentType());
         return response.writeTo(exchange, new ResponseContext());
     }
 
+    public void setMessageReaders(List<HttpMessageReader<?>> messageReaders) {
+        Assert.notNull(messageReaders, "'messageReaders' must not be null");
+        this.messageReaders = messageReaders;
+    }
+
+    public void setMessageWriters(List<HttpMessageWriter<?>> messageWriters) {
+        Assert.notNull(messageWriters, "'messageWriters' must not be null");
+        this.messageWriters = messageWriters;
+    }
+
+    public void setViewResolvers(List<ViewResolver> viewResolvers) {
+        this.viewResolvers = viewResolvers;
+    }
+
+    /**
+     * 自定义响应上下文
+     */
     private class ResponseContext implements ServerResponse.Context {
 
         @Override
@@ -148,4 +158,5 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
             return GatewayExceptionHandler.this.viewResolvers;
         }
     }
+
 }

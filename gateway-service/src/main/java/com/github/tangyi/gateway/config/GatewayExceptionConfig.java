@@ -17,8 +17,8 @@ import java.util.List;
 /**
  * 网关异常处理
  *
- * @author tangyi
- * @date 2019/3/18 20:50
+ * @author zdz
+ * @date 2022/04/11 21:50
  */
 @Configuration
 public class GatewayExceptionConfig {
@@ -29,11 +29,13 @@ public class GatewayExceptionConfig {
     @Primary
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public ErrorWebExceptionHandler errorWebExceptionHandler(ObjectProvider<List<ViewResolver>> viewResolversProvider, ServerCodecConfigurer serverCodecConfigurer) {
+    public ErrorWebExceptionHandler errorWebExceptionHandler(
+            ObjectProvider<List<ViewResolver>> viewResolversProvider, ServerCodecConfigurer serverCodeConfigurer) {
         GatewayExceptionHandler gatewayExceptionHandler = new GatewayExceptionHandler();
         gatewayExceptionHandler.setViewResolvers(viewResolversProvider.getIfAvailable(Collections::emptyList));
-        gatewayExceptionHandler.setMessageWriters(serverCodecConfigurer.getWriters());
-        gatewayExceptionHandler.setMessageReaders(serverCodecConfigurer.getReaders());
+        gatewayExceptionHandler.setMessageWriters(serverCodeConfigurer.getWriters());
+        gatewayExceptionHandler.setMessageReaders(serverCodeConfigurer.getReaders());
         return gatewayExceptionHandler;
     }
+
 }

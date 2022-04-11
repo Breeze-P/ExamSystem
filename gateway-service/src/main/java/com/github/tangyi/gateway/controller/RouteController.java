@@ -16,10 +16,9 @@ import javax.validation.Valid;
 
 /**
  * 路由controller
- * TODO：增加security认证
  *
- * @author tangyi
- * @date 2019/4/2 15:03
+ * @author zdz
+ * @date 2022/04/11 23:08
  */
 @Slf4j
 @AllArgsConstructor
@@ -27,14 +26,16 @@ import javax.validation.Valid;
 @RequestMapping("/api/route/v1/route")
 public class RouteController extends BaseController {
 
+    /**
+     * 路由service
+     */
     private final RouteService routeService;
 
     /**
      * 根据id获取路由
-     * @param id id
-     * @return Route
-     * @author tangyi
-     * @date 2019/4/2 15:09
+     *
+     * @param id ID
+     * @return 路由信息
      */
     @GetMapping("/{id}")
     public Route get(@PathVariable Long id) {
@@ -48,37 +49,36 @@ public class RouteController extends BaseController {
 
     /**
      * 路由分页查询
+     *
      * @param pageNum  pageNum
      * @param pageSize pageSize
      * @param sort     sort
      * @param order    order
      * @param route    route
      * @return PageInfo
-     * @author tangyi
-     * @date 2019/4/2 15:09
      */
     @GetMapping("routeList")
-    public PageInfo<Route> userList(@RequestParam(value = CommonConstant.PAGE_NUM, required = false, defaultValue = CommonConstant.PAGE_NUM_DEFAULT) String pageNum,
-                                    @RequestParam(value = CommonConstant.PAGE_SIZE, required = false, defaultValue = CommonConstant.PAGE_SIZE_DEFAULT) String pageSize,
-                                    @RequestParam(value = CommonConstant.SORT, required = false, defaultValue = CommonConstant.PAGE_SORT_DEFAULT) String sort,
-                                    @RequestParam(value = CommonConstant.ORDER, required = false, defaultValue = CommonConstant.PAGE_ORDER_DEFAULT) String order,
-                                    Route route) {
+    public PageInfo<Route> userList(
+            @RequestParam(value = CommonConstant.PAGE_NUM, required = false, defaultValue = CommonConstant.PAGE_NUM_DEFAULT) String pageNum,
+            @RequestParam(value = CommonConstant.PAGE_SIZE, required = false, defaultValue = CommonConstant.PAGE_SIZE_DEFAULT) String pageSize,
+            @RequestParam(value = CommonConstant.SORT, required = false, defaultValue = CommonConstant.PAGE_SORT_DEFAULT) String sort,
+            @RequestParam(value = CommonConstant.ORDER, required = false, defaultValue = CommonConstant.PAGE_ORDER_DEFAULT) String order,
+            Route route) {
         return routeService.findPage(PageUtil.pageInfo(pageNum, pageSize, sort, order), route);
     }
 
     /**
      * 修改路由
-     * @param route route
+     *
+     * @param route 路由信息
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/4/2 15:09
      */
     @PutMapping
     public ResponseBean<Boolean> updateRoute(@RequestBody @Valid Route route) {
         try {
             route.setCommonValue("", "", "");
-			return new ResponseBean<>(routeService.update(route) > 0);
-		} catch (Exception e) {
+            return new ResponseBean<>(routeService.update(route) > 0);
+        } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new CommonException(e.getMessage());
         }
@@ -86,10 +86,9 @@ public class RouteController extends BaseController {
 
     /**
      * 创建路由
-     * @param route route
+     *
+     * @param route 路由信息
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/4/2 15:09
      */
     @PostMapping
     public ResponseBean<Boolean> add(@RequestBody @Valid Route route) {
@@ -103,15 +102,14 @@ public class RouteController extends BaseController {
 
     /**
      * 根据id删除路由
+     *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/4/2 15:09
      */
     @DeleteMapping("/{id}")
     public ResponseBean<Boolean> delete(@PathVariable Long id) {
         try {
-			return new ResponseBean<>(routeService.delete(id) > 0);
+            return new ResponseBean<>(routeService.delete(id) > 0);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new CommonException(e.getMessage());
@@ -120,28 +118,24 @@ public class RouteController extends BaseController {
 
     /**
      * 批量删除
+     *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/4/2 15:09
      */
     @PostMapping("deleteAll")
     public ResponseBean<Boolean> deleteAll(@RequestBody Long[] ids) {
-		try {
-			return new ResponseBean<>( routeService.deleteAll(ids) > 0);
+        try {
+            return new ResponseBean<>(routeService.deleteAll(ids) > 0);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new CommonException(e.getMessage());
         }
     }
 
-
     /**
      * 刷新路由
      *
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/04/07 12:32
      */
     @GetMapping("refresh")
     public ResponseBean<Boolean> refresh() {
@@ -153,4 +147,5 @@ public class RouteController extends BaseController {
             throw new CommonException(e.getMessage());
         }
     }
+
 }

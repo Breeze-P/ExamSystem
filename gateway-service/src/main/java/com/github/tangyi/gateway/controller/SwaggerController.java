@@ -14,19 +14,28 @@ import java.util.Optional;
 /**
  * SwaggerController
  *
- * @author tangyi
- * @date 2019/3/26 17:01
+ * @author zdz
+ * @date 2022/04/11 23:08
  */
 @RestController
 @RequestMapping("/swagger-resources")
 public class SwaggerController {
 
+    /**
+     * security配置
+     */
     @Autowired(required = false)
     private SecurityConfiguration securityConfiguration;
 
+    /**
+     * ui配置
+     */
     @Autowired(required = false)
     private UiConfiguration uiConfiguration;
 
+    /**
+     * swagger资源
+     */
     @Autowired
     private SwaggerResourcesProvider swaggerResources;
 
@@ -51,4 +60,5 @@ public class SwaggerController {
     public Mono<ResponseEntity> swaggerResources() {
         return Mono.just((new ResponseEntity<>(swaggerResources.get(), HttpStatus.OK)));
     }
+
 }

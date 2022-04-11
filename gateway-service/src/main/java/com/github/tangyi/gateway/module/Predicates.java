@@ -8,8 +8,8 @@ import javax.validation.constraints.NotBlank;
 /**
  * 断言
  *
- * @author tangyi
- * @date 2019-08-16 17:51
+ * @author zdz
+ * @date 2022/04/11 21:43
  */
 @Data
 public class Predicates extends BaseEntity<Predicates> {
@@ -30,4 +30,5 @@ public class Predicates extends BaseEntity<Predicates> {
      * 断言参数
      */
     private String args;
+
 }

@@ -24,8 +24,8 @@ import java.util.List;
  * 目前问题：结合动态更新路由之后，GatewayProperties获取不到新的路由列表，导致swagger-ui显示不了
  * 解决办法：从Redis里读取路由数据
  *
- * @author tangyi
- * @date 2019/3/26 15:39
+ * @author zdz
+ * @date 2022/04/11 21:51
  */
 @Slf4j
 @Component
@@ -111,4 +111,5 @@ public class RegistrySwaggerResourcesProvider implements SwaggerResourcesProvide
         swaggerResource.setSwaggerVersion("2.0");
         return swaggerResource;
     }
+
 }

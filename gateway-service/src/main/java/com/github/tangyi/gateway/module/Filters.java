@@ -8,8 +8,8 @@ import javax.validation.constraints.NotBlank;
 /**
  * 网关过滤器
  *
- * @author tangyi
- * @date 2019-08-16 17:48
+ * @author zdz
+ * @date 2022/04/11 21:42
  */
 @Data
 public class Filters extends BaseEntity<Filters> {
@@ -30,4 +30,5 @@ public class Filters extends BaseEntity<Filters> {
      * 路由参数
      */
     private String args;
+
 }

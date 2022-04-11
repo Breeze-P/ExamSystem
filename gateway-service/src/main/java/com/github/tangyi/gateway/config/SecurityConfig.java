@@ -10,9 +10,10 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 /**
- * oauth2 client 配置
- * @author tangyi
- * @date 2020/3/7 3:25 下午
+ * oauth2 client配置
+ *
+ * @author zdz
+ * @date 2022/04/11 21:49
  */
 @Configuration
 @Import(FilterIgnorePropertiesConfig.class)
@@ -33,4 +34,5 @@ public class SecurityConfig {
 		http.oauth2ResourceServer().jwt();
 		return http.build();
 	}
+
 }

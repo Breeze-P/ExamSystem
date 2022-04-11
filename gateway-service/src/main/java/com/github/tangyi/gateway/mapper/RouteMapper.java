@@ -5,11 +5,12 @@ import com.github.tangyi.gateway.module.Route;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * Route mapper
+ * 封装常用路由Crud操作的接口
  *
- * @author tangyi
- * @date 2019/4/2 15:00
+ * @author zdz
+ * @date 2022/04/11 21:44
  */
 @Mapper
 public interface RouteMapper extends CrudMapper<Route> {
+
 }

@@ -23,26 +23,39 @@ import java.net.URI;
 /**
  * 验证码过滤器
  *
- * @author tangyi
- * @date 2019/3/18 16:40
+ * @author zdz
+ * @date 2022/04/11 22:55
  */
-@AllArgsConstructor
 @Component
+@AllArgsConstructor
 public class ValidateCodeFilter implements GlobalFilter, Ordered {
 
+    /**
+     * Redis template
+     */
     private final RedisTemplate redisTemplate;
 
+    /**
+     * 处理逻辑
+     *
+     * @param exchange exchange
+     * @param chain    Filter chain
+     * @return Mono
+     */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // 当前请求
         ServerHttpRequest request = exchange.getRequest();
-        // 请求的URI
+        // 请求URI
         URI uri = request.getURI();
         if (HttpMethod.POST.matches(request.getMethodValue())
                 && StrUtil.containsAnyIgnoreCase(uri.getPath(), GatewayConstant.OAUTH_TOKEN_URL, GatewayConstant.REGISTER, GatewayConstant.MOBILE_TOKEN_URL)) {
             String grantType = request.getQueryParams().getFirst(GatewayConstant.GRANT_TYPE);
             // 授权类型为密码模式、手机号、注册才校验验证码
-            if (CommonConstant.GRANT_TYPE_PASSWORD.equals(grantType) || CommonConstant.GRANT_TYPE_MOBILE.equals(grantType) || StrUtil.containsAnyIgnoreCase(uri.getPath(), GatewayConstant.REGISTER)) {
+            if (CommonConstant.GRANT_TYPE_PASSWORD.equals(grantType)
+                    || CommonConstant.GRANT_TYPE_MOBILE.equals(grantType)
+                    || StrUtil.containsAnyIgnoreCase(uri.getPath(),
+                    GatewayConstant.REGISTER)) {
                 // 校验验证码
                 checkCode(request, getLoginType(grantType));
             }
@@ -50,6 +63,11 @@ public class ValidateCodeFilter implements GlobalFilter, Ordered {
         return chain.filter(exchange);
     }
 
+    /**
+     * 获取Order级别
+     *
+     * @return Order级别
+     */
     @Override
     public int getOrder() {
         return -100;
@@ -60,7 +78,6 @@ public class ValidateCodeFilter implements GlobalFilter, Ordered {
      *
      * @param serverHttpRequest serverHttpRequest
      * @param loginType         loginType
-     * @throws InvalidValidateCodeException
      */
     private void checkCode(ServerHttpRequest serverHttpRequest, LoginTypeEnum loginType) throws InvalidValidateCodeException {
         MultiValueMap<String, String> params = serverHttpRequest.getQueryParams();
@@ -75,11 +92,13 @@ public class ValidateCodeFilter implements GlobalFilter, Ordered {
             randomStr = params.getFirst("mobile");
         String key = CommonConstant.DEFAULT_CODE_KEY + loginType.getType() + "@" + randomStr;
         // 验证码过期
-        if (!redisTemplate.hasKey(key))
+        if (!redisTemplate.hasKey(key)) {
             throw new ValidateCodeExpiredException(GatewayConstant.EXPIRED_ERROR);
+        }
         Object codeObj = redisTemplate.opsForValue().get(key);
-        if (codeObj == null)
+        if (codeObj == null) {
             throw new ValidateCodeExpiredException(GatewayConstant.EXPIRED_ERROR);
+        }
         String saveCode = codeObj.toString();
         if (StrUtil.isBlank(saveCode)) {
             redisTemplate.delete(key);
@@ -99,10 +118,15 @@ public class ValidateCodeFilter implements GlobalFilter, Ordered {
      * @return LoginType
      */
     private LoginTypeEnum getLoginType(String grantType) {
-        if (CommonConstant.GRANT_TYPE_PASSWORD.equals(grantType))
+        // 密码登录
+        if (CommonConstant.GRANT_TYPE_PASSWORD.equals(grantType)) {
             return LoginTypeEnum.PWD;
-        if (CommonConstant.GRANT_TYPE_MOBILE.equals(grantType))
+        }
+        // 验证码登录
+        if (CommonConstant.GRANT_TYPE_MOBILE.equals(grantType)) {
             return LoginTypeEnum.SMS;
+        }
         return LoginTypeEnum.PWD;
     }
+
 }

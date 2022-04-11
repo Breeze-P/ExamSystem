@@ -8,14 +8,14 @@ import java.util.Map;
 /**
  * 过滤器信息
  *
- * @author tangyi
- * @date 2019/3/27 11:07
+ * @author zdz
+ * @date 2022/04/11 21:44
  */
 @Data
 public class RouteFilterVo {
 
     /**
-     * Filter Name
+     * Filter名称
      */
     private String name;
 
@@ -23,4 +23,5 @@ public class RouteFilterVo {
      * 对应的路由规则
      */
     private Map<String, String> args = new LinkedHashMap<>();
+
 }

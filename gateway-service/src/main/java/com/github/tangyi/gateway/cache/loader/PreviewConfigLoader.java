@@ -12,36 +12,54 @@ import java.util.Map;
 
 /**
  * 加载演示环境配置
- * @author tangyi
- * @date 2019/12/11 13:56
+ *
+ * @author zdz
+ * @date 2022/04/11 21:52
  */
 @Slf4j
 public class PreviewConfigLoader extends CacheLoader<String, Map<String, String>> {
 
-	/**
-	 * 30秒刷新一次loadingCache
-	 */
-	public static final int REFRESH_CACHE_DURATION = 30;
+    /**
+     * 30秒刷新一次loadingCache
+     */
+    public static final int REFRESH_CACHE_DURATION = 30;
 
-	public static final String PREVIEW_ENABLE = "preview_enable";
+    /**
+     * 是否启动preview演示
+     */
+    public static final String PREVIEW_ENABLE = "preview_enable";
 
-	@Override
-	public Map<String, String> load(String key) throws Exception {
-		return loadData(key);
-	}
+    /**
+     * 加载配置信息
+     * @param key Key
+     * @return 配置信息
+     */
+    @Override
+    public Map<String, String> load(String key) throws Exception {
+        return loadData(key);
+    }
 
-	@Override
-	public ListenableFuture<Map<String, String>> reload(String key, Map<String, String> oldValue) throws Exception {
-		return LoadingCacheHelper.REFRESH_POOLS.submit(() -> loadData(key));
-	}
+    @Override
+    public ListenableFuture<Map<String, String>> reload(String key, Map<String, String> oldValue) throws Exception {
+        return LoadingCacheHelper.REFRESH_POOLS.submit(() -> loadData(key));
+    }
 
-	@SuppressWarnings("unchecked")
-	private static Map<String, String> loadData(String key) {
-		// 从Redis获取配置
-		RedisTemplate<String, String> redisTemplate = (RedisTemplate) SpringContextHolder.getApplicationContext().getBean("redisTemplate");
-		Object enablePreview = redisTemplate.opsForValue().get(PREVIEW_ENABLE);
-		if (enablePreview != null)
-			return Collections.singletonMap(PREVIEW_ENABLE, enablePreview.toString());
-		return Collections.emptyMap();
-	}
+    /**
+     * 从redis中获取配置信息
+     *
+     * @param key Key
+     * @return 配置信息
+     */
+    @SuppressWarnings("unchecked")
+    private static Map<String, String> loadData(String key) {
+        // 从Redis获取配置
+        RedisTemplate<String, String> redisTemplate =
+                (RedisTemplate) SpringContextHolder.getApplicationContext().getBean("redisTemplate");
+        Object enablePreview = redisTemplate.opsForValue().get(PREVIEW_ENABLE);
+        if (enablePreview != null) {
+            return Collections.singletonMap(PREVIEW_ENABLE, enablePreview.toString());
+        }
+        return Collections.emptyMap();
+     }
+
 }

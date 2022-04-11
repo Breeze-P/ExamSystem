@@ -28,22 +28,28 @@ import java.util.List;
 /**
  * 路由service
  *
- * @author tangyi
- * @date 2019/4/2 15:01
+ * @author zdz
+ * @date 2022/04/11 21:41
  */
 @Slf4j
 @AllArgsConstructor
 @Service
 public class RouteService extends CrudService<RouteMapper, Route> {
 
+    /**
+     * 动态路由service
+     */
     private final DynamicRouteService dynamicRouteService;
 
+    /**
+     * Redis模板
+     */
     private final RedisTemplate redisTemplate;
 
     /**
      * 新增路由
      *
-     * @param route route
+     * @param route 路由信息
      * @return int
      */
     @Override
@@ -67,7 +73,7 @@ public class RouteService extends CrudService<RouteMapper, Route> {
     /**
      * 更新路由
      *
-     * @param route route
+     * @param route 路由信息
      * @return int
      */
     @Override
@@ -119,20 +125,17 @@ public class RouteService extends CrudService<RouteMapper, Route> {
     /**
      * 初始化RouteDefinition
      *
-     * @param route route
+     * @param route 路由信息
      * @return RouteDefinition
-     * @author tangyi
-     * @date 2019/04/02 18:50
      */
     private RouteDefinition routeDefinition(Route route) {
         RouteDefinition routeDefinition = new RouteDefinition();
         // id
         routeDefinition.setId(route.getRouteId());
-
         // predicates
-        if (StringUtils.isNotBlank(route.getPredicates()))
+        if (StringUtils.isNotBlank(route.getPredicates())) {
             routeDefinition.setPredicates(predicateDefinitions(route));
-
+        }
         // filters
         if (StringUtils.isNotBlank(route.getFilters())) {
             routeDefinition.setFilters(filterDefinitions(route));
@@ -143,15 +146,16 @@ public class RouteService extends CrudService<RouteMapper, Route> {
     }
 
     /**
-     * @param route route
-     * @return List
-     * @author tangyi
-     * @date 2019/04/02 21:28
+     * 初始化PredicateDefinition
+     *
+     * @param route 路由信息
+     * @return List of PredicateDefinition
      */
     private List<PredicateDefinition> predicateDefinitions(Route route) {
         List<PredicateDefinition> predicateDefinitions = new ArrayList<>();
         try {
-            List<RoutePredicateVo> routePredicateVoList = JsonMapper.getInstance().fromJson(route.getPredicates(),
+            List<RoutePredicateVo> routePredicateVoList = JsonMapper.getInstance().fromJson(
+                    route.getPredicates(),
                     JsonMapper.getInstance().createCollectionType(ArrayList.class, RoutePredicateVo.class));
             if (CollectionUtils.isNotEmpty(routePredicateVoList)) {
                 for (RoutePredicateVo routePredicateVo : routePredicateVoList) {
@@ -168,10 +172,10 @@ public class RouteService extends CrudService<RouteMapper, Route> {
     }
 
     /**
-     * @param route route
+     * 初始化FilterDefinition
+     *
+     * @param route 路由信息
      * @return List
-     * @author tangyi
-     * @date 2019/04/02 21:29
      */
     private List<FilterDefinition> filterDefinitions(Route route) {
         List<FilterDefinition> filterDefinitions = new ArrayList<>();
@@ -191,4 +195,5 @@ public class RouteService extends CrudService<RouteMapper, Route> {
         }
         return filterDefinitions;
     }
+
 }

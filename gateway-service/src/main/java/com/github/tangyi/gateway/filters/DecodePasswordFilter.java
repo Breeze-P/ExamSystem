@@ -25,8 +25,8 @@ import java.net.URI;
  * 解密过滤器
  * 对外密码字段的名称是credential，在这里解密，转换成password
  *
- * @author tangyi
- * @date 2019/3/18 11:30
+ * @author zdz
+ * @date 2022/04/11 22:00
  */
 @Slf4j
 @AllArgsConstructor
@@ -34,12 +34,28 @@ import java.net.URI;
 @ConditionalOnProperty(value = "sys.key")
 public class DecodePasswordFilter implements GlobalFilter, Ordered {
 
+    /**
+     * 凭证（对外密码）
+     */
     private static final String CREDENTIAL = "credential";
 
+    /**
+     * 密码（对内密码）
+     */
     private static final String PASSWORD = "password";
 
+    /**
+     * 系统属性
+     */
     private final SysProperties sysProperties;
 
+    /**
+     * 处理逻辑
+     *
+     * @param exchange exchange
+     * @param chain    Filter chain
+     * @return Mono
+     */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // 当前请求
@@ -47,8 +63,8 @@ public class DecodePasswordFilter implements GlobalFilter, Ordered {
         // 请求的URI
         URI uri = request.getURI();
         // 获取token的请求
-        if (HttpMethod.POST.matches(request.getMethodValue()) && StrUtil.containsAnyIgnoreCase(uri.getPath(), GatewayConstant.OAUTH_TOKEN_URL, GatewayConstant.REGISTER,
-                GatewayConstant.MOBILE_TOKEN_URL)) {
+        if (HttpMethod.POST.matches(request.getMethodValue()) &&
+                StrUtil.containsAnyIgnoreCase(uri.getPath(), GatewayConstant.OAUTH_TOKEN_URL, GatewayConstant.REGISTER, GatewayConstant.MOBILE_TOKEN_URL)) {
             String grantType = request.getQueryParams().getFirst(GatewayConstant.GRANT_TYPE);
             // 授权类型为密码模式则解密
             if (CommonConstant.GRANT_TYPE_PASSWORD.equals(grantType) || StrUtil.containsAnyIgnoreCase(uri.getPath(), GatewayConstant.REGISTER)) {
@@ -75,8 +91,14 @@ public class DecodePasswordFilter implements GlobalFilter, Ordered {
         return chain.filter(exchange);
     }
 
+    /**
+     * 获取order
+     *
+     * @return order
+     */
     @Override
     public int getOrder() {
         return -100;
     }
+
 }

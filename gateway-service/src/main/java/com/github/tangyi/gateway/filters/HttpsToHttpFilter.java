@@ -14,21 +14,33 @@ import java.net.URI;
  * 将HTTPS改为HTTP
  * 网关进来的协议是HTTPS，其它服务一般部署在内网，没必要走HTTPS
  *
- * @author tangyi
- * @date 2019/08/03 12:03
+ * @author zdz
+ * @date 2022/04/11 22:03
  */
 @Component
 public class HttpsToHttpFilter implements GlobalFilter, Ordered {
 
+    /**
+     * 该处理操作的Order级别
+     */
     private static final int HTTPS_TO_HTTP_FILTER_ORDER = 10099;
 
+    /**
+     * 处理逻辑
+     * @param exchange exchange
+     * @param chain Filter chain
+     * @return Mono
+     */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        // 原始URI
         URI originalUri = exchange.getRequest().getURI();
+        // 当前请求
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpRequest.Builder mutate = request.mutate();
         String forwardedUri = request.getURI().toString();
         if (forwardedUri != null && forwardedUri.startsWith("https")) {
+            // 将Https转化为Http，其他信息不变
             try {
                 URI mutatedUri = new URI("http",
                         originalUri.getUserInfo(),
@@ -56,4 +68,5 @@ public class HttpsToHttpFilter implements GlobalFilter, Ordered {
     public int getOrder() {
         return HTTPS_TO_HTTP_FILTER_ORDER;
     }
+
 }

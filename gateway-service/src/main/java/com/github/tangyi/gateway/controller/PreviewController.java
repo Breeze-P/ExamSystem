@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 演示环境开关配置
- * @author tangyi
- * @date 2019/12/15 18:56
+ *
+ * @author zdz
+ * @date 2022/04/12 00:04
  */
 @Slf4j
 @AllArgsConstructor
@@ -24,19 +25,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/preview")
 public class PreviewController {
 
+    /**
+     * 系统属性
+     */
     private final SysProperties sysProperties;
 
     /**
      * 演示模式
      *
-     * @param enable enable
+     * @param enable 是否启动preview演示模式
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/12/15 19:45
      */
     @GetMapping("/enable")
-    public ResponseBean<Boolean> preview(@RequestParam(required = false) String enable, @RequestParam String secret) {
-
+    public ResponseBean<Boolean> preview(@RequestParam(required = false) String enable,
+                                         @RequestParam String secret) {
         if (StringUtils.isNotBlank(enable) && sysProperties.getGatewaySecret().equals(secret)) {
             log.info("Preview enable: {}", enable);
             RedisTemplate<String, String> redisTemplate = (RedisTemplate) SpringContextHolder.getApplicationContext().getBean("redisTemplate");
@@ -49,12 +51,11 @@ public class PreviewController {
      * 获取演示模式开关
      *
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/12/15 19:45
      */
     @GetMapping("/getPreview")
     public ResponseBean<String> getPreview() {
         RedisTemplate<String, String> redisTemplate = (RedisTemplate) SpringContextHolder.getApplicationContext().getBean("redisTemplate");
         return new ResponseBean<>(redisTemplate.opsForValue().get(PreviewConfigLoader.PREVIEW_ENABLE));
     }
+
 }

@@ -8,8 +8,8 @@ import java.util.Map;
 /**
  * 断言信息
  *
- * @author tangyi
- * @date 2019/3/27 11:08
+ * @author zdz
+ * @date 2022/04/11 21:44
  */
 @Data
 public class RoutePredicateVo {
@@ -23,4 +23,5 @@ public class RoutePredicateVo {
      * 配置的断言规则
      */
     private Map<String, String> args = new LinkedHashMap<>();
+
 }

@@ -8,8 +8,8 @@ import javax.validation.constraints.NotBlank;
 /**
  * 路由信息
  *
- * @author tangyi
- * @date 2019/4/2 14:52
+ * @author zdz
+ * @date 2022/04/11 21:41
  */
 @Data
 public class Route extends BaseEntity<Route> {
@@ -51,4 +51,5 @@ public class Route extends BaseEntity<Route> {
      */
     @NotBlank(message = "路由状态不能为空")
     private String status;
+
 }

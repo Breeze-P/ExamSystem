@@ -8,14 +8,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author tangyi
- * @date 2018-09-13 17:18
+ * 用户相关信息DTO类
+ *
+ * @author zdz
+ * @date 2022/04/11 21:55
  */
 @Data
 public class UserInfoDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * ID
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
 
@@ -156,4 +161,5 @@ public class UserInfoDto implements Serializable {
      * 微信
      */
     private String wechat;
+
 }

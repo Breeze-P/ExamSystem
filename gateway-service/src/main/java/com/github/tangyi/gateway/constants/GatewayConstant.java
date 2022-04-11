@@ -1,8 +1,10 @@
 package com.github.tangyi.gateway.constants;
 
 /**
- * @author tangyi
- * @date 2019/3/18 16:55
+ * 网关常用的常量声明
+ *
+ * @author zdz
+ * @date 2022/04/11 21:49
  */
 public class GatewayConstant {
 
@@ -20,7 +22,7 @@ public class GatewayConstant {
      * 微信登录URL
      */
     public static final String WX_TOKEN_URL = "/wx/token";
-    
+
     /**
      * 注册
      */
@@ -46,6 +48,10 @@ public class GatewayConstant {
      */
     public static final String DEFAULT_TENANT_CODE = "gitee";
 
+
+    /**
+     * 请求头中表示租户code的key
+     */
     public static final String TENANT_CODE_HEADER = "Tenant-Code";
 
 }
