@@ -8,43 +8,40 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 /**
  * 查询用户信息接口
  *
- * @author tangyi
- * @date 2019/5/28 21:05
+ * @author zdz
+ * @date 2022/04/11 20:08
  */
 public interface CustomUserDetailsService {
 
     /**
      * 根据用户名和租户标识查询
 	 *
-	 * @param tenantCode tenantCode
-     * @param username   username
-     * @return UserDetails
-     * @author tangyi
-     * @date 2019/05/28 21:06
+	 * @param tenantCode 租户标识
+     * @param username   用户名
+     * @return 用户信息
      */
     UserDetails loadUserByIdentifierAndTenantCode(String tenantCode, String username) throws UsernameNotFoundException;
 
     /**
      * 根据社交账号和租户标识查询
      *
-     * @param tenantCode tenantCode
-     * @param social     social
-	 * @param mobileUser mobileUser
-     * @return UserDetails
-     * @author tangyi
-     * @date 2019/06/22 21:08
+     * @param tenantCode 租户标识
+     * @param social     社交账号
+	 * @param mobileUser 手机用户
+     * @return 用户信息
      */
     UserDetails loadUserBySocialAndTenantCode(String tenantCode, String social, MobileUser mobileUser) throws UsernameNotFoundException;
 
     /**
      * 根据微信openId和租户标识查询
 	 *
-	 * @param tenantCode tenantCode
-     * @param code       code
-     * @param wxUser     wxUser
+	 * @param tenantCode 租户标识
+     * @param code       微信ID
+     * @param wxUser     微信用户
      * @return UserDetails
      * @author tangyi
      * @date 2019/07/05 20:04:59
      */
     UserDetails loadUserByWxCodeAndTenantCode(String tenantCode, String code, WxUser wxUser) throws UsernameNotFoundException;
+
 }

@@ -24,32 +24,32 @@ import java.security.Principal;
 /**
  * 系统工具类
  *
- * @author tangyi
- * @date 2018-09-13 20:50
+ * @author zdz
+ * @date 2022/04/11 20:16
  */
 @Slf4j
 public class SysUtil {
 
     /**
-     * 获取当前登录的用户名
+     * 获取当前登录用户的用户名
      *
-     * @return String
-     * @author tangyi
-     * @date 2019/03/17 11:46
+     * @return 当前登录用户的用户名
      */
     public static String getUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails)
+        if (principal instanceof UserDetails) {
             return ((UserDetails) principal).getUsername();
-        if (principal instanceof Principal)
+        }
+        if (principal instanceof Principal) {
             return ((Principal) principal).getName();
+        }
         return String.valueOf(principal);
     }
 
     /**
      * 获取系统编号
      *
-     * @return String
+     * @return 系统编号
      */
     public static String getSysCode() {
         return SecurityConstant.SYS_CODE;
@@ -58,32 +58,39 @@ public class SysUtil {
     /**
      * 获取租户编号
      *
-     * @return String
+     * @return 租户编号
      */
     public static String getTenantCode() {
         String tenantCode = TenantContextHolder.getTenantCode();
-        if (StringUtils.isBlank(tenantCode))
+        if (StringUtils.isBlank(tenantCode)) {
             tenantCode = getCurrentUserTenantCode();
-        if (StringUtils.isBlank(tenantCode))
+        }
+        if (StringUtils.isBlank(tenantCode)) {
             tenantCode = SecurityConstant.DEFAULT_TENANT_CODE;
+        }
         return tenantCode;
     }
 
     /**
-     * 获取当前登录的租户code
+     * 获取当前登录租户的租户code
      *
-     * @return String
+     * @return 当前登录租户的租户code
      */
     private static String getCurrentUserTenantCode() {
         String tenantCode = "";
         try {
-            ResourceServerTokenServices resourceServerTokenServices = SpringContextHolder.getApplicationContext().getBean(ResourceServerTokenServices.class);
+            ResourceServerTokenServices resourceServerTokenServices =
+                    SpringContextHolder.getApplicationContext().getBean(ResourceServerTokenServices.class);
+            // 通过上下文中的认证信息，获取当前租户的信息
             Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
             if (details instanceof OAuth2AuthenticationDetails) {
                 OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) details;
-                OAuth2AccessToken oAuth2AccessToken = resourceServerTokenServices.readAccessToken(oAuth2AuthenticationDetails.getTokenValue());
+                // 获取当前租户的访问token
+                OAuth2AccessToken oAuth2AccessToken = resourceServerTokenServices.
+                        readAccessToken(oAuth2AuthenticationDetails.getTokenValue());
+                // 根据获取到的token，找到对应的租户并且获取其租户code
                 Object tenantObj = oAuth2AccessToken.getAdditionalInformation().get(SecurityConstant.TENANT_CODE);
-                tenantCode = tenantObj == null ? "" : tenantObj.toString();
+                tenantCode = (tenantObj == null) ? "" : tenantObj.toString();
             } else if (details instanceof WebAuthenticationDetails) {
                 // 未认证
                 Object requestObj = RequestContextHolder.getRequestAttributes();
@@ -101,9 +108,7 @@ public class SysUtil {
     /**
      * 获取当前用户的授权信息
      *
-     * @return Authentication
-     * @author tangyi
-     * @date 2019/03/17 19:18
+     * @return 当前用户的授权信息
      */
     public static Authentication getCurrentAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
@@ -112,20 +117,16 @@ public class SysUtil {
     /**
      * 获取当前登录用户的授权信息
      *
-     * @return Object
-     * @author tangyi
-     * @date 2019/03/17 11:48
+     * @return 当前登录用户的授权信息
      */
     public static Object getCurrentPrincipal() {
         return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
     /**
-     * 从header 请求中的clientId/clientsecect
+     * 从header请求中的clientId/clientsecect
      *
      * @param header header中的参数
-     * @throws RuntimeException if the Basic header is not present or is not valid
-     *                          Base64
      */
     public static String[] extractAndDecodeHeader(String header) throws IOException {
         byte[] base64Token = header.substring(6).getBytes(StandardCharsets.UTF_8);
@@ -137,8 +138,10 @@ public class SysUtil {
         }
         String token = new String(decoded, StandardCharsets.UTF_8);
         int delim = token.indexOf(":");
-        if (delim == -1)
+        if (delim == -1) {
             throw new RuntimeException("Invalid basic authentication token");
+        }
         return new String[]{token.substring(0, delim), token.substring(delim + 1)};
     }
+
 }

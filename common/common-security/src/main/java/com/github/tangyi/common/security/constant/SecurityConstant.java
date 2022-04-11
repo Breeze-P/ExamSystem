@@ -1,8 +1,10 @@
 package com.github.tangyi.common.security.constant;
 
 /**
- * @author tangyi
- * @date 2018-08-25 14:08
+ * 与security相关的常量声明
+ *
+ * @author zdz
+ * @date 2022/04/11 19:54
  */
 public class SecurityConstant {
 
@@ -60,4 +62,5 @@ public class SecurityConstant {
      * JSON 资源
      */
     public static final String CONTENT_TYPE = "application/json; charset=utf-8";
+
 }

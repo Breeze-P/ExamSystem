@@ -5,14 +5,16 @@ import com.github.tangyi.common.security.serializer.CustomOauthExceptionSerializ
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 
 /**
- * 自定义OauthException
+ * 自定义的OauthException
  *
- * @author tangyi
- * @date 2020/2/29 14:12
+ * @author zdz
+ * @date 2022/04/11 19:56
  */
 @JsonSerialize(using = CustomOauthExceptionSerializer.class)
 public class CustomOauthException extends OAuth2Exception {
+
     public CustomOauthException(String msg) {
         super(msg);
     }
+
 }

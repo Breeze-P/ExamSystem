@@ -25,16 +25,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 手机登录filter
+ * 手机登录操作过滤器
  *
- * @author tangyi
- * @date 2019/6/22 21:15
+ * @author zdz
+ * @date 2022/04/11 20:24
  */
 @Slf4j
 public class MobileAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
+    /**
+     * 手机登录操作Key
+     */
     private static final String SPRING_SECURITY_FORM_MOBILE_KEY = "mobile";
 
+    /**
+     * 手机登录操作Key
+     */
     @Getter
     @Setter
     private String mobileParameter = SPRING_SECURITY_FORM_MOBILE_KEY;
@@ -43,6 +49,9 @@ public class MobileAuthenticationFilter extends AbstractAuthenticationProcessing
     @Setter
     private boolean postOnly = true;
 
+    /**
+     * 手机登录操作事件发起者
+     */
     @Getter
     @Setter
     private AuthenticationEventPublisher eventPublisher;
@@ -91,6 +100,12 @@ public class MobileAuthenticationFilter extends AbstractAuthenticationProcessing
         return authResult;
     }
 
+    /**
+     * 根据参数名称，在请求中获取手机用户信息
+     *
+     * @param request 请求
+     * @return 指定的手机用户信息
+     */
     private String obtainMobile(HttpServletRequest request) {
         return request.getParameter(mobileParameter);
     }
@@ -116,4 +131,5 @@ public class MobileAuthenticationFilter extends AbstractAuthenticationProcessing
             log.error(e.getMessage(), e);
         }
     }
+
 }

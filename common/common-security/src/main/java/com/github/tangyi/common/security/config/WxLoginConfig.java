@@ -15,8 +15,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 /**
  * 微信登录相关配置
  *
- * @author tangyi
- * @date 2019/07/05 19:44
+ * @author zdz
+ * @date 2022/04/11 20:06
  */
 @Configuration
 public class WxLoginConfig {
@@ -27,9 +27,10 @@ public class WxLoginConfig {
      * @return WxSecurityConfigurer
      */
     @Bean
-    public WxSecurityConfigurer wxSecurityConfigurer(@Lazy PasswordEncoder encoder, @Lazy ClientDetailsService clientDetailsService,
-                                                     @Lazy CustomUserDetailsService userDetailsService, @Lazy ObjectMapper objectMapper,
-                                                     @Lazy AuthorizationServerTokenServices defaultAuthorizationServerTokenServices) {
+    public WxSecurityConfigurer wxSecurityConfigurer(
+            @Lazy PasswordEncoder encoder, @Lazy ClientDetailsService clientDetailsService,
+            @Lazy CustomUserDetailsService userDetailsService, @Lazy ObjectMapper objectMapper,
+            @Lazy AuthorizationServerTokenServices defaultAuthorizationServerTokenServices) {
         WxSecurityConfigurer wxSecurityConfigurer = new WxSecurityConfigurer();
         wxSecurityConfigurer.setWxLoginSuccessHandler(wxLoginSuccessHandler(encoder, clientDetailsService, objectMapper, defaultAuthorizationServerTokenServices));
         wxSecurityConfigurer.setUserDetailsService(userDetailsService);
@@ -39,15 +40,17 @@ public class WxLoginConfig {
     /**
      * 微信登录成功后的处理
      *
-     * @return AuthenticationSuccessHandler
+     * @return AuthenticationSuccessHandler 认证成功事件处理器
      */
     @Bean
-    public AuthenticationSuccessHandler wxLoginSuccessHandler(PasswordEncoder encoder, ClientDetailsService clientDetailsService, ObjectMapper objectMapper,
-                                                              AuthorizationServerTokenServices defaultAuthorizationServerTokenServices) {
+    public AuthenticationSuccessHandler wxLoginSuccessHandler(
+            PasswordEncoder encoder, ClientDetailsService clientDetailsService, ObjectMapper objectMapper,
+            AuthorizationServerTokenServices defaultAuthorizationServerTokenServices) {
         return WxLoginSuccessHandler.builder()
                 .objectMapper(objectMapper)
                 .clientDetailsService(clientDetailsService)
                 .passwordEncoder(encoder)
                 .defaultAuthorizationServerTokenServices(defaultAuthorizationServerTokenServices).build();
     }
+
 }

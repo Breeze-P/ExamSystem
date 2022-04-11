@@ -16,8 +16,8 @@ import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * @author tangyi
- * @date 2019/6/22 21:00
+ * @author zdz
+ * @date 2022/04/11 20:27
  */
 @Slf4j
 @Data
@@ -47,4 +47,5 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
     public boolean supports(Class<?> authentication) {
         return MobileAuthenticationToken.class.isAssignableFrom(authentication);
     }
+
 }

@@ -5,8 +5,10 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author tangyi
- * @date 2019/08/04 13:28
+ * 表示手机用户的POJO类
+ *
+ * @author zdz
+ * @date 2022/04/11 20:08
  */
 @Data
 public class MobileUser implements Serializable {
@@ -51,5 +53,6 @@ public class MobileUser implements Serializable {
     /**
      * 语言
      */
-    private String languang;
+    private String languange;
+
 }

@@ -15,8 +15,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * 手机登录配置
  *
- * @author tangyi
- * @date 2019/6/22 21:26
+ * @author zdz
+ * @date 2022/04/11 20:27
  */
 @Data
 public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
@@ -43,4 +43,5 @@ public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultS
         // 增加手机登录的过滤器
         http.authenticationProvider(mobileAuthenticationProvider).addFilterAfter(mobileAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
 }

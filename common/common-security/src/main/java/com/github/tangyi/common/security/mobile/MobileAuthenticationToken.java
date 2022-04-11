@@ -8,8 +8,8 @@ import java.util.Collection;
 /**
  * 手机登录token
  *
- * @author tangyi
- * @date 2019/6/22 15:27
+ * @author zdz
+ * @date 2022/04/11 20:27
  */
 public class MobileAuthenticationToken extends AbstractAuthenticationToken {
 
@@ -59,4 +59,5 @@ public class MobileAuthenticationToken extends AbstractAuthenticationToken {
     public void setMobileUser(MobileUser mobileUser) {
         this.mobileUser = mobileUser;
     }
+
 }

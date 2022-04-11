@@ -16,8 +16,8 @@ import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * @author tangyi
- * @date 2019/07/05 19:34
+ * @author zdz
+ * @date 2022/04/11 20:29
  */
 @Slf4j
 @Data
@@ -48,4 +48,5 @@ public class WxAuthenticationProvider implements AuthenticationProvider {
     public boolean supports(Class<?> authentication) {
         return WxAuthenticationToken.class.isAssignableFrom(authentication);
     }
+
 }

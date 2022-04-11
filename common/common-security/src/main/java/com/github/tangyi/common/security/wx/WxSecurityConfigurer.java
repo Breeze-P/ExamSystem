@@ -15,8 +15,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * 微信登录配置
  *
- * @author tangyi
- * @date 2019/07/05 19:29
+ * @author zdz
+ * @date 2022/04/11 20:29
  */
 @Data
 public class WxSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
@@ -43,4 +43,5 @@ public class WxSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecur
         // 增加微信登录的过滤器
         http.authenticationProvider(wxAuthenticationProvider).addFilterAfter(wxAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
 }

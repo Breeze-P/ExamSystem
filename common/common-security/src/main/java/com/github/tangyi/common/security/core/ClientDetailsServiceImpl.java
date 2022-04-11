@@ -9,11 +9,15 @@ import javax.sql.DataSource;
 /**
  * jdbc客户端service
  *
- * @author tangyi
- * @date 2019/3/30 23:30
+ * @author zdz
+ * @date 2022/04/11 20:08
  */
 public class ClientDetailsServiceImpl extends JdbcClientDetailsService {
 
+    /**
+     * 绑定数据源
+     * @param dataSource 将要绑定的数据源
+     */
     public ClientDetailsServiceImpl(DataSource dataSource) {
         super(dataSource);
     }
@@ -23,11 +27,10 @@ public class ClientDetailsServiceImpl extends JdbcClientDetailsService {
      *
      * @param clientId clientId
      * @return ClientDetails
-     * @author tangyi
-     * @date 2019/03/30 23:31
      */
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws InvalidClientException {
         return super.loadClientByClientId(clientId);
     }
+
 }

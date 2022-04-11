@@ -14,17 +14,26 @@ import java.util.Map;
 /**
  * 自定义AccessDeniedHandler
  *
- * @author tangyi
- * @date 2020-02-29 15:39
+ * @author zdz
+ * @date 2022/04/11 19:59
  */
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
+    /**
+     * Object Mapper
+     */
     private final ObjectMapper objectMapper;
 
     public CustomAccessDeniedHandler(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
+    /**
+     * 对访问拒绝异常做出处理
+     * @param request 请求
+     * @param response 响应
+     * @param e 访问拒绝异常
+     */
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
@@ -35,4 +44,5 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.getWriter().write(objectMapper.writeValueAsString(map));
     }
+
 }

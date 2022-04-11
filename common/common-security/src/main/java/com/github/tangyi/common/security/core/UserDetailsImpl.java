@@ -10,8 +10,8 @@ import java.util.Set;
 /**
  * UserDetails封装
  *
- * @author tangyi
- * @date 2019/3/17 14:37
+ * @author zdz
+ * @date 2022/04/11 20:10
  */
 @Data
 public class UserDetailsImpl implements UserDetails {
@@ -24,14 +24,14 @@ public class UserDetailsImpl implements UserDetails {
     private Set<GrantedAuthority> authorities;
 
     /**
-     * 密码
-     */
-    private String password;
-
-    /**
      * 用户名
      */
     private String username;
+
+    /**
+     * 密码
+     */
+    private String password;
 
     /**
      * 启用禁用状态
@@ -85,4 +85,5 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return SecurityConstant.NORMAL.equals(this.status);
     }
+
 }

@@ -7,8 +7,8 @@ import java.lang.reflect.Type;
 /**
  * 基于Gson的json工具类
  *
- * @author tangyi
- * @date 2017-11-23 18:03
+ * @author zdz
+ * @date 2022/04/11 20:22
  */
 public class GsonHelper {
 
@@ -18,15 +18,12 @@ public class GsonHelper {
     private static final Gson gson = new Gson();
 
     /**
-     * 单例
+     * 单例 GsonHelper
      */
     private volatile static GsonHelper instance;
 
     /**
      * 获取单例
-     *
-     * @author tangyi
-     * @date 2017/11/23 18:10
      */
     public static GsonHelper getInstance() {
         if (instance == null) {
@@ -42,11 +39,9 @@ public class GsonHelper {
     /**
      * 将json转为对象
      *
-     * @param json  json
-     * @param clazz clazz
-     * @return T
-     * @author tangyi
-     * @date 2017/11/23 18:09
+     * @param json  json对象
+     * @param clazz 转化后的类
+     * @return T 指定的类
      */
     public <T> T fromJson(String json, Class<T> clazz) {
         return gson.fromJson(json, clazz);
@@ -55,11 +50,9 @@ public class GsonHelper {
     /**
      * 将json转为对象
      *
-     * @param json json
-     * @param type type
-     * @return T
-     * @author tangyi
-     * @date 2017/11/28 15:41
+     * @param json json对象
+     * @param type 转化后的Type
+     * @return T 指定的类
      */
     public <T> T fromJson(String json, Type type) {
         return gson.fromJson(json, type);
@@ -68,12 +61,11 @@ public class GsonHelper {
     /**
      * 将对象转为json
      *
-     * @param src
-     * @return String
-     * @author tangyi
-     * @date 2017/11/23 18:09
+     * @param src 所给对象
+     * @return 转化后的Json字符串
      */
     public String toJson(Object src) {
         return gson.toJson(src);
     }
+
 }

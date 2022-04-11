@@ -8,8 +8,8 @@ import java.util.Collection;
 /**
  * 微信登录token
  *
- * @author tangyi
- * @date 2019/07/05 19:29
+ * @author zdz
+ * @date 2022/04/11 20:29
  */
 public class WxAuthenticationToken extends AbstractAuthenticationToken {
 
@@ -62,4 +62,5 @@ public class WxAuthenticationToken extends AbstractAuthenticationToken {
     public void setWxUser(WxUser wxUser) {
         this.wxUser = wxUser;
     }
+
 }

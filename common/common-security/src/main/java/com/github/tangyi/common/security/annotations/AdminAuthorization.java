@@ -7,12 +7,13 @@ import java.lang.annotation.*;
 /**
  * 超级管理员权限注解
  *
- * @author tangyi
- * @date 2019/11/02 12:33
+ * @author zdz
+ * @date 2022/04/11 19:51
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @PreAuthorize("hasRole(T(com.github.tangyi.common.security.enums.Roles).ROLE_ADMIN)")
 public @interface AdminAuthorization {
+
 }

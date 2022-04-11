@@ -26,8 +26,8 @@ import java.util.HashMap;
 /**
  * 手机号登录成功，返回oauth token
  *
- * @author tangyi
- * @date 2019/6/22 21:19
+ * @author zdz
+ * @date 2022/04/11 20:28
  */
 @Slf4j
 @Builder
@@ -79,4 +79,5 @@ public class MobileLoginSuccessHandler implements AuthenticationSuccessHandler {
             throw new BadCredentialsException("Failed to decode basic authentication token");
         }
     }
+
 }

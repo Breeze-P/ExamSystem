@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * 自定义OauthException Serializer，定制异常返回结果
+ * 自定义的OauthException Serializer，定制异常返回结果
  *
- * @author tangyi
- * @date 2020/2/29 14:12
+ * @author zdz
+ * @date 2022/04/11 19:57
  */
 public class CustomOauthExceptionSerializer extends StdSerializer<CustomOauthException> {
 
@@ -33,4 +33,5 @@ public class CustomOauthExceptionSerializer extends StdSerializer<CustomOauthExc
         }
         jsonGenerator.writeEndObject();
     }
+
 }

@@ -5,10 +5,10 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 微信用户的基本信息
+ * 表示微信用户的POJO类
  *
- * @author tangyi
- * @date 2019/07/06 15:58
+ * @author zdz
+ * @date 2022/04/11 20:09
  */
 @Data
 public class WxUser implements Serializable {
@@ -53,6 +53,6 @@ public class WxUser implements Serializable {
     /**
      * 语言
      */
-    private String languang;
+    private String languange;
 
 }
