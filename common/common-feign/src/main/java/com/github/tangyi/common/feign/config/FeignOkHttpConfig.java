@@ -14,14 +14,19 @@ import java.util.concurrent.TimeUnit;
 /**
  * okHttp配置
  *
- * @author tangyi
- * @date 2019/07/02 22:31
+ * @author zdz
+ * @date 2022/04/11 20:41
  */
 @Configuration
 @ConditionalOnClass(Feign.class)
 @AutoConfigureBefore(FeignAutoConfiguration.class)
 public class FeignOkHttpConfig {
 
+    /**
+     * 对okHttp进行相关配置
+     *
+     * @return OkHttp Client
+     */
     @Bean
     public OkHttpClient okHttpClient() {
         return new OkHttpClient.Builder()
@@ -38,4 +43,5 @@ public class FeignOkHttpConfig {
                 //.addInterceptor(new LogInterceptor())
                 .build();
     }
+
 }

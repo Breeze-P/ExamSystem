@@ -26,8 +26,8 @@ import java.util.concurrent.TimeUnit;
  * 自定义隔离策略
  * 解决RequestContextHolder.getRequestAttributes()问题
  *
- * @author tangyi
- * @date 2019/3/27 20:53
+ * @author zdz
+ * @date 2022/04/11 20:44
  */
 @Slf4j
 @Component
@@ -120,4 +120,5 @@ public class CustomFeignHystrixConcurrencyStrategy extends HystrixConcurrencyStr
             }
         }
     }
+
 }

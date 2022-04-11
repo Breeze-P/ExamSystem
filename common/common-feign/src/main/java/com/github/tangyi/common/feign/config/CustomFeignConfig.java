@@ -14,16 +14,29 @@ import java.util.Map;
 /**
  * 服务间调用携带Authorization、Tenant-Code请求头
  *
- * @author tangyi
- * @date 2019-03-15 14:14
+ * @author zdz
+ * @date 2022/04/11 20:37
  */
 @Configuration
 public class CustomFeignConfig implements RequestInterceptor {
 
+    /**
+     * 请求头中认证token的标识
+     */
     private static final String TOKEN_HEADER = "authorization";
 
+    /**
+     * 请求头中租户code的标识
+     */
     private static final String TENANT_HEADER = "Tenant-Code";
 
+
+    /**
+     * 利用请求模板自定义请求，
+     * 将从请求头信息中获取到的认证token标识和租户code标识存到自定义请求的请求头中
+     *
+     * @param requestTemplate 请求模板
+     */
     @Override
     public void apply(RequestTemplate requestTemplate) {
         HttpServletRequest request = getHttpServletRequest();
@@ -33,6 +46,11 @@ public class CustomFeignConfig implements RequestInterceptor {
         }
     }
 
+    /**
+     * 获取请求
+     *
+     * @return 请求
+     */
     private HttpServletRequest getHttpServletRequest() {
         try {
             // hystrix隔离策略会导致RequestContextHolder.getRequestAttributes()返回null
@@ -46,6 +64,12 @@ public class CustomFeignConfig implements RequestInterceptor {
         }
     }
 
+    /**
+     * 获取请求的请求头信息，并返回存储请求头信息的map
+     *
+     * @param request 请求
+     * @return 存储请求头信息的map
+     */
     private Map<String, String> getHeaders(HttpServletRequest request) {
         Map<String, String> map = new LinkedHashMap<>();
         Enumeration<String> enumeration = request.getHeaderNames();
@@ -56,4 +80,5 @@ public class CustomFeignConfig implements RequestInterceptor {
         }
         return map;
     }
+
 }
