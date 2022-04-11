@@ -7,8 +7,9 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 七牛云配置
- * @author tangyi
- * @date 2019/12/8 8:19 下午
+ *
+ * @author zdz
+ * @date 2022/04/11 19:46
  */
 @Data
 @Configuration
@@ -16,10 +17,19 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnExpression("!'${qiniu}'.isEmpty()")
 public class QiNiuConfig {
 
+	/**
+	 * 访问Key
+	 */
 	private String accessKey;
 
+	/**
+	 * 秘钥
+	 */
 	private String secretKey;
 
+	/**
+	 *
+	 */
 	private String bucket;
 
 	/**
@@ -31,4 +41,5 @@ public class QiNiuConfig {
 	 * 链接超时时间，单位秒
 	 */
 	private Integer expire;
+
 }

@@ -10,16 +10,16 @@ import org.springframework.jmx.support.RegistrationPolicy;
 /**
  * fastDfs配置
  *
- * @author tangyi
- * @date 2018-01-05 14:45
+ * @author zdz
+ * @date 2022/04/11 19:48
  */
 @Deprecated
 @Configuration
 @Import(FdfsClientConfig.class)
-// 解决jmx重复注册bean的问题
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
 @ConditionalOnExpression("!'${fdfs}'.isEmpty()")
 public class FastDfsConfig {
+// 解决jmx重复注册bean的问题
 
 }
 
