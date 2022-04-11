@@ -17,13 +17,19 @@ import java.util.Objects;
 /**
  * 日志工具类
  *
- * @author tangyi
- * @date 2019/3/13 00:01
+ * @author zdz
+ * @date 2022/04/11 15:47
  */
 public class LogUtil {
 
+    /**
+     * 获取日志
+     *
+     * @return 日志
+     */
     public static Log getLog() {
-        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.
+                requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         Log sysLog = new Log();
         sysLog.setCreator(Objects.requireNonNull(getUsername()));
         sysLog.setType(CommonConstant.STATUS_NORMAL);
@@ -62,4 +68,5 @@ public class LogUtil {
         }
         return authentication.getName();
     }
+
 }

@@ -3,19 +3,21 @@ package com.github.tangyi.common.log.annotation;
 import java.lang.annotation.*;
 
 /**
- * 日志注解
+ * 日志注解类
  *
- * @author tangyi
- * @date 2019/3/12 23:50
+ * @author zdz
+ * @date 2022/04/11 15:38
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Log {
+
     /**
-     * 描述
+     * 日志描述信息
      *
      * @return {String}
      */
     String value();
+
 }

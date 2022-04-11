@@ -10,8 +10,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
- * @author tangyi
- * @date 2019/3/12 23:51
+ * 日志配置信息类
+ *
+ * @author zdz
+ * @date 2022/04/11 15:49
  */
 @EnableAsync
 @Configuration
@@ -30,4 +32,5 @@ public class LogAutoConfiguration {
     public LogAspect sysLogAspect() {
         return new LogAspect();
     }
+
 }

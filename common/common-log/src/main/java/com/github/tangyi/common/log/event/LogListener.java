@@ -10,8 +10,8 @@ import org.springframework.scheduling.annotation.Async;
 /**
  * 异步监听日志事件
  *
- * @author tangyi
- * @date 2019/3/12 23:59
+ * @author zdz
+ * @date 2022/04/11 15:54
  */
 public class LogListener {
 
@@ -34,4 +34,5 @@ public class LogListener {
         Log log = (Log) event.getSource();
         userServiceClient.saveLog(log);
     }
+
 }
