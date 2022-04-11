@@ -21,4 +21,5 @@
         <module>common-config</module>
         <module>common-oss</module>
     </modules>
+
 </project>

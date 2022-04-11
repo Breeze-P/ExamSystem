@@ -9,12 +9,11 @@
     <packaging>pom</packaging>
     <name>spring-microservice-exam</name>
     <description>微服务在线考试系统</description>
-    <url>https://gitee.com/wells2333/spring-micoservices-exam.git</url>
+
     <developers>
         <developer>
-            <name>tangyi</name>
-            <email>1633736729@qq.com</email>
-            <url>https://gitee.com/wells2333</url>
+            <name>zdz</name>
+            <email>1015864587@qq.com</email>
         </developer>
     </developers>
 
