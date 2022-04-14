@@ -8,10 +8,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 部门dto
+ * 部门数据传输对象类（树形结构）
  *
- * @author tangyi
- * @date 2018-10-25 12:49
+ * @author zdz
+ * @date 2022/04/15 00:14
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -39,6 +39,10 @@ public class DeptDto extends TreeEntity<DeptDto> {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long parentId;
 
+    /**
+     * 构造器
+     * @param dept 部门实例
+     */
     public DeptDto(Dept dept) {
         this.id = dept.getId();
         this.deptName = dept.getDeptName();
@@ -51,4 +55,5 @@ public class DeptDto extends TreeEntity<DeptDto> {
         this.modifier = dept.getModifier();
         this.modifyDate = dept.getModifyDate();
     }
+
 }

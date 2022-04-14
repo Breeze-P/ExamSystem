@@ -6,10 +6,10 @@ import com.github.tangyi.user.api.module.Menu;
 import lombok.Data;
 
 /**
- * 菜单dto
+ * 菜单数据传输对象类
  *
- * @author tangyi
- * @date 2018-09-13 20:39
+ * @author zdz
+ * @date 2022/04/15 00:15
  */
 @Data
 public class MenuDto extends TreeEntity<MenuDto> {
@@ -20,32 +20,75 @@ public class MenuDto extends TreeEntity<MenuDto> {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long parentId;
 
+    /**
+     * 图标
+     */
     private String icon;
 
+    /**
+     * 名称
+     */
     private String name;
 
+    /**
+     * URL
+     */
     private String url;
 
+    /**
+     * 重定向地址
+     */
     private String redirect;
 
+    /**
+     * spread
+     */
     private boolean spread = false;
 
+    /**
+     * 路径
+     */
     private String path;
 
+    /**
+     * 组件
+     */
     private String component;
 
+    /**
+     *
+     */
     private String authority;
 
+    /**
+     * code
+     */
     private String code;
 
+    /**
+     * 类型
+     */
     private Integer type;
 
+    /**
+     * 标签
+     */
     private String label;
 
+    /**
+     * 角色
+     */
     private String[] roles;
 
+    /**
+     * remark
+     */
     private String remark;
 
+    /**
+     * 构造器
+     * @param menu 菜单实例
+     */
     public MenuDto(Menu menu) {
         this.id = menu.getId();
         this.parentId = menu.getParentId();
@@ -70,4 +113,5 @@ public class MenuDto extends TreeEntity<MenuDto> {
     public void setCode(String code) {
         this.code = code;
     }
+
 }

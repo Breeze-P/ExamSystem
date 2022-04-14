@@ -1,20 +1,20 @@
 package com.github.tangyi.user.api.constant;
 
 /**
- * 用户学生常量
+ * 封装学生用户相关的常量
  *
- * @author tangyi
- * @date 2019-07-25 13:08
+ * @author zdz
+ * @date 2022/04/14 23:51
  */
 public class UserStudentConstant {
 
     /**
-     * 爸爸
+     * 父亲
      */
     public static final Integer RELATIONSHIP_TYPE_FATHER = 0;
 
     /**
-     * 妈妈
+     * 母亲
      */
     public static final Integer RELATIONSHIP_TYPE_MOTHER = 1;
 
@@ -37,4 +37,5 @@ public class UserStudentConstant {
      * 外婆
      */
     public static final Integer RELATIONSHIP_TYPE_GRANDMA_MOTHER = 6;
+
 }

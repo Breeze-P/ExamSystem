@@ -8,8 +8,8 @@ import lombok.Data;
 /**
  * 附件信息
  *
- * @author tangyi
- * @date 2018/10/30 20:47
+ * @author zdz
+ * @date 2022/04/15 00:09
  */
 @Data
 public class Attachment extends BaseEntity<Attachment> {
@@ -69,4 +69,5 @@ public class Attachment extends BaseEntity<Attachment> {
      * 上传结果
      */
     private String uploadResult;
+
 }

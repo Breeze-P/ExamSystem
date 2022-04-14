@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * 用户基本信息
  *
- * @author tangyi
- * @date 2018-08-25 15:30
+ * @author zdz
+ * @date 2022/04/15 00:03
  */
 @Data
 public class User extends BaseEntity<User> {
@@ -131,4 +131,5 @@ public class User extends BaseEntity<User> {
      * 个性签名
      */
     private String signature;
+
 }

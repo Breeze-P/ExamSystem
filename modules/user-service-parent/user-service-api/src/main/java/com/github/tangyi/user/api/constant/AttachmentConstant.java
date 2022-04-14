@@ -1,8 +1,10 @@
 package com.github.tangyi.user.api.constant;
 
 /**
- * @author tangyi
- * @date 2019/07/06 16:16
+ * 封装附件相关的常量
+ *
+ * @author zdz
+ * @date 2022/04/15 00:02
  */
 public class AttachmentConstant {
 
@@ -25,4 +27,5 @@ public class AttachmentConstant {
      * 附件预览地址
      */
     public static final String ATTACHMENT_PREVIEW_URL = "/api/user/v1/attachment/preview?id=";
+
 }

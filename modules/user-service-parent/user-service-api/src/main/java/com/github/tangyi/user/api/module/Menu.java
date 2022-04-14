@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 /**
  * 菜单
  *
- * @author tangyi
- * @date 2018/8/26 22:21
+ * @author zdz
+ * @date 2022/04/15 00:08
  */
 @Data
 public class Menu extends BaseEntity<Menu> {
@@ -71,4 +71,5 @@ public class Menu extends BaseEntity<Menu> {
      * 备注
      */
     private String remark;
+
 }

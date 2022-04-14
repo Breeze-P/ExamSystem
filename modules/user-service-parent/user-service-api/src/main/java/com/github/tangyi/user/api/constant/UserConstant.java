@@ -1,8 +1,10 @@
 package com.github.tangyi.user.api.constant;
 
 /**
- * @author tangyi
- * @date 2018/8/26 14:41
+ * 封装用户相关的常量
+ *
+ * @author zdz
+ * @date 2022/04/14 23:51
  */
 public class UserConstant {
 

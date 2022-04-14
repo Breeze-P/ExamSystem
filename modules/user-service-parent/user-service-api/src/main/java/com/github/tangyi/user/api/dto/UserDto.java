@@ -18,10 +18,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * userDto
+ * 用户数据传输对象类
  *
- * @author tangyi
- * @date 2018/8/26 14:36
+ * @author zdz
+ * @date 2022/04/15 00:12
  */
 @Data
 @ToString
@@ -227,4 +227,5 @@ public class UserDto implements Serializable {
      */
     @ApiModelProperty(value = "个性签名")
     private String signature;
+
 }

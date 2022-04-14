@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * DashboardDto
+ * 主页数据传输对象类
  *
- * @author tangyi
- * @date 2019-03-01 13:56
+ * @author zdz
+ * @date 2022/04/15 00:17
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -33,7 +33,6 @@ public class DashboardDto implements Serializable {
 	 * 考试记录数量
 	 */
 	private String examinationRecordNumber;
-
 
 	/**
      * 参与人数
@@ -59,4 +58,5 @@ public class DashboardDto implements Serializable {
 	 * 考试记录日期
 	 */
 	private List<String> examRecordDate = new ArrayList<>();
+
 }

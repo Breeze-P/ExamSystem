@@ -6,13 +6,20 @@ import lombok.Data;
 /**
  * 用户角色关系
  *
- * @author tangyi
- * @date 2018/8/26 09:29
+ * @author zdz
+ * @date 2022/04/15 00:06
  */
 @Data
 public class UserRole extends BaseEntity<UserRole> {
 
+    /**
+     * 用户ID
+     */
     private Long userId;
 
+    /**
+     * 角色ID
+     */
     private Long roleId;
+
 }

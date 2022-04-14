@@ -1,8 +1,10 @@
 package com.github.tangyi.user.api.constant;
 
 /**
- * @author tangyi
- * @date 2019/5/27 10:25
+ * 封装租户相关的常量
+ *
+ * @author zdz
+ * @date 2022/04/15 00:01
  */
 public class TenantConstant {
 
@@ -20,4 +22,5 @@ public class TenantConstant {
      * 审核不通过
      */
     public static final Integer AUDIT_FAIL = 2;
+
 }

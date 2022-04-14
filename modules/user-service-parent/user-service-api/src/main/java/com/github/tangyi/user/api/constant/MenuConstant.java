@@ -1,8 +1,10 @@
 package com.github.tangyi.user.api.constant;
 
 /**
- * @author tangyi
- * @date 2018/10/28 15:48
+ * 封装菜单相关的常量
+ *
+ * @author zdz
+ * @date 2022/04/15 00:01
  */
 public class MenuConstant {
 
@@ -46,6 +48,9 @@ public class MenuConstant {
      */
     public static final String PERMISSION_SUFFIX_MODIFY = ":edit";
 
+    /**
+     * 系统
+     */
     public static final String MENU_SYS = "sys";
 
 	/**

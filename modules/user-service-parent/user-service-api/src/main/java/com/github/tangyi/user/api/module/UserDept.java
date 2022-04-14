@@ -6,8 +6,8 @@ import lombok.Data;
 /**
  * 用户部门关系
  *
- * @author tangyi
- * @date 2018/10/27 10:23
+ * @author zdz
+ * @date 2022/04/15 00:06
  */
 @Data
 public class UserDept extends BaseEntity<UserDept> {
@@ -21,4 +21,5 @@ public class UserDept extends BaseEntity<UserDept> {
      * 部门ID
      */
     private String deptId;
+
 }

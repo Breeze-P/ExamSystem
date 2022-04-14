@@ -6,10 +6,10 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 学生
+ * 学生信息
  *
- * @author tangyi
- * @date 2019/07/09 15:08
+ * @author zdz
+ * @date 2022/04/15 00:07
  */
 @Data
 public class Student extends BaseEntity<Student> {
@@ -68,4 +68,5 @@ public class Student extends BaseEntity<Student> {
      * 县id
      */
     private String countyId;
+
 }

@@ -6,10 +6,10 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 /**
- * 租户
+ * 租户信息
  *
- * @author tangyi
- * @date 2019/5/22 22:44
+ * @author zdz
+ * @date 2022/04/15 00:07
  */
 @Data
 public class Tenant extends BaseEntity<Tenant> {
@@ -35,4 +35,5 @@ public class Tenant extends BaseEntity<Tenant> {
      * 状态，0-待审核，1-正常，2-审核不通过
      */
     private Integer status;
+
 }

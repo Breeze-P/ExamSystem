@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 /**
  * 部门
  *
- * @author tangyi
- * @date 2018/8/26 22:25
+ * @author zdz
+ * @date 2022/04/15 00:09
  */
 @Data
 public class Dept extends BaseEntity<Dept> {
@@ -41,4 +41,5 @@ public class Dept extends BaseEntity<Dept> {
      * 排序
      */
     private Integer sort;
+
 }

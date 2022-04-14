@@ -8,14 +8,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author tangyi
- * @date 2018-09-13 17:18
+ * 用户信息数据传输对象类
+ *
+ * @author zdz
+ * @date 2022/04/15 00:12
  */
 @Data
 public class UserInfoDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * ID
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
 
@@ -161,4 +166,5 @@ public class UserInfoDto implements Serializable {
      * 个性签名
      */
     private String signature;
+
 }

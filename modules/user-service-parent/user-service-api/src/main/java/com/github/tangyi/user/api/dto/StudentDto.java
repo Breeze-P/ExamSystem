@@ -8,14 +8,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author tangyi
- * @date 2019/07/10 18:07
+ * 学生用户数据传输对象类
+ *
+ * @author zdz
+ * @date 2022/04/15 00:14
  */
 @Data
 public class StudentDto implements Serializable {
 
     private static final long serialVersionUID = 2602249526687821147L;
 
+    /**
+     * ID
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
 
@@ -107,4 +112,5 @@ public class StudentDto implements Serializable {
     @ApiModelProperty(value = "就读区县ID")
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long countyId;
+
 }
