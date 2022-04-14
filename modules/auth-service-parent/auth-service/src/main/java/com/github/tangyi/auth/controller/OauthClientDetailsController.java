@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Oauth2客户端信息管理
+ * Oauth2客户端信息管理Controller类
  *
- * @author tangyi
- * @date 2019/3/30 16:49
+ * @author zdz
+ * @date 2022/04/14 11:48
  */
 @Slf4j
 @AllArgsConstructor
@@ -35,17 +35,21 @@ import java.util.List;
 @RequestMapping("/v1/client")
 public class OauthClientDetailsController extends BaseController {
 
+    /**
+     * Oauth客户端Service实例
+     */
     private final OauthClientDetailsService oauthClientDetailsService;
 
+    /**
+     * 密码编码器
+     */
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
-     * 根据ID获取
+     * 根据ID获取客户端实体
      *
-     * @param id id
-     * @return ResponseBean
-     * @author tangyi
-     * @date 2019/03/30 16:53
+     * @param id 客户端ID
+     * @return 响应的客户端Bean
      */
     @ApiOperation(value = "获取客户端信息", notes = "根据客户端id获取客户端详细信息")
     @ApiImplicitParam(name = "id", value = "客户端ID", required = true, dataType = "Long", paramType = "path")
@@ -67,8 +71,6 @@ public class OauthClientDetailsController extends BaseController {
      * @param order              order
      * @param oauthClientDetails oauthClientDetails
      * @return PageInfo
-     * @author tangyi
-     * @date 2019/03/30 16:54
      */
     @GetMapping("clientList")
     @ApiOperation(value = "获取客户端列表")
@@ -79,21 +81,20 @@ public class OauthClientDetailsController extends BaseController {
             @ApiImplicitParam(name = CommonConstant.ORDER, value = "排序方向", defaultValue = CommonConstant.PAGE_ORDER_DEFAULT, dataType = "String"),
             @ApiImplicitParam(name = "attachment", value = "客户端信息", dataType = "OauthClient")
     })
-    public PageInfo<OauthClientDetails> oauthClientList(@RequestParam(value = CommonConstant.PAGE_NUM, required = false, defaultValue = CommonConstant.PAGE_NUM_DEFAULT) String pageNum,
-                                                        @RequestParam(value = CommonConstant.PAGE_SIZE, required = false, defaultValue = CommonConstant.PAGE_SIZE_DEFAULT) String pageSize,
-                                                        @RequestParam(value = CommonConstant.SORT, required = false, defaultValue = CommonConstant.PAGE_SORT_DEFAULT) String sort,
-                                                        @RequestParam(value = CommonConstant.ORDER, required = false, defaultValue = CommonConstant.PAGE_ORDER_DEFAULT) String order,
-                                                        OauthClientDetails oauthClientDetails) {
+    public PageInfo<OauthClientDetails> oauthClientList(
+            @RequestParam(value = CommonConstant.PAGE_NUM, required = false, defaultValue = CommonConstant.PAGE_NUM_DEFAULT) String pageNum,
+            @RequestParam(value = CommonConstant.PAGE_SIZE, required = false, defaultValue = CommonConstant.PAGE_SIZE_DEFAULT) String pageSize,
+            @RequestParam(value = CommonConstant.SORT, required = false, defaultValue = CommonConstant.PAGE_SORT_DEFAULT) String sort,
+            @RequestParam(value = CommonConstant.ORDER, required = false, defaultValue = CommonConstant.PAGE_ORDER_DEFAULT) String order,
+            OauthClientDetails oauthClientDetails) {
         return oauthClientDetailsService.findPage(PageUtil.pageInfo(pageNum, pageSize, sort, order), oauthClientDetails);
     }
 
     /**
      * 查询客户端列表
      *
-     * @param oauthClientDetails oauthClientDetails
-     * @return ResponseBean
-     * @author tangyi
-     * @date 2019/03/30 23:17
+     * @param oauthClientDetails 客户端实体
+     * @return 响应的客户端Bean
      */
     @GetMapping("clients")
     @ApiOperation(value = "查询客户端列表", notes = "查询客户端列表")
@@ -105,10 +106,8 @@ public class OauthClientDetailsController extends BaseController {
     /**
      * 创建客户端
      *
-     * @param oauthClientDetails oauthClientDetails
-     * @return ResponseBean
-     * @author tangyi
-     * @date 2019/03/30 16:57
+     * @param oauthClientDetails 客户端实体
+     * @return 包含请求处理结果的响应Bean
      */
     @PostMapping
     @AdminAuthorization
@@ -125,10 +124,8 @@ public class OauthClientDetailsController extends BaseController {
     /**
      * 修改客户端
      *
-     * @param oauthClientDetails oauthClientDetails
-     * @return ResponseBean
-     * @author tangyi
-     * @date 2019/03/30 16:56
+     * @param oauthClientDetails 客户端实体
+     * @return 包含请求处理结果的响应Bean
      */
     @PutMapping
     @AdminAuthorization
@@ -138,8 +135,9 @@ public class OauthClientDetailsController extends BaseController {
     public ResponseBean<Boolean> updateOauthClient(@RequestBody OauthClientDetails oauthClientDetails) {
         OauthClientDetails tempOauthClientDetails = oauthClientDetailsService.get(oauthClientDetails);
         // 有调整过明文则重新加密密钥
-        if (tempOauthClientDetails != null && !tempOauthClientDetails.getClientSecretPlainText().equals(oauthClientDetails.getClientSecretPlainText()))
+        if (tempOauthClientDetails != null && !tempOauthClientDetails.getClientSecretPlainText().equals(oauthClientDetails.getClientSecretPlainText())) {
             oauthClientDetails.setClientSecret(bCryptPasswordEncoder.encode(oauthClientDetails.getClientSecretPlainText()));
+        }
         oauthClientDetails.setCommonValue(SysUtil.getUser(), SysUtil.getSysCode(), SysUtil.getTenantCode());
         return new ResponseBean<>(oauthClientDetailsService.update(oauthClientDetails) > 0);
     }
@@ -147,10 +145,8 @@ public class OauthClientDetailsController extends BaseController {
     /**
      * 根据id删除客户端
      *
-     * @param id id
-     * @return ResponseBean
-     * @author tangyi
-     * @date 2019/03/30 16:59
+     * @param id 客户端ID
+     * @return 包含请求处理结果的响应Bean
      */
     @DeleteMapping("/{id}")
     @AdminAuthorization
@@ -166,12 +162,10 @@ public class OauthClientDetailsController extends BaseController {
     }
 
     /**
-     * 批量删除
+     * 批量删除客户端
      *
-     * @param ids ids
-     * @return ResponseBean
-     * @author tangyi
-     * @date 2019/03/30 17:01
+     * @param ids 需要删除的客户端的ids
+     * @return 包含请求处理结果的响应Bean
      */
     @PostMapping("deleteAll")
     @AdminAuthorization
@@ -181,11 +175,13 @@ public class OauthClientDetailsController extends BaseController {
     public ResponseBean<Boolean> deleteAllOauthClient(@RequestBody Long[] ids) {
         boolean success = false;
         try {
-            if (ArrayUtils.isNotEmpty(ids))
+            if (ArrayUtils.isNotEmpty(ids)) {
                 success = oauthClientDetailsService.deleteAll(ids) > 0;
+            }
         } catch (Exception e) {
             log.error("Delete client failed", e);
         }
         return new ResponseBean<>(success);
     }
+
 }

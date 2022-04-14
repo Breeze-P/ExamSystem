@@ -10,14 +10,17 @@ import org.springframework.stereotype.Service;
 /**
  * 微信Service
  *
- * @author tangyi
- * @date 2019/07/05 20:33
+ * @author zdz
+ * @date 2022/04/14 12:32
  */
 @Slf4j
 @AllArgsConstructor
 @Service
 public class WxSessionService {
 
+    /**
+     * 第三方微信service类
+     */
     private final WxMaService wxMaService;
 
     /**
@@ -25,8 +28,6 @@ public class WxSessionService {
      *
      * @param code code
      * @return WxSession
-     * @author tangyi
-     * @date 2019/07/05 20:37:02
      */
     public WxSession getSession(String code) {
         WxSession session = null;
@@ -45,8 +46,6 @@ public class WxSessionService {
      *
      * @param code code
      * @return WxSession
-     * @author tangyi
-     * @date 2019/07/06 14:01:13
      */
     public WxSession code2Session(String code) {
         WxSession session = null;
@@ -59,4 +58,5 @@ public class WxSessionService {
         }
         return session;
     }
+
 }

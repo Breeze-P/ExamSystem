@@ -20,53 +20,85 @@ import java.util.Map;
 /**
  * 扩展JwtAccessTokenConverter，增加租户code
  *
- * @author tangyi
- * @date 2019/5/28 22:53
+ * @author zdz
+ * @date 2022/04/14 23:02
  */
 public class CustomTokenConverter extends JwtAccessTokenConverter {
 
-	private RsaSigner signer;
+    /**
+     * RSA签名器
+     */
+    private RsaSigner signer;
 
-	private Map<String, String> customHeaders = new HashMap<>();
+    /**
+     * 自定义Header
+     */
+    private Map<String, String> customHeaders;
 
-	private JsonParser objectMapper = JsonParserFactory.create();
+    /**
+     * Json信息解析器
+     */
+    private JsonParser objectMapper = JsonParserFactory.create();
 
-	public CustomTokenConverter(KeyPair keyPair, Map<String, String> customHeaders) {
-		super();
-		super.setKeyPair(keyPair);
-		this.signer = new RsaSigner((RSAPrivateKey) keyPair.getPrivate());
-		this.customHeaders = customHeaders;
-	}
+    /**
+     * 构造器
+     *
+     * @param keyPair       k-v对
+     * @param customHeaders 自定义的信息头
+     */
+    public CustomTokenConverter(KeyPair keyPair, Map<String, String> customHeaders) {
+        super();
+        super.setKeyPair(keyPair);
+        this.signer = new RsaSigner((RSAPrivateKey) keyPair.getPrivate());
+        this.customHeaders = customHeaders;
+    }
 
-	@Override
-	protected String encode(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-		String content;
-		try {
-			content = this.objectMapper
-					.formatMap(getAccessTokenConverter().convertAccessToken(accessToken, authentication));
-		} catch (Exception ex) {
-			throw new IllegalStateException("Cannot convert access token to JSON", ex);
-		}
-		return JwtHelper.encode(content, this.signer, this.customHeaders).getEncoded();
-	}
+    /**
+     * 编码逻辑
+     *
+     * @param accessToken    访问token
+     * @param authentication 认证信息
+     * @return 经过编码的信息
+     */
+    @Override
+    protected String encode(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
+        String content;
+        try {
+            content = this.objectMapper.formatMap(getAccessTokenConverter().convertAccessToken(accessToken, authentication));
+        } catch (Exception ex) {
+            throw new IllegalStateException("Cannot convert access token to JSON", ex);
+        }
+        return JwtHelper.encode(content, this.signer, this.customHeaders).getEncoded();
+    }
 
-	@Override
-	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-		final Map<String, Object> additionalInfo = new HashMap<>();
-		String grantType = authentication.getOAuth2Request().getGrantType();
-		// 加入tenantCode
-		additionalInfo.put("tenantCode", TenantContextHolder.getTenantCode());
-		// 加入登录类型，用户名/手机号
-		String loginType = "";
-		if (grantType.equalsIgnoreCase(CommonConstant.GRANT_TYPE_PASSWORD)) {
-			loginType = LoginTypeEnum.PWD.getType();
-		} else if (grantType.equalsIgnoreCase(CommonConstant.GRANT_TYPE_MOBILE)) {
-			loginType = LoginTypeEnum.SMS.getType();
-		} else if (grantType.equalsIgnoreCase(LoginTypeEnum.WECHAT.getType())) {
-			loginType = LoginTypeEnum.WECHAT.getType();
-		}
-		additionalInfo.put("loginType", loginType);
-		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
-		return super.enhance(accessToken, authentication);
-	}
+    /**
+     * 增强访问token，即在访问token中添加部分额外信息
+     *
+     * @param accessToken    访问token
+     * @param authentication 认证信息
+     * @return 经过增强后的token
+     */
+    @Override
+    public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
+        // 存储需要添加的额外信息
+        final Map<String, Object> additionalInfo = new HashMap<>();
+        // 获取此次访问的授权类型（用户名/手机号/微信）
+        String grantType = authentication.getOAuth2Request().getGrantType();
+        // 在额外信息中加入tenantCode
+        additionalInfo.put("tenantCode", TenantContextHolder.getTenantCode());
+        // 在额外信息中加入登录类型（用户名/手机号/微信）
+        String loginType = "";
+        if (grantType.equalsIgnoreCase(CommonConstant.GRANT_TYPE_PASSWORD)) {
+            loginType = LoginTypeEnum.PWD.getType();
+        } else if (grantType.equalsIgnoreCase(CommonConstant.GRANT_TYPE_MOBILE)) {
+            loginType = LoginTypeEnum.SMS.getType();
+        } else if (grantType.equalsIgnoreCase(LoginTypeEnum.WECHAT.getType())) {
+            loginType = LoginTypeEnum.WECHAT.getType();
+        }
+        additionalInfo.put("loginType", loginType);
+        // 在用户的访问token中添加上这些额外信息
+        ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
+        return super.enhance(accessToken, authentication);
+    }
+
 }

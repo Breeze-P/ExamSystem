@@ -8,22 +8,29 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 /**
+ * 登录失败事件监听器
  *
- * 处理登录失败事件
- *
- * @author tangyi
- * @date 2019-11-11 23:52
+ * @author zdz
+ * @date 2022/04/14 22:56
  */
 @Slf4j
 @AllArgsConstructor
 @Component
 public class LoginFailureListener implements ApplicationListener<CustomAuthenticationFailureEvent> {
 
-	private final UserServiceClient userServiceClient;
+    /**
+     * 用户service客户端
+     */
+    private final UserServiceClient userServiceClient;
 
-	@Override
-	public void onApplicationEvent(CustomAuthenticationFailureEvent event) {
-		// 登录失败后的处理
+    /**
+     * 处理逻辑
+     *
+     * @param event 认证登录失败事件
+     */
+    @Override
+    public void onApplicationEvent(CustomAuthenticationFailureEvent event) {
+        // 登录失败后的处理
+    }
 
-	}
 }

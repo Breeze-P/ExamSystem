@@ -6,11 +6,12 @@ import com.github.tangyi.common.core.service.CrudService;
 import org.springframework.stereotype.Service;
 
 /**
- * Oauth2客户端Service
+ * Oauth2客户端Service类
  *
- * @author tangyi
- * @date 2019/3/30 16:48
+ * @author zdz
+ * @date 2022/04/14 11:46
  */
 @Service
 public class OauthClientDetailsService extends CrudService<OauthClientDetailsMapper, OauthClientDetails> {
+
 }

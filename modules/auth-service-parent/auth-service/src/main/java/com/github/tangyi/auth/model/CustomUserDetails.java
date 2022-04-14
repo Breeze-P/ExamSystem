@@ -9,10 +9,10 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 
 /**
- * 用户信息
+ * 用户信息类
  *
- * @author tangyi
- * @date 2019/5/28 21:13
+ * @author zdz
+ * @date 2022/04/14 11:46
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -21,14 +21,14 @@ public class CustomUserDetails extends User {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 租户标识
-     */
-    private String tenantCode;
-
-    /**
      * id
      */
     private Long id;
+
+    /**
+     * 租户标识
+     */
+    private String tenantCode;
 
     /**
      * 开始授权时间
@@ -58,4 +58,5 @@ public class CustomUserDetails extends User {
         this.start = start;
         this.loginType = loginType;
     }
+
 }

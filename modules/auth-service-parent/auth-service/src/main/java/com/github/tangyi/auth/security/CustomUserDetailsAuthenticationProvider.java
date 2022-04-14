@@ -19,8 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * 认证Provider，提供获取用户信息、认证、授权等功能
  *
- * @author tangyi
- * @date 2019/5/28 21:26
+ * @author zdz
+ * @date 2022/04/14 23:02
  */
 @Slf4j
 public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {

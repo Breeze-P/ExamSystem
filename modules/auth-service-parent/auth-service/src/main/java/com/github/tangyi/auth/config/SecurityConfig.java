@@ -20,41 +20,40 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 /**
  * Spring Security配置
  *
- * @author tangyi
- * @date 2019-03-14 14:35
+ * @author zdz
+ * @date 2022/04/14 12:21
  */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * 用户信息service
+     */
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    /**
+     * Authorization服务器端点配置
+     */
     @Autowired
     private AuthorizationServerEndpointsConfiguration endpoints;
 
+    /**
+     * 配置Spring Security
+     *
+     * @param http http security
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                // 前后端分离，关闭csrf
+                // 前后端分离，关闭csrf (Cross-Site request forgery)跨站请求伪造
                 .csrf().disable()
                 .authorizeRequests()
                 .anyRequest().authenticated();
         // accessDeniedHandler
-        http.exceptionHandling()
-				.accessDeniedHandler(accessDeniedHandler());
-    }
-
-    @Bean
-    public BCryptPasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
 
     @Autowired
@@ -63,18 +62,45 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
+     * 实例化并返回一个Authentication Manager Bean对象
+     *
+     * @return Authentication Manager Bean对象
+     */
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    /**
+     * 实例化并返回一个密码编码器实例
+     *
+     * @return 密码编码器实例
+     */
+    @Bean
+    public BCryptPasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    /**
      * 认证Provider，提供获取用户信息、认证、授权等功能
      *
-     * @return AuthenticationProvider
+     * @return Authentication Provider
      */
     @Bean
     public AuthenticationProvider authProvider() {
         return new CustomUserDetailsAuthenticationProvider(encoder(), userDetailsService);
     }
 
+    /**
+     * 实例化并返回一个自定义的访问拒绝处理器实例
+     *
+     * @return 自定义的访问拒绝处理器实例
+     */
     @Bean
-	public AccessDeniedHandler accessDeniedHandler() {
-    	return new CustomOAuth2AccessDeniedHandler();
-	}
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new CustomOAuth2AccessDeniedHandler();
+    }
+
 }
 

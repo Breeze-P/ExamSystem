@@ -13,30 +13,43 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * 校验租户
  *
- * @author tangyi
- * @date 2019-11-12 20:14
+ * @author zdz
+ * @date 2022/04/14 22:57
  */
 @AllArgsConstructor
 @Aspect
 @Component
 public class ValidateTenantAspect {
 
-	private final UserServiceClient userServiceClient;
+    /**
+     * 用户service客户端
+     */
+    private final UserServiceClient userServiceClient;
 
-	@Before("execution(* com.github.tangyi.auth.security.CustomUserDetailsServiceImpl.load*(..)) && args(tenantCode,..)")
-	public void validateTenantCode(String tenantCode) throws TenantNotFoundException {
-		// 获取tenantCode
-		if (StringUtils.isBlank(tenantCode))
-			throw new TenantNotFoundException("tenantCode cant not be null");
-		// 先获取租户信息
-		ResponseBean<Tenant> tenantResponseBean = userServiceClient.findTenantByTenantCode(tenantCode);
-		if (!ResponseUtil.isSuccess(tenantResponseBean))
-			throw new ServiceException("get tenant info failed: " + tenantResponseBean.getMsg());
-		Tenant tenant = tenantResponseBean.getData();
-		if (tenant == null)
-			throw new TenantNotFoundException("tenant does not exist");
-	}
+    /**
+     * 校验逻辑
+     *
+     * @param tenantCode 租户ID
+     * @throws TenantNotFoundException “未找到对应租户”异常
+     */
+    @Before("execution(* com.github.tangyi.auth.security.CustomUserDetailsServiceImpl.load*(..)) && args(tenantCode,..)")
+    public void validateTenantCode(String tenantCode) throws TenantNotFoundException {
+        // 获取租户ID
+        if (StringUtils.isBlank(tenantCode)) {
+            throw new TenantNotFoundException("tenantCode cant not be null");
+        }
+        // 根据租户ID获取租户实体Bean
+        ResponseBean<Tenant> tenantResponseBean = userServiceClient.findTenantByTenantCode(tenantCode);
+        if (!ResponseUtil.isSuccess(tenantResponseBean)) {
+            throw new ServiceException("get tenant info failed: " + tenantResponseBean.getMsg());
+        }
+        // 根据租户实体Bean获取租户实体
+        Tenant tenant = tenantResponseBean.getData();
+        if (tenant == null) {
+            throw new TenantNotFoundException("tenant does not exist");
+        }
+    }
+
 }

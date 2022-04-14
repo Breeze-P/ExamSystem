@@ -36,17 +36,20 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.Collections;
 
 /**
- * 授权服务器配置
+ * 授权服务器配置类
  *
- * @author tangyi
- * @date 2019-03-14 11:40
+ * @author zdz
+ * @date 2022/04/14 12:13
  */
 @Configuration
 public class CustomAuthorizationServerConfigurer extends AuthorizationServerConfigurerAdapter {
 
-	private AuthenticationConfiguration authenticationConfiguration;
+    /**
+     * Authentication配置信息
+     */
+    private AuthenticationConfiguration authenticationConfiguration;
 
-	/**
+    /**
      * redis连接工厂
      */
     private final RedisConnectionFactory redisConnectionFactory;
@@ -61,6 +64,13 @@ public class CustomAuthorizationServerConfigurer extends AuthorizationServerConf
      */
     private final KeyProperties keyProperties;
 
+    /**
+     * 构造器
+     *
+     * @param redisConnectionFactory redis连接工厂
+     * @param dataSource             数据源
+     * @param keyProperties          key配置信息
+     */
     @Autowired
     public CustomAuthorizationServerConfigurer(RedisConnectionFactory redisConnectionFactory,
                                                DataSource dataSource,
@@ -73,46 +83,49 @@ public class CustomAuthorizationServerConfigurer extends AuthorizationServerConf
     /**
      * 将token存储到redis
      *
-     * @return TokenStore
+     * @return 存储token的redis仓库
      */
     @Bean
     public TokenStore tokenStore() {
         return new RedisTokenStore(redisConnectionFactory);
     }
 
-	/**
-	 * 生成KeyPair
-	 * @return KeyPair
-	 */
-	@Bean
-	public KeyPair keyPair() {
-		KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(keyProperties.getKeyStore().getLocation(), keyProperties.getKeyStore().getPassword().toCharArray());
-		return keyStoreKeyFactory.getKeyPair(keyProperties.getKeyStore().getAlias());
-	}
+    /**
+     * 生成KeyPair
+     *
+     * @return 生成的KeyPair
+     */
+    @Bean
+    public KeyPair keyPair() {
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
+                keyProperties.getKeyStore().getLocation(),
+                keyProperties.getKeyStore().getPassword().toCharArray());
+        return keyStoreKeyFactory.getKeyPair(keyProperties.getKeyStore().getAlias());
+    }
 
     /**
      * token增强，使用非对称加密算法来对Token进行签名
      *
-     * @return JwtAccessTokenConverter
+     * @return 生成的token增强器
      */
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {
-		return new CustomTokenConverter(keyPair(), Collections.singletonMap("kid", "bael-key-id"));
+        return new CustomTokenConverter(keyPair(), Collections.singletonMap("kid", "bael-key-id"));
     }
 
-	@Bean
-	public JWKSet jwkSet() {
-		RSAKey.Builder builder = new RSAKey.Builder((RSAPublicKey) keyPair().getPublic())
-				.keyUse(KeyUse.SIGNATURE)
-				.algorithm(JWSAlgorithm.RS256)
-				.keyID("bael-key-id");
-		return new JWKSet(builder.build());
-	}
+    @Bean
+    public JWKSet jwkSet() {
+        RSAKey.Builder builder = new RSAKey.Builder((RSAPublicKey) keyPair().getPublic())
+                .keyUse(KeyUse.SIGNATURE)
+                .algorithm(JWSAlgorithm.RS256)
+                .keyID("bael-key-id");
+        return new JWKSet(builder.build());
+    }
 
     /**
      * 使用自定义的JdbcClientDetailsService客户端详情服务
      *
-     * @return ClientDetailsService
+     * @return 客户端信息service
      */
     @Bean
     public ClientDetailsService clientDetails() {
@@ -122,7 +135,7 @@ public class CustomAuthorizationServerConfigurer extends AuthorizationServerConf
     /**
      * 从数据库加载客户端信息
      *
-     * @param clients clients
+     * @param clients 客户端service配置
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -138,8 +151,8 @@ public class CustomAuthorizationServerConfigurer extends AuthorizationServerConf
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-				.authenticationManager(this.authenticationConfiguration.getAuthenticationManager())
-                // 将token存储到redis
+                .authenticationManager(this.authenticationConfiguration.getAuthenticationManager())
+                // 将token存储到redis仓库
                 .tokenStore(tokenStore())
                 // token增强
                 .tokenEnhancer(jwtTokenEnhancer())
@@ -148,7 +161,7 @@ public class CustomAuthorizationServerConfigurer extends AuthorizationServerConf
     }
 
     /**
-     * 配置认证规则，哪些需要认证哪些不需要
+     * 配置认证规则，即哪些需要认证以及哪些不需要
      *
      * @param oauthServer oauthServer
      */
@@ -163,11 +176,11 @@ public class CustomAuthorizationServerConfigurer extends AuthorizationServerConf
                 .allowFormAuthenticationForClients();
     }
 
-	@Autowired
-	public void setAuthenticationConfiguration(AuthenticationConfiguration authenticationConfiguration) {
-		this.authenticationConfiguration = authenticationConfiguration;
-	}
-
+    /**
+     * WebResponseExceptionTranslator
+     *
+     * @return WebResponseExceptionTranslator
+     */
     @Bean
     @Lazy
     public WebResponseExceptionTranslator<OAuth2Exception> webResponseExceptionTranslator() {
@@ -184,5 +197,11 @@ public class CustomAuthorizationServerConfigurer extends AuthorizationServerConf
             }
         };
     }
+
+    @Autowired
+    public void setAuthenticationConfiguration(AuthenticationConfiguration authenticationConfiguration) {
+        this.authenticationConfiguration = authenticationConfiguration;
+    }
+
 }
 

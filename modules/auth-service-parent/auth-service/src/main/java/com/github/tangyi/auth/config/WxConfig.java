@@ -12,18 +12,24 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 微信相关配置
  *
- * @author tangyi
- * @date 2019/07/05 20:29
+ * @author zdz
+ * @date 2022/04/14 12:27
  */
 @Configuration
 @AllArgsConstructor
 public class WxConfig {
 
     /**
-     * 微信的配置，如appId，appSecret，sessionHost
+     * 微信的属性，如appId，appSecret，sessionHost
      */
     private final WxProperties wxProperties;
 
+
+    /**
+     * 微信相关配置类
+     *
+     * @return 微信相关配置类
+     */
     @Bean
     public WxMaConfig wxMaConfig() {
         WxMaInMemoryConfig config = new WxMaInMemoryConfig();
@@ -32,10 +38,18 @@ public class WxConfig {
         return config;
     }
 
+    /**
+     * 微信相关service类
+     *
+     * @param maConfig 微信相关配置
+     * @return 微信相关service
+     */
     @Bean
     public WxMaService wxMaService(WxMaConfig maConfig) {
         WxMaService service = new WxMaServiceImpl();
         service.setWxMaConfig(maConfig);
         return service;
     }
+
 }
+

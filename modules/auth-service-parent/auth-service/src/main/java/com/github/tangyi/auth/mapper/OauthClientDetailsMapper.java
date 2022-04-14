@@ -5,11 +5,12 @@ import com.github.tangyi.common.core.persistence.CrudMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * Oauth2客户端mapper
+ * Oauth2客户端mapper接口
  *
- * @author tangyi
- * @date 2019/3/30 16:39
+ * @author zdz
+ * @date 2022/04/14 11:47
  */
 @Mapper
 public interface OauthClientDetailsMapper extends CrudMapper<OauthClientDetails> {
+
 }

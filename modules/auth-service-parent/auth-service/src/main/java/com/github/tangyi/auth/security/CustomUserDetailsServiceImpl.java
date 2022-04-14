@@ -33,132 +33,158 @@ import java.util.stream.Collectors;
 /**
  * 从数据库获取用户信息
  *
- * @author tangyi
- * @date 2019-03-14 14:36
+ * @author zdz
+ * @date 2022/04/14 23:24
  */
 @AllArgsConstructor
 @Service("userDetailsService")
 public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
 
-	private static final String GET_USER_INFO_FAIL = "get user information failed: ";
+    /**
+     * “获取用户信息失败”提示
+     */
+    private static final String GET_USER_INFO_FAIL = "get user information failed: ";
 
+    /**
+     * 用户service客户端
+     */
     private final UserServiceClient userServiceClient;
 
+    /**
+     * 微信service
+     */
     private final WxSessionService wxService;
 
     /**
-     * 加载用户信息
+     * 根据用户名和租户标识查询指定用户的信息
      *
-	 * @param tenantCode 租户标识
-     * @param username 用户名
-     * @return UserDetails
-     * @throws UsernameNotFoundException,TenantNotFoundException
+     * @param tenantCode 租户标识
+     * @param username   用户名
+     * @return 所给租户和用户名对应的用户信息
+     * @throws UsernameNotFoundException “未找到用户名”异常
+     * @throws TenantNotFoundException   “未找到租户”异常
      */
     @Override
-    public UserDetails loadUserByIdentifierAndTenantCode(String tenantCode, String username) throws UsernameNotFoundException, TenantNotFoundException {
+    public UserDetails loadUserByIdentifierAndTenantCode(String tenantCode, String username)
+            throws UsernameNotFoundException, TenantNotFoundException {
         long start = System.currentTimeMillis();
         ResponseBean<UserVo> userVoResponseBean = userServiceClient.findUserByIdentifier(username, tenantCode);
-        if (!ResponseUtil.isSuccess(userVoResponseBean))
+        if (!ResponseUtil.isSuccess(userVoResponseBean)) {
             throw new ServiceException(GET_USER_INFO_FAIL + userVoResponseBean.getMsg());
+        }
         UserVo userVo = userVoResponseBean.getData();
-        if (userVo == null)
+        // 若未找到所给用户名对应的用户
+        if (userVo == null) {
             throw new UsernameNotFoundException("user does not exist");
-        return new CustomUserDetails(username, userVo.getCredential(), CommonConstant.STATUS_NORMAL.equals(userVo.getStatus()), getAuthority(userVo), userVo.getTenantCode(), userVo.getId(), start, LoginTypeEnum.PWD);
+        }
+        return new CustomUserDetails(username, userVo.getCredential(),
+                CommonConstant.STATUS_NORMAL.equals(userVo.getStatus()),
+                getAuthority(userVo), userVo.getTenantCode(), userVo.getId(), start, LoginTypeEnum.PWD);
     }
 
     /**
-     * 根据社交账号查询
-	 *
-	 * @param tenantCode tenantCode
-     * @param social     social
-     * @param mobileUser mobileUser
-     * @return UserDetails
-     * @author tangyi
-     * @date 2019/06/22 21:08
+     * 根据社交账号和租户标识查询指定用户的信息
+     *
+     * @param tenantCode 租户标识
+     * @param social     社交账号
+     * @param mobileUser 手机号码
+     * @return 所给租户和社交账号对应的用户信息
      */
     @Override
-    public UserDetails loadUserBySocialAndTenantCode(String tenantCode, String social, MobileUser mobileUser) throws UsernameNotFoundException {
+    public UserDetails loadUserBySocialAndTenantCode(String tenantCode, String social, MobileUser mobileUser)
+            throws UsernameNotFoundException {
         long start = System.currentTimeMillis();
         ResponseBean<UserVo> userVoResponseBean = userServiceClient.findUserByIdentifier(social, IdentityType.PHONE_NUMBER.getValue(), tenantCode);
-        if (!ResponseUtil.isSuccess(userVoResponseBean))
+        if (!ResponseUtil.isSuccess(userVoResponseBean)) {
             throw new ServiceException(GET_USER_INFO_FAIL + userVoResponseBean.getMsg());
+        }
         UserVo userVo = userVoResponseBean.getData();
         // 第一次登录
         if (userVo == null) {
             UserDto userDto = new UserDto();
             // 用户的基本信息
-            if (mobileUser != null)
+            if (mobileUser != null) {
                 BeanUtils.copyProperties(mobileUser, userDto);
+            }
             userDto.setIdentifier(social);
             userDto.setCredential(social);
             userDto.setIdentityType(IdentityType.PHONE_NUMBER.getValue());
             userDto.setLoginTime(DateUtils.asDate(LocalDateTime.now()));
             // 注册账号
             ResponseBean<Boolean> response = userServiceClient.registerUser(userDto);
-            if (!ResponseUtil.isSuccess(response))
+            if (!ResponseUtil.isSuccess(response)) {
                 throw new ServiceException("register failed: " + response.getMsg());
+            }
             // 重新获取用户信息
             userVoResponseBean = userServiceClient.findUserByIdentifier(social, IdentityType.PHONE_NUMBER.getValue(), tenantCode);
-            if (!ResponseUtil.isSuccess(userVoResponseBean))
+            if (!ResponseUtil.isSuccess(userVoResponseBean)) {
                 throw new ServiceException(GET_USER_INFO_FAIL + userVoResponseBean.getMsg());
+            }
             userVo = userVoResponseBean.getData();
         }
-        return new CustomUserDetails(userVo.getIdentifier(), userVo.getCredential(), CommonConstant.STATUS_NORMAL.equals(userVo.getStatus()), getAuthority(userVo), userVo.getTenantCode(), userVo.getId(), start, LoginTypeEnum.SMS);
+        return new CustomUserDetails(userVo.getIdentifier(), userVo.getCredential(),
+                CommonConstant.STATUS_NORMAL.equals(userVo.getStatus()),
+                getAuthority(userVo), userVo.getTenantCode(), userVo.getId(), start, LoginTypeEnum.SMS);
     }
 
     /**
      * 根据微信code和租户标识查询
      * 将code换成openId和sessionKey
      *
-	 * @param tenantCode tenantCode
+     * @param tenantCode tenantCode
      * @param code       code
      * @param wxUser     wxUser
-     * @return UserDetails
-     * @author tangyi
-     * @date 2019/07/05 20:05:36
+     * @return 所给租户和微信账号对应的用户信息
      */
     @Override
-    public UserDetails loadUserByWxCodeAndTenantCode(String tenantCode, String code, WxUser wxUser) throws UsernameNotFoundException {
+    public UserDetails loadUserByWxCodeAndTenantCode(String tenantCode, String code, WxUser wxUser)
+            throws UsernameNotFoundException {
         long start = System.currentTimeMillis();
         // 根据code获取openId和sessionKey
         WxSession wxSession = wxService.code2Session(code);
-        if (wxSession == null)
+        // 若未找到对应的微信账号
+        if (wxSession == null) {
             throw new CommonException("get openId failed");
+        }
         // 获取用户信息
         ResponseBean<UserVo> userVoResponseBean = userServiceClient.findUserByIdentifier(wxSession.getOpenId(), IdentityType.WE_CHAT.getValue(), tenantCode);
-        if (!ResponseUtil.isSuccess(userVoResponseBean))
+        if (!ResponseUtil.isSuccess(userVoResponseBean)) {
             throw new ServiceException(GET_USER_INFO_FAIL + userVoResponseBean.getMsg());
+        }
         UserVo userVo = userVoResponseBean.getData();
         // 为空说明是第一次登录，需要将用户信息增加到数据库里
         if (userVo == null) {
             UserDto userDto = new UserDto();
             // 用户的基本信息
-            if (wxUser != null)
+            if (wxUser != null) {
                 BeanUtils.copyProperties(wxUser, userDto);
+            }
             userDto.setIdentifier(wxSession.getOpenId());
             userDto.setCredential(wxSession.getOpenId());
             userDto.setIdentityType(IdentityType.WE_CHAT.getValue());
             userDto.setLoginTime(DateUtils.asDate(LocalDateTime.now()));
             // 注册账号
             ResponseBean<Boolean> response = userServiceClient.registerUser(userDto);
-            if (!ResponseUtil.isSuccess(response))
+            if (!ResponseUtil.isSuccess(response)) {
                 throw new ServiceException("register failed: " + response.getMsg());
+            }
             // 重新获取用户信息
             userVoResponseBean = userServiceClient.findUserByIdentifier(wxSession.getOpenId(), IdentityType.WE_CHAT.getValue(), tenantCode);
-            if (!ResponseUtil.isSuccess(userVoResponseBean))
+            if (!ResponseUtil.isSuccess(userVoResponseBean)) {
                 throw new ServiceException(GET_USER_INFO_FAIL + userVoResponseBean.getMsg());
+            }
             userVo = userVoResponseBean.getData();
         }
-        return new CustomUserDetails(userVo.getIdentifier(), userVo.getCredential(), CommonConstant.STATUS_NORMAL.equals(userVo.getStatus()), getAuthority(userVo), userVo.getTenantCode(), userVo.getId(), start, LoginTypeEnum.WECHAT);
+        return new CustomUserDetails(userVo.getIdentifier(), userVo.getCredential(),
+                CommonConstant.STATUS_NORMAL.equals(userVo.getStatus()),
+                getAuthority(userVo), userVo.getTenantCode(), userVo.getId(), start, LoginTypeEnum.WECHAT);
     }
 
     /**
      * 获取用户权限
      *
-     * @param userVo userVo
-     * @return Set
-     * @author tangyi
-     * @date 2019/03/17 14:41
+     * @param userVo 用户VO
+     * @return 用户权限set
      */
     private Set<GrantedAuthority> getAuthority(UserVo userVo) {
         return userVo.getRoleList()
@@ -166,4 +192,5 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
                 .map(role -> new GrantedAuthorityImpl(role.getRoleCode().toUpperCase()))
                 .collect(Collectors.toSet());
     }
+
 }

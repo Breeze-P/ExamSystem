@@ -19,27 +19,33 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * Authentication管理
+ * Authentication管理Controller
  *
- * @author tangyi
- * @date 2019/3/18 14:13
+ * @author zdz
+ * @date 2022/04/14 12:10
  */
 @RestController
 @RequestMapping("/v1/authentication")
 public class AuthenticationController extends BaseController {
 
+    /**
+     * 用户token service
+     */
     @Autowired
     @Qualifier("consumerTokenServices")
     private ConsumerTokenServices consumerTokenServices;
 
-	@Autowired
-	private JWKSet jwkSet;
+    /**
+     * JWT Secret k-v set
+     */
+    @Autowired
+    private JWKSet jwkSet;
 
-	/**
+    /**
      * 用户信息校验
      *
-     * @param authentication 信息
-     * @return 用户信息
+     * @param authentication 校验信息
+     * @return 用户主体
      */
     @RequestMapping("user")
     public Object user(Authentication authentication) {
@@ -47,29 +53,31 @@ public class AuthenticationController extends BaseController {
     }
 
     /**
-     * 清除access_token
+     * 清除用户的access_token
      *
-     * @param request request
-     * @return ReturnT
+     * @param request 处理请求
+     * @return 包含请求处理结果的响应Bean
      */
     @PostMapping("removeToken")
     public ResponseBean<Boolean> removeToken(HttpServletRequest request) {
         String accessToken = request.getHeader("Authorization");
-        if (StringUtils.isBlank(accessToken))
+        if (StringUtils.isBlank(accessToken)) {
             throw new CommonException("accessToken为空.");
-        if (accessToken.startsWith(CommonConstant.AUTHORIZATION_BEARER))
+        }
+        if (accessToken.startsWith(CommonConstant.AUTHORIZATION_BEARER)) {
             accessToken = accessToken.split(CommonConstant.AUTHORIZATION_BEARER)[1];
+        }
         return new ResponseBean<>(consumerTokenServices.revokeToken(accessToken));
     }
 
     /**
+     * 获取JWT K—V集合
      *
-     * @return Map
-     * @author tangyi
-     * @date 2020/3/7 4:25 下午
+     * @return Map K-V集合
      */
-	@GetMapping("/jwks.json")
-	public Map<String, Object> keys() {
-		return this.jwkSet.toJSONObject();
-	}
+    @GetMapping("/jwks.json")
+    public Map<String, Object> keys() {
+        return this.jwkSet.toJSONObject();
+    }
+
 }
