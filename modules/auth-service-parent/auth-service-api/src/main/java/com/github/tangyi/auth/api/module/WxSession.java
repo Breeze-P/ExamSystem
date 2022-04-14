@@ -8,8 +8,8 @@ import java.io.Serializable;
 /**
  * 封装微信登录状态
  *
- * @author tangyi
- * @date 2019/07/05 20:35
+ * @author zdz
+ * @date 2022/04/14 23:40
  */
 @Data
 @AllArgsConstructor
@@ -17,7 +17,14 @@ public class WxSession implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * open ID
+     */
     private String openId;
 
+    /**
+     * Session key
+     */
     private String sessionKey;
+
 }

@@ -6,8 +6,8 @@ import lombok.Data;
 /**
  * OAuth2客户端信息
  *
- * @author tangyi
- * @date 2019/3/30 16:35
+ * @author zdz
+ * @date 2022/04/14 11:52
  */
 @Data
 public class OauthClientDetails extends BaseEntity<OauthClientDetails> {
