@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 /**
  * 简答题
  *
- * @author tangyi
- * @date 2018/11/8 20:53
+ * @author zdz
+ * @date 2022/04/16 14:14
  */
 @Data
 public class SubjectShortAnswer extends BaseEntity<SubjectShortAnswer> {
@@ -47,4 +47,5 @@ public class SubjectShortAnswer extends BaseEntity<SubjectShortAnswer> {
 	 * 难度等级
 	 */
 	private Integer level;
+
 }

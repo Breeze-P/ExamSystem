@@ -7,8 +7,8 @@ import lombok.Data;
 /**
  * 选择题的选项
  *
- * @author tangyi
- * @date 2018/11/8 20:53
+ * @author zdz
+ * @date 2022/04/16 14:14
  */
 @Data
 public class SubjectOption extends BaseEntity<SubjectOption> {
@@ -33,4 +33,5 @@ public class SubjectOption extends BaseEntity<SubjectOption> {
      * 是否正确
      */
     private String right;
+
 }

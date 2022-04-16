@@ -8,8 +8,8 @@ import javax.validation.constraints.NotBlank;
 /**
  * 课程
  *
- * @author tangyi
- * @date 2018/11/8 20:43
+ * @author zdz
+ * @date 2022/04/16 14:10
  */
 @Data
 public class Course extends BaseEntity<Course> {
@@ -49,4 +49,5 @@ public class Course extends BaseEntity<Course> {
      * logo URL
      */
     private String logoUrl;
+
 }

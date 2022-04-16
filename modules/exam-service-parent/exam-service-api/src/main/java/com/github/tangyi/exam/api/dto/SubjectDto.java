@@ -11,8 +11,10 @@ import lombok.EqualsAndHashCode;
 import java.util.List;
 
 /**
- * @author tangyi
- * @date 2019/1/9 20:58
+ * 题目DTO
+ *
+ * @author zdz
+ * @date 2022/04/16 14:18
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -57,7 +59,6 @@ public class SubjectDto extends BaseEntity<SubjectDto> {
      */
     private Double score;
 
-
     /**
      * 解析
      */
@@ -77,4 +78,5 @@ public class SubjectDto extends BaseEntity<SubjectDto> {
      * 选项列表
      */
     private List<SubjectOption> options;
+
 }

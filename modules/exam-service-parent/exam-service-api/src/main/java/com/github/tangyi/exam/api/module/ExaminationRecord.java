@@ -10,8 +10,8 @@ import java.util.Date;
 /**
  * 考试记录
  *
- * @author tangyi
- * @date 2018/11/8 21:05
+ * @author zdz
+ * @date 2022/04/16 14:12
  */
 @Data
 public class ExaminationRecord extends BaseEntity<ExaminationRecord> {
@@ -46,18 +46,19 @@ public class ExaminationRecord extends BaseEntity<ExaminationRecord> {
     private Double score;
 
     /**
-     * 错误题目数量
-     */
-    private Integer inCorrectNumber;
-
-    /**
      * 正确题目数量
      */
     private Integer correctNumber;
+
+    /**
+     * 错误题目数量
+     */
+    private Integer inCorrectNumber;
 
     /**
      * 提交状态 1-已提交 0-未提交
      */
     @NotBlank(message = "状态不能为空")
     private Integer submitStatus;
+
 }

@@ -8,8 +8,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author tangyi
- * @date 2019/6/18 15:02
+ * 答案DTO
+ *
+ * @author zdz
+ * @date 2022/04/16 14:15
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -90,4 +92,5 @@ public class AnswerDto implements Serializable {
 	 * 耗时
 	 */
 	private String duration;
+
 }

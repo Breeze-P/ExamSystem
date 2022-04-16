@@ -11,8 +11,8 @@ import java.util.Date;
 /**
  * 考试
  *
- * @author tangyi
- * @date 2018/11/8 20:47
+ * @author zdz
+ * @date 2022/04/16 14:11
  */
 @Data
 public class Examination extends BaseEntity<Examination> {
@@ -71,4 +71,5 @@ public class Examination extends BaseEntity<Examination> {
      * 备注
      */
     private String remark;
+
 }

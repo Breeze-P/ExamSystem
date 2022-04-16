@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 /**
  * 知识库
  *
- * @author tangyi
- * @date 2019/1/1 15:01
+ * @author zdz
+ * @date 2022/04/16 14:12
  */
 @Data
 public class Knowledge extends BaseEntity<Knowledge> {
@@ -37,4 +37,5 @@ public class Knowledge extends BaseEntity<Knowledge> {
      */
     @NotBlank(message = "状态不能为空")
     private String status;
+
 }

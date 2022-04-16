@@ -7,16 +7,19 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 答题卡
+ * 答题卡DTO
  *
- * @author tangyi
- * @date 2019/10/10 21:23
+ * @author zdz
+ * @date 2022/04/16 14:14
  */
 @Data
 public class AnswerCartDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 题目IDs
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private List<Long> subjectIds;
 

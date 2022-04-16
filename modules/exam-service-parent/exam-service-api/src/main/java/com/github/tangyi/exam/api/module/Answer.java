@@ -9,8 +9,8 @@ import java.util.Date;
 /**
  * 答题
  *
- * @author tangyi
- * @date 2018/11/8 20:59
+ * @author zdz
+ * @date 2022/04/16 14:10
  */
 @Data
 public class Answer extends BaseEntity<Answer> {
@@ -61,4 +61,5 @@ public class Answer extends BaseEntity<Answer> {
      * 结束时间
      */
     private Date endTime;
+
 }

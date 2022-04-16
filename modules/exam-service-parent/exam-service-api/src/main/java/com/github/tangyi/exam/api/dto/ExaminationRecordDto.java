@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * 考试记录DTO
  *
- * @author tangyi
- * @date 2018-12-26 16:26
+ * @author zdz
+ * @date 2022/04/16 14:16
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -140,6 +140,9 @@ public class ExaminationRecordDto extends BaseEntity<ExaminationRecordDto> {
      */
     private Integer submitStatus;
 
+    /**
+     * 提交状态名称
+     */
     private String submitStatusName;
 
 	/**

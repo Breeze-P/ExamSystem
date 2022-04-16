@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 /**
  * 考试服务熔断
  *
- * @author tangyi
- * @date 2019-03-01 15:22
+ * @author zdz
+ * @date 2022/04/16 14:20
  */
 @Slf4j
 @Service
@@ -37,4 +37,5 @@ public class ExaminationServiceClientFallbackImpl implements ExaminationServiceC
 	public void setThrowable(Throwable throwable) {
 		this.throwable = throwable;
 	}
+
 }

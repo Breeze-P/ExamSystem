@@ -1,10 +1,10 @@
 package com.github.tangyi.exam.api.constants;
 
 /**
- * 答题常量
+ * 封装与答题相关的常量
  *
- * @author tangyi
- * @date 2019/6/18 16:49
+ * @author zdz
+ * @date 2022/04/16 14:07
  */
 public class AnswerConstant {
 
@@ -47,4 +47,5 @@ public class AnswerConstant {
 	 * 排名缓存前缀
 	 */
 	public static final String CACHE_PREFIX_RANK = "rank:";
+
 }

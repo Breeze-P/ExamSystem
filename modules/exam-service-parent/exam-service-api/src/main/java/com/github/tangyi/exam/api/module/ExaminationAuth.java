@@ -6,8 +6,8 @@ import lombok.Data;
 /**
  * 考试权限
  *
- * @author tangyi
- * @date 2019-07-16 14:01
+ * @author zdz
+ * @date 2022/04/16 14:12
  */
 @Data
 public class ExaminationAuth extends BaseEntity<ExaminationAuth> {
@@ -21,4 +21,5 @@ public class ExaminationAuth extends BaseEntity<ExaminationAuth> {
      * 考试ID
      */
     private String examinationId;
+
 }

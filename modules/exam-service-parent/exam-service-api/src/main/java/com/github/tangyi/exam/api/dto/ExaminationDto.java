@@ -6,13 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author tangyi
- * @date 2018/11/20 22:02
+ * 考试DTO
+ *
+ * @author zdz
+ * @date 2022/04/16 14:15
  */
 @Data
 @NoArgsConstructor
 public class ExaminationDto extends Examination {
 
+    /**
+     * 课程
+     */
     private Course course;
 
     /**

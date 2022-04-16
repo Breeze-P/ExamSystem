@@ -6,8 +6,10 @@ import com.github.tangyi.exam.api.module.SubjectCategory;
 import lombok.Data;
 
 /**
- * @author tangyi
- * @date 2018/12/4 22:04
+ * 题目类型DTO
+ *
+ * @author zdz
+ * @date 2022/04/16 14:17
  */
 @Data
 public class SubjectCategoryDto extends TreeEntity<SubjectCategoryDto> {
@@ -28,6 +30,10 @@ public class SubjectCategoryDto extends TreeEntity<SubjectCategoryDto> {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long parentId;
 
+
+    /**
+     * 构造器
+     */
     public SubjectCategoryDto(SubjectCategory subjectCategory) {
         this.id = subjectCategory.getId();
         this.categoryName = subjectCategory.getCategoryName();
@@ -45,4 +51,5 @@ public class SubjectCategoryDto extends TreeEntity<SubjectCategoryDto> {
     public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
+
 }

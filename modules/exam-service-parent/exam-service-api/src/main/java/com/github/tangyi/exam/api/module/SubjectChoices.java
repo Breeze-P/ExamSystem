@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * 选择题
  *
- * @author tangyi
- * @date 2018/11/8 20:53
+ * @author zdz
+ * @date 2022/04/16 14:13
  */
 @Data
 public class SubjectChoices extends BaseEntity<SubjectChoices> {
@@ -59,4 +59,5 @@ public class SubjectChoices extends BaseEntity<SubjectChoices> {
 	 * 选项列表
 	 */
 	private List<SubjectOption> options;
+
 }

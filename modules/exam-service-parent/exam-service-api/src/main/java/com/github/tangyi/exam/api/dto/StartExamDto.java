@@ -8,8 +8,8 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author tangyi
- * @date 2019/4/30 16:54
+ * @author zdz
+ * @date 2022/04/16 14:17
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -31,4 +31,5 @@ public class StartExamDto implements Serializable {
      * 题目信息
      */
     private SubjectDto subjectDto;
+
 }

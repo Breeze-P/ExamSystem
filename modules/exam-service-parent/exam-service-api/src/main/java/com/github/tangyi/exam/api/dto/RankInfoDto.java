@@ -5,13 +5,17 @@ import lombok.Data;
 
 /**
  * 排名详情
- * @author tangyi
- * @date 2019/12/8 23:33
+ *
+ * @author zdz
+ * @date 2022/04/16 14:17
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RankInfoDto {
 
+	/**
+	 * 用户ID
+	 */
 	private Long userId;
 
 	/**

@@ -7,8 +7,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * @author tangyi
- * @date 2019/1/1 22:04
+ * 知识库DTO
+ *
+ * @author zdz
+ * @date 2022/04/16 14:16
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -45,4 +47,5 @@ public class KnowledgeDto extends BaseEntity<KnowledgeDto> {
      * 附件大小
      */
     private String attachSize;
+
 }

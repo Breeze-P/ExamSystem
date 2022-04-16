@@ -8,8 +8,8 @@ import lombok.Data;
 /**
  * 考试题目关联
  *
- * @author tangyi
- * @date 2019/6/16 13:46
+ * @author zdz
+ * @date 2022/04/16 14:12
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -37,4 +37,5 @@ public class ExaminationSubject extends BaseEntity<ExaminationSubject> {
      * 题目类型，0：选择题，1：简答题，2：判断题，3：多选题
      */
     private Integer type;
+
 }

@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
  * <p>
  * FeignClient需要指定configuration为CustomFeignConfig，用于服务间调用携带token
  *
- * @author tangyi
- * @date 2019-03-01 15:21
+ * @author zdz
+ * @date 2022/04/16 14:19
  */
-@FeignClient(name = ServiceConstant.EXAM_SERVICE, configuration = CustomFeignConfig.class, fallback = ExaminationServiceClientFallbackImpl.class)
+@FeignClient(name = ServiceConstant.EXAM_SERVICE,
+		configuration = CustomFeignConfig.class,
+		fallback = ExaminationServiceClientFallbackImpl.class)
 public interface ExaminationServiceClient {
 
 	/**
@@ -37,6 +39,7 @@ public interface ExaminationServiceClient {
 	 * @return ResponseBean
 	 */
 	@GetMapping("/v1/examRecord/dashboard/examRecordTendency")
-	ResponseBean<ExaminationDashboardDto> findExamRecordTendencyData(@RequestParam("tenantCode") String tenantCode, @RequestParam("pastDays") Integer pastDays);
+	ResponseBean<ExaminationDashboardDto> findExamRecordTendencyData(@RequestParam("tenantCode") String tenantCode,
+																	 @RequestParam("pastDays") Integer pastDays);
 
 }

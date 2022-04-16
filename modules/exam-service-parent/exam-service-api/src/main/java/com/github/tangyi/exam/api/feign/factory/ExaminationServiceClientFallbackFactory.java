@@ -6,8 +6,8 @@ import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * @author tangyi
- * @date 2019/3/26 09:49
+ * @author zdz
+ * @date 2022/04/16 14:21
  */
 @Component
 public class ExaminationServiceClientFallbackFactory implements FallbackFactory<ExaminationServiceClient> {
@@ -18,4 +18,5 @@ public class ExaminationServiceClientFallbackFactory implements FallbackFactory<
         examinationServiceClientFallback.setThrowable(throwable);
         return examinationServiceClientFallback;
     }
+
 }

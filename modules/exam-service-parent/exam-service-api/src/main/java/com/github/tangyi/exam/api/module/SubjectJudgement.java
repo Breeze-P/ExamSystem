@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 /**
  * 判断题
  *
- * @author tangyi
- * @date 2019-07-16 12:57
+ * @author zdz
+ * @date 2022/04/16 14:13
  */
 @Data
 public class SubjectJudgement extends BaseEntity<SubjectJudgement> {
@@ -47,4 +47,5 @@ public class SubjectJudgement extends BaseEntity<SubjectJudgement> {
 	 * 难度等级
 	 */
 	private Integer level;
+
 }

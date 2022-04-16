@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 /**
  * 题目分类
  *
- * @author tangyi
- * @date 2018-12-04 11:18
+ * @author zdz
+ * @date 2022/04/16 14:13
  */
 @Data
 public class SubjectCategory extends BaseEntity<SubjectCategory> {
@@ -41,4 +41,5 @@ public class SubjectCategory extends BaseEntity<SubjectCategory> {
      * 类型: 0-私共,1-公有
      */
     private Integer type;
+
 }

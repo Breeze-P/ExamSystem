@@ -6,8 +6,8 @@ import lombok.Data;
 /**
  * 图片表
  *
- * @author tangyi
- * @date 2019/6/16 13:52
+ * @author zdz
+ * @date 2022/04/16 14:13
  */
 @Data
 public class Pictures extends BaseEntity<Pictures> {
@@ -21,4 +21,5 @@ public class Pictures extends BaseEntity<Pictures> {
      * 附件ID
      */
     private String attachmentId;
+
 }

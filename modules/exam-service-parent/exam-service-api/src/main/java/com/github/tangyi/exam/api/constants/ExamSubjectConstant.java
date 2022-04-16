@@ -1,8 +1,10 @@
 package com.github.tangyi.exam.api.constants;
 
 /**
- * @author tangyi
- * @date 2019/4/30 17:17
+ * 封装考试题型相关的常量
+ *
+ * @author zdz
+ * @date 2022/04/16 14:07
  */
 public class ExamSubjectConstant {
 
@@ -25,4 +27,5 @@ public class ExamSubjectConstant {
 	 * 公共分类
 	 */
 	public static final Integer PUBLIC_CATEGORY = 0;
+
 }
