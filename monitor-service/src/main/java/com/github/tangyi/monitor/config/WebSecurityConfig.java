@@ -8,8 +8,8 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 /**
- * @author tangyi
- * @date 2019/3/21 14:48
+ * @author zdz
+ * @date 2022/04/12 00:20
  */
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -29,7 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 解决spring boot不允许加载iframe问题
         http.headers().frameOptions().disable();
-
         http.authorizeRequests()
                 .antMatchers("/actuator/**", "/hystrix/**", "/hystrix", "*.sender").permitAll()
                 .antMatchers(adminContextPath + "/assets/**").permitAll()
@@ -46,4 +45,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         adminContextPath + "/actuator/**"
                 );
     }
+
 }

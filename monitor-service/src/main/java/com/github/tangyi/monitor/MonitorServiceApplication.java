@@ -13,8 +13,8 @@ import org.springframework.cloud.netflix.turbine.EnableTurbine;
 @EnableHystrixDashboard
 @EnableTurbine
 @EnableAdminServer
-// 动态刷新
 @RefreshScope
+// 动态刷新
 public class MonitorServiceApplication {
 
     public static void main(String[] args) {
