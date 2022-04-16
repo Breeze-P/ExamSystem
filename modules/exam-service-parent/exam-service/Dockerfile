@@ -1,5 +1,5 @@
 FROM anapsix/alpine-java:8_server-jre_unlimited
-MAINTAINER tangyi(1633736729@qq.com)
+MAINTAINER z
 ARG JAR_FILE
 ADD target/${JAR_FILE} /opt/app.jar
 EXPOSE 9184
