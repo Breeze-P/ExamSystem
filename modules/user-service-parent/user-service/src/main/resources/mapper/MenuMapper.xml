@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.tangyi.user.mapper.MenuMapper">
-    <resultMap id="menuResultMap" type="com.github.tangyi.user.api.module.Menu">
+<mapper namespace="com.github.helloteam.user.mapper.MenuMapper">
+    <resultMap id="menuResultMap" type="com.github.helloteam.user.api.module.Menu">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="permission" property="permission"/>

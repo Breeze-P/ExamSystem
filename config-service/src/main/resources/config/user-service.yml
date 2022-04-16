@@ -76,7 +76,7 @@ security:
 
 # mybatis配置
 mybatis:
-  type-aliases-package: com.github.tangyi.user.api.module
+  type-aliases-package: com.github.helloteam.user.api.module
   configuration:
     # 驼峰转换
     map-underscore-to-camel-case: true

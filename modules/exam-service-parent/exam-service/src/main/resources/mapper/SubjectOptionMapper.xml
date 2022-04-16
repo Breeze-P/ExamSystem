@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.tangyi.exam.mapper.SubjectOptionMapper">
-    <resultMap id="subjectOptionResultMap" type="com.github.tangyi.exam.api.module.SubjectOption">
+<mapper namespace="com.github.helloteam.exam.mapper.SubjectOptionMapper">
+    <resultMap id="subjectOptionResultMap" type="com.github.helloteam.exam.api.module.SubjectOption">
         <id column="id" property="id"/>
         <result column="subject_choices_id" property="subjectChoicesId"/>
         <result column="option_name" property="optionName"/>
