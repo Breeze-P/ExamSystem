@@ -8,7 +8,7 @@
         <module>user-service</module>
     </modules>
     <parent>
-        <groupId>com.github.tangyi</groupId>
+        <groupId>com.github.helloteam</groupId>
         <artifactId>modules</artifactId>
         <version>${revision}</version>
     </parent>

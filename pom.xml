@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.tangyi</groupId>
+    <groupId>com.github.helloteam</groupId>
     <artifactId>spring-microservice-exam</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
@@ -174,77 +174,77 @@
 
             <!-- common-core -->
             <dependency>
-                <groupId>com.github.tangyi</groupId>
+                <groupId>com.github.helloteam</groupId>
                 <artifactId>common-core</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- common-basic -->
             <dependency>
-                <groupId>com.github.tangyi</groupId>
+                <groupId>com.github.helloteam</groupId>
                 <artifactId>common-basic</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- common-config -->
             <dependency>
-                <groupId>com.github.tangyi</groupId>
+                <groupId>com.github.helloteam</groupId>
                 <artifactId>common-config</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- common-security -->
             <dependency>
-                <groupId>com.github.tangyi</groupId>
+                <groupId>com.github.helloteam</groupId>
                 <artifactId>common-security</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- common-feign -->
             <dependency>
-                <groupId>com.github.tangyi</groupId>
+                <groupId>com.github.helloteam</groupId>
                 <artifactId>common-feign</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- common-log -->
             <dependency>
-                <groupId>com.github.tangyi</groupId>
+                <groupId>com.github.helloteam</groupId>
                 <artifactId>common-log</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- common-oss -->
             <dependency>
-                <groupId>com.github.tangyi</groupId>
+                <groupId>com.github.helloteam</groupId>
                 <artifactId>common-oss</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- user-service-api -->
             <dependency>
-                <groupId>com.github.tangyi</groupId>
+                <groupId>com.github.helloteam</groupId>
                 <artifactId>user-service-api</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- auth-service-api -->
             <dependency>
-                <groupId>com.github.tangyi</groupId>
+                <groupId>com.github.helloteam</groupId>
                 <artifactId>auth-service-api</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- exam-service-api -->
             <dependency>
-                <groupId>com.github.tangyi</groupId>
+                <groupId>com.github.helloteam</groupId>
                 <artifactId>exam-service-api</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- msc-service-api -->
             <dependency>
-                <groupId>com.github.tangyi</groupId>
+                <groupId>com.github.helloteam</groupId>
                 <artifactId>msc-service-api</artifactId>
                 <version>${revision}</version>
             </dependency>

@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
     <parent>
         <artifactId>common</artifactId>
-        <groupId>com.github.tangyi</groupId>
+        <groupId>com.github.helloteam</groupId>
         <version>${revision}</version>
     </parent>
     <artifactId>common-config</artifactId>
@@ -16,14 +16,14 @@
     <dependencies>
         <!-- core -->
         <dependency>
-            <groupId>com.github.tangyi</groupId>
+            <groupId>com.github.helloteam</groupId>
             <artifactId>common-core</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <!-- security -->
         <dependency>
-            <groupId>com.github.tangyi</groupId>
+            <groupId>com.github.helloteam</groupId>
             <artifactId>common-security</artifactId>
             <scope>provided</scope>
         </dependency>

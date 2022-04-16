@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
     <parent>
-        <groupId>com.github.tangyi</groupId>
+        <groupId>com.github.helloteam</groupId>
         <artifactId>user-service-parent</artifactId>
         <version>${revision}</version>
     </parent>
@@ -15,43 +15,43 @@
     <dependencies>
         <!-- common-config -->
         <dependency>
-            <groupId>com.github.tangyi</groupId>
+            <groupId>com.github.helloteam</groupId>
             <artifactId>common-config</artifactId>
         </dependency>
 
         <!-- common-security -->
         <dependency>
-            <groupId>com.github.tangyi</groupId>
+            <groupId>com.github.helloteam</groupId>
             <artifactId>common-security</artifactId>
         </dependency>
 
         <!-- common-log -->
         <dependency>
-            <groupId>com.github.tangyi</groupId>
+            <groupId>com.github.helloteam</groupId>
             <artifactId>common-log</artifactId>
         </dependency>
 
         <!-- common-oss -->
         <dependency>
-            <groupId>com.github.tangyi</groupId>
+            <groupId>com.github.helloteam</groupId>
             <artifactId>common-oss</artifactId>
         </dependency>
 
         <!-- user-service-api -->
         <dependency>
-            <groupId>com.github.tangyi</groupId>
+            <groupId>com.github.helloteam</groupId>
             <artifactId>user-service-api</artifactId>
         </dependency>
 
         <!-- exam-service-api -->
         <dependency>
-            <groupId>com.github.tangyi</groupId>
+            <groupId>com.github.helloteam</groupId>
             <artifactId>exam-service-api</artifactId>
         </dependency>
 
         <!-- msc-service-api -->
         <dependency>
-            <groupId>com.github.tangyi</groupId>
+            <groupId>com.github.helloteam</groupId>
             <artifactId>msc-service-api</artifactId>
         </dependency>
 
