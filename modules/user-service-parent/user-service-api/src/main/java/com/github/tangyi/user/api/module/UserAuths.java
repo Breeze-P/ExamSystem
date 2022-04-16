@@ -5,7 +5,7 @@ import com.github.tangyi.common.core.persistence.BaseEntity;
 import lombok.Data;
 
 /**
- * 用户授权信息
+ * 用户授权信息关联
  *
  * @author zdz
  * @date 2022/04/15 00:04
