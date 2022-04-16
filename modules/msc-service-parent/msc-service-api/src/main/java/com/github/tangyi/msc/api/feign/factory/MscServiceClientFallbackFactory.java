@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 /**
  * 消息中心服务断路器工厂
  *
- * @author tangyi
- * @date 2019/07/02 16:08
+ * @author zdz
+ * @date 2022/04/16 14:55
  */
 @Component
 public class MscServiceClientFallbackFactory implements FallbackFactory<MscServiceClient> {
@@ -20,4 +20,5 @@ public class MscServiceClientFallbackFactory implements FallbackFactory<MscServi
         mscServiceClientFallback.setThrowable(throwable);
         return mscServiceClientFallback;
     }
+
 }

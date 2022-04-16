@@ -6,8 +6,8 @@ import lombok.Data;
 /**
  * 封装短信服务返回的结果
  *
- * @author tangyi
- * @date 2019/08/04 13:51
+ * @author zdz
+ * @date 2022/04/16 14:55
  */
 @Data
 public class SmsResponse {
@@ -20,4 +20,5 @@ public class SmsResponse {
 
     @JsonProperty("Code")
     private String code;
+
 }

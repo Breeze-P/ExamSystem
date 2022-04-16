@@ -5,8 +5,10 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author tangyi
- * @date 2019/6/22 13:07
+ * 短信数据传输对象类
+ *
+ * @author zdz
+ * @date 2022/04/16 13:41
  */
 @Data
 public class SmsDto implements Serializable {
@@ -22,4 +24,5 @@ public class SmsDto implements Serializable {
      * 发送内容
      */
     private String content;
+
 }

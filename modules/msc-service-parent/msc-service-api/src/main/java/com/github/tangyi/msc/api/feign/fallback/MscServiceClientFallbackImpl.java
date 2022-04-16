@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 /**
  * 消息中心服务断路器
  *
- * @author tangyi
- * @date 2019/07/02 16:09
+ * @author zdz
+ * @date 2022/04/16 14:55
  */
 @Slf4j
 @Component
@@ -31,4 +31,5 @@ public class MscServiceClientFallbackImpl implements MscServiceClient {
     public void setThrowable(Throwable throwable) {
         this.throwable = throwable;
     }
+
 }
