@@ -23,8 +23,8 @@ import java.util.Random;
 /**
  * 课程service
  *
- * @author tangyi
- * @date 2018/11/8 21:18
+ * @author zdz
+ * @date 2022/04/16 14:36
  */
 @Slf4j
 @Service
@@ -38,8 +38,6 @@ public class CourseService extends CrudService<CourseMapper, Course> {
      *
      * @param id id
      * @return Course
-     * @author tangyi
-     * @date 2018/12/03 21:30
      */
     @Cacheable(value = "course#" + CommonConstant.CACHE_EXPIRE, key = "#id")
     @Override
@@ -56,8 +54,6 @@ public class CourseService extends CrudService<CourseMapper, Course> {
      *
      * @param course course
      * @return Course
-     * @author tangyi
-     * @date 2018/12/03 21:30
      */
     @Override
     @Cacheable(value = "course#" + CommonConstant.CACHE_EXPIRE, key = "#course.id")
@@ -70,8 +66,6 @@ public class CourseService extends CrudService<CourseMapper, Course> {
      *
      * @param page page
      * @param course course
-     * @author tangyi
-     * @date 2020/03/18 20:38
      */
     @Override
     public PageInfo<Course> findPage(PageInfo<Course> page, Course course) {
@@ -87,8 +81,6 @@ public class CourseService extends CrudService<CourseMapper, Course> {
      *
      * @param course course
      * @return int
-     * @author tangyi
-     * @date 2018/12/03 21:32
      */
     @Override
     @Transactional
@@ -102,8 +94,6 @@ public class CourseService extends CrudService<CourseMapper, Course> {
      *
      * @param course course
      * @return int
-     * @author tangyi
-     * @date 2018/12/03 21:32
      */
     @Override
     @Transactional
@@ -117,8 +107,6 @@ public class CourseService extends CrudService<CourseMapper, Course> {
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:05
      */
     @Override
     @Transactional
@@ -131,8 +119,6 @@ public class CourseService extends CrudService<CourseMapper, Course> {
      * 初始化logo
      *
      * @param courseList courseList
-     * @author tangyi
-     * @date 2020/03/18 20:38
      */
     public void initLogoUrl(List<Course> courseList) {
         try {
@@ -153,4 +139,5 @@ public class CourseService extends CrudService<CourseMapper, Course> {
             log.error(e.getMessage(), e);
         }
     }
+
 }

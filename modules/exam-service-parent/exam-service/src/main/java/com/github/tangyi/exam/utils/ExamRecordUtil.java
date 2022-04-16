@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * 考试记录工具类
  *
- * @author tangyi
- * @date 2018/12/31 22:35
+ * @author zdz
+ * @date 2022/04/16 14:31
  */
 public class ExamRecordUtil {
 
@@ -51,4 +51,5 @@ public class ExamRecordUtil {
 		}
 		return duration + suffix;
 	}
+
 }

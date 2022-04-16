@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 /**
  * 题目分类service
  *
- * @author tangyi
- * @date 2018/12/4 21:56
+ * @author zdz
+ * @date 2022/04/16 14:39
  */
 @Service
 public class SubjectCategoryService extends CrudService<SubjectCategoryMapper, SubjectCategory> {
@@ -33,8 +33,6 @@ public class SubjectCategoryService extends CrudService<SubjectCategoryMapper, S
      *
      * @param subjectCategory subjectCategory
      * @return SubjectCategory
-     * @author tangyi
-     * @date 2019/1/3 14:21
      */
     @Override
     @Cacheable(value = "category#" + CommonConstant.CACHE_EXPIRE, key = "#subjectCategory.id")
@@ -47,8 +45,6 @@ public class SubjectCategoryService extends CrudService<SubjectCategoryMapper, S
      *
      * @param subjectCategory subjectCategory
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:21
      */
     @Override
     @Transactional
@@ -62,8 +58,6 @@ public class SubjectCategoryService extends CrudService<SubjectCategoryMapper, S
      *
      * @param subjectCategory subjectCategory
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:21
      */
     @Override
     @Transactional
@@ -77,8 +71,6 @@ public class SubjectCategoryService extends CrudService<SubjectCategoryMapper, S
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:23
      */
     @Override
     @Transactional
@@ -91,8 +83,6 @@ public class SubjectCategoryService extends CrudService<SubjectCategoryMapper, S
 	 * 返回树形分类集合
 	 *
 	 * @return List
-	 * @author tangyi
-	 * @date 2018/12/04 22:03
 	 */
     public List<SubjectCategoryDto> menus() {
 		SubjectCategory subjectCategory = new SubjectCategory();
@@ -108,4 +98,5 @@ public class SubjectCategoryService extends CrudService<SubjectCategoryMapper, S
 		}
 		return new ArrayList<>();
 	}
+
 }

@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 简答题Mapper
  *
- * @author tangyi
- * @date 2016/6/16 14:52
+ * @author zdz
+ * @date 2022/04/16 14:35
  */
 @Mapper
 public interface SubjectShortAnswerMapper extends CrudMapper<SubjectShortAnswer> {
@@ -18,8 +18,6 @@ public interface SubjectShortAnswerMapper extends CrudMapper<SubjectShortAnswer>
      *
      * @param subjectShortAnswer subjectShortAnswer
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 22:54
      */
     int physicalDelete(SubjectShortAnswer subjectShortAnswer);
 
@@ -28,8 +26,7 @@ public interface SubjectShortAnswerMapper extends CrudMapper<SubjectShortAnswer>
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 22:54
      */
     int physicalDeleteAll(Long[] ids);
+
 }

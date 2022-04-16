@@ -24,8 +24,8 @@ import javax.validation.Valid;
 /**
  * 课程controller
  *
- * @author tangyi
- * @date 2018/11/8 21:25
+ * @author zdz
+ * @date 2022/04/16 14:43
  */
 @Slf4j
 @AllArgsConstructor
@@ -41,8 +41,6 @@ public class CourseController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:28
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "获取课程信息", notes = "根据课程id获取课程详细信息")
@@ -60,8 +58,6 @@ public class CourseController extends BaseController {
      * @param order    order
      * @param course   course
      * @return PageInfo
-     * @author tangyi
-     * @date 2018/11/10 21:30
      */
     @GetMapping("courseList")
     @ApiOperation(value = "获取课程列表")
@@ -86,8 +82,6 @@ public class CourseController extends BaseController {
      *
      * @param course course
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:31
      */
     @PostMapping
     @AdminTenantTeacherAuthorization
@@ -104,8 +98,6 @@ public class CourseController extends BaseController {
      *
      * @param course course
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:31
      */
     @PutMapping
     @AdminTenantTeacherAuthorization
@@ -122,8 +114,6 @@ public class CourseController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:32
      */
     @DeleteMapping("{id}")
     @AdminTenantTeacherAuthorization
@@ -149,8 +139,6 @@ public class CourseController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/4 11:26
      */
     @PostMapping("deleteAll")
     @AdminTenantTeacherAuthorization
@@ -167,4 +155,5 @@ public class CourseController extends BaseController {
         }
         return new ResponseBean<>(success);
     }
+
 }

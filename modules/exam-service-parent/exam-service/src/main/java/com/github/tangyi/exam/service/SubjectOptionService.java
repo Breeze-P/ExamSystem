@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * 选择题选项service
  *
- * @author tangyi
- * @date 2019/6/16 15:01
+ * @author zdz
+ * @date 2022/04/16 14:40
  */
 @Service
 public class SubjectOptionService extends CrudService<SubjectOptionMapper, SubjectOption> {
@@ -22,8 +22,6 @@ public class SubjectOptionService extends CrudService<SubjectOptionMapper, Subje
      *
      * @param subjectOption subjectOption
      * @return SubjectOption
-     * @author tangyi
-     * @date 2019/6/16 15:01
      */
     @Override
     public SubjectOption get(SubjectOption subjectOption) {
@@ -35,8 +33,6 @@ public class SubjectOptionService extends CrudService<SubjectOptionMapper, Subje
      *
      * @param subjectOption subjectOption
      * @return List
-     * @author tangyi
-     * @date 2019/6/16 15:01
      */
     public List<SubjectOption> getBySubjectChoicesId(SubjectOption subjectOption) {
         return this.dao.getBySubjectChoicesId(subjectOption);
@@ -47,8 +43,6 @@ public class SubjectOptionService extends CrudService<SubjectOptionMapper, Subje
      *
      * @param subjectOption subjectOption
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 15:01
      */
     @Override
     @Transactional
@@ -61,8 +55,6 @@ public class SubjectOptionService extends CrudService<SubjectOptionMapper, Subje
      *
      * @param subjectOptionList subjectOptionList
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 15:01
      */
     @Transactional
     public int insertBatch(List<SubjectOption> subjectOptionList) {
@@ -74,8 +66,6 @@ public class SubjectOptionService extends CrudService<SubjectOptionMapper, Subje
      *
      * @param subjectOption subjectOption
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 15:01
      */
     @Override
     @Transactional
@@ -88,8 +78,6 @@ public class SubjectOptionService extends CrudService<SubjectOptionMapper, Subje
      *
      * @param subjectOption subjectOption
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 15:01
      */
     @Override
     @Transactional
@@ -102,8 +90,6 @@ public class SubjectOptionService extends CrudService<SubjectOptionMapper, Subje
      *
      * @param subjectOption subjectOption
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 21:56
      */
     @Transactional
     public int deleteBySubjectChoicesId(SubjectOption subjectOption) {
@@ -115,8 +101,6 @@ public class SubjectOptionService extends CrudService<SubjectOptionMapper, Subje
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 15:01
      */
     @Override
     @Transactional
@@ -129,11 +113,10 @@ public class SubjectOptionService extends CrudService<SubjectOptionMapper, Subje
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 22:40
      */
     @Transactional
     public int physicalDeleteAll(Long[] ids) {
         return this.dao.physicalDeleteAll(ids);
     }
+
 }

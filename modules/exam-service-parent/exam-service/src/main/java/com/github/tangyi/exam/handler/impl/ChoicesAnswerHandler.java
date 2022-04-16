@@ -13,9 +13,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 选择题
- * @author tangyi
- * @date 2019/12/8 21:57
+ * 选择题答案处理器
+ *
+ * @author zdz
+ * @date 2022/04/16 14:50
  */
 @Slf4j
 @AllArgsConstructor
@@ -37,8 +38,6 @@ public class ChoicesAnswerHandler extends AbstractAnswerHandler {
 	 *
 	 * @param answer  answer
 	 * @param subject subject
-	 * @author tangyi
-	 * @date 2020/02/19 23:23
 	 */
 	public void judgeOptionRight(Answer answer, SubjectDto subject) {
 		String userAnswer = answer.getAnswer();
@@ -52,6 +51,12 @@ public class ChoicesAnswerHandler extends AbstractAnswerHandler {
 		}
 	}
 
+	/**
+	 * 判断正误
+	 * @param answer     answer
+	 * @param subject    subject
+	 * @param rightScore rightScore
+	 */
 	@Override
 	public void judge(Answer answer, SubjectDto subject, List<Double> rightScore) {
 		if (judgeRight(answer, subject)) {
@@ -64,4 +69,5 @@ public class ChoicesAnswerHandler extends AbstractAnswerHandler {
 		}
 		answer.setMarkStatus(AnswerConstant.MARKED);
 	}
+
 }

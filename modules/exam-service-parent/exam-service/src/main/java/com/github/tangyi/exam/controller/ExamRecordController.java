@@ -31,8 +31,8 @@ import java.time.LocalDateTime;
 /**
  * 考试记录controller
  *
- * @author tangyi
- * @date 2018/11/8 21:27
+ * @author zdz
+ * @date 2022/04/16 14:45
  */
 @Slf4j
 @AllArgsConstructor
@@ -50,8 +50,6 @@ public class ExamRecordController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:33
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "获取考试记录信息", notes = "根据考试记录id获取考试记录详细信息")
@@ -69,8 +67,6 @@ public class ExamRecordController extends BaseController {
      * @param order      order
      * @param examRecord examRecord
      * @return PageInfo
-     * @author tangyi
-     * @date 2018/11/10 21:33
      */
     @GetMapping("examRecordList")
     @ApiOperation(value = "获取考试记录列表")
@@ -81,11 +77,12 @@ public class ExamRecordController extends BaseController {
             @ApiImplicitParam(name = CommonConstant.ORDER, value = "排序方向", defaultValue = CommonConstant.PAGE_ORDER_DEFAULT, dataType = "String"),
             @ApiImplicitParam(name = "examRecord", value = "考试记录信息", dataType = "ExamRecord")
     })
-    public PageInfo<ExaminationRecordDto> examRecordList(@RequestParam(value = CommonConstant.PAGE_NUM, required = false, defaultValue = CommonConstant.PAGE_NUM_DEFAULT) String pageNum,
-                                                         @RequestParam(value = CommonConstant.PAGE_SIZE, required = false, defaultValue = CommonConstant.PAGE_SIZE_DEFAULT) String pageSize,
-                                                         @RequestParam(value = CommonConstant.SORT, required = false, defaultValue = CommonConstant.PAGE_SORT_DEFAULT) String sort,
-                                                         @RequestParam(value = CommonConstant.ORDER, required = false, defaultValue = CommonConstant.PAGE_ORDER_DEFAULT) String order,
-                                                         ExaminationRecord examRecord) {
+    public PageInfo<ExaminationRecordDto> examRecordList(
+            @RequestParam(value = CommonConstant.PAGE_NUM, required = false, defaultValue = CommonConstant.PAGE_NUM_DEFAULT) String pageNum,
+            @RequestParam(value = CommonConstant.PAGE_SIZE, required = false, defaultValue = CommonConstant.PAGE_SIZE_DEFAULT) String pageSize,
+            @RequestParam(value = CommonConstant.SORT, required = false, defaultValue = CommonConstant.PAGE_SORT_DEFAULT) String sort,
+            @RequestParam(value = CommonConstant.ORDER, required = false, defaultValue = CommonConstant.PAGE_ORDER_DEFAULT) String order,
+            ExaminationRecord examRecord) {
         return examRecordService.examRecordList(examRecord, pageNum, pageSize, sort, order);
     }
 
@@ -94,8 +91,6 @@ public class ExamRecordController extends BaseController {
      *
      * @param examRecord examRecord
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:33
      */
     @PostMapping
     @ApiOperation(value = "创建考试记录", notes = "创建考试记录")
@@ -113,8 +108,6 @@ public class ExamRecordController extends BaseController {
      *
      * @param examRecord examRecord
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:34
      */
     @PutMapping
     @ApiOperation(value = "更新考试记录信息", notes = "根据考试记录id更新考试记录的基本信息")
@@ -130,8 +123,6 @@ public class ExamRecordController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:34
      */
     @DeleteMapping("{id}")
     @ApiOperation(value = "删除考试记录", notes = "根据ID删除考试记录")
@@ -154,11 +145,9 @@ public class ExamRecordController extends BaseController {
     /**
      * 导出
      *
-     * @param ids ids
-	 * @param request request
-	 * @param response response
-     * @author tangyi
-     * @date 2018/12/31 22:28
+     * @param ids      ids
+     * @param request  request
+     * @param response response
      */
     @PostMapping("export")
     @AdminTenantTeacherAuthorization
@@ -166,7 +155,7 @@ public class ExamRecordController extends BaseController {
     @ApiImplicitParam(name = "ids", value = "成绩ID", required = true, dataType = "Long")
     @Log("导出考试记录")
     public void exportExamRecord(@RequestBody Long[] ids, HttpServletRequest request, HttpServletResponse response) {
-    	examRecordService.exportExamRecord(ids, request, response);
+        examRecordService.exportExamRecord(ids, request, response);
     }
 
     /**
@@ -174,8 +163,6 @@ public class ExamRecordController extends BaseController {
      *
      * @param examRecord examRecord
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/04/30 16:45
      */
     @PostMapping("start")
     @Log("开始考试")
@@ -187,12 +174,10 @@ public class ExamRecordController extends BaseController {
      * 获取服务器当前时间
      *
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/05/07 22:03
      */
     @GetMapping("currentTime")
-	@ApiOperation(value = "获取服务器当前时间", notes = "获取服务器当前时间")
-	public ResponseBean<String> currentTime() {
+    @ApiOperation(value = "获取服务器当前时间", notes = "获取服务器当前时间")
+    public ResponseBean<String> currentTime() {
         return new ResponseBean<>(DateUtils.localDateToString(LocalDateTime.now()));
     }
 
@@ -201,67 +186,60 @@ public class ExamRecordController extends BaseController {
      *
      * @param examRecord examRecord
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/06/19 14:33
      */
     @PutMapping("completeMarking")
     public ResponseBean<Boolean> completeMarking(@RequestBody ExaminationRecord examRecord) {
         return new ResponseBean<>(answerService.completeMarking(examRecord));
     }
 
-	/**
-	 * 查询考试监控数据
-	 *
-	 * @param tenantCode tenantCode
-	 * @return ResponseBean
-	 * @author tangyi
-	 * @date 2019/10/27 20:07:38
-	 */
-	@GetMapping("dashboard")
-	public ResponseBean<ExaminationDashboardDto> findExamDashboardData(@RequestParam @NotBlank String tenantCode) {
-		return new ResponseBean<>(examRecordService.findExamDashboardData(tenantCode));
-	}
+    /**
+     * 查询考试监控数据
+     *
+     * @param tenantCode tenantCode
+     * @return ResponseBean
+     */
+    @GetMapping("dashboard")
+    public ResponseBean<ExaminationDashboardDto> findExamDashboardData(@RequestParam @NotBlank String tenantCode) {
+        return new ResponseBean<>(examRecordService.findExamDashboardData(tenantCode));
+    }
 
-	/**
-	 * 查询过去n天的考试记录数据
-	 * @param tenantCode tenantCode
-	 * @param pastDays pastDays
-	 * @return ResponseBean
-	 * @author tangyi
-	 * @date 2020/1/31 5:46 下午
-	 */
-	@GetMapping("dashboard/examRecordTendency")
-	public ResponseBean<ExaminationDashboardDto> findExamRecordTendency(@RequestParam @NotBlank String tenantCode,
-			@RequestParam @NotBlank Integer pastDays) {
-		return new ResponseBean<>(examRecordService.findExamRecordTendency(tenantCode, pastDays));
-	}
+    /**
+     * 查询过去n天的考试记录数据
+     *
+     * @param tenantCode tenantCode
+     * @param pastDays   pastDays
+     * @return ResponseBean
+     */
+    @GetMapping("dashboard/examRecordTendency")
+    public ResponseBean<ExaminationDashboardDto> findExamRecordTendency(@RequestParam @NotBlank String tenantCode,
+                                                                        @RequestParam @NotBlank Integer pastDays) {
+        return new ResponseBean<>(examRecordService.findExamRecordTendency(tenantCode, pastDays));
+    }
 
     /**
      * 成绩详情
+     *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2020/2/20 23:54
      */
     @GetMapping("/{id}/details")
-	@ApiOperation(value = "成绩详情", notes = "根据考试记录id获取成绩详情")
-	@ApiImplicitParam(name = "id", value = "考试记录ID", required = true, dataType = "Long", paramType = "path")
-	public ResponseBean<ExaminationRecordDto> details(@PathVariable Long id) {
-    	return new ResponseBean<>(examRecordService.details(id));
-	}
+    @ApiOperation(value = "成绩详情", notes = "根据考试记录id获取成绩详情")
+    @ApiImplicitParam(name = "id", value = "考试记录ID", required = true, dataType = "Long", paramType = "path")
+    public ResponseBean<ExaminationRecordDto> details(@PathVariable Long id) {
+        return new ResponseBean<>(examRecordService.details(id));
+    }
 
     /**
      * 开始考试
      *
      * @param examinationId examinationId
-     * @param identifier identifier
+     * @param identifier    identifier
      * @return ResponseBean
-     * @author tangyi
-     * @date 2020/3/21 5:51 下午
      */
     @PostMapping("anonymousUser/start")
     @Log("开始考试(匿名)")
     public ResponseBean<StartExamDto> anonymousUserStart(Long examinationId, String identifier) {
         return new ResponseBean<>(answerService.anonymousUserStart(examinationId, identifier));
     }
+
 }

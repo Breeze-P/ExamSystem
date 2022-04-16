@@ -35,8 +35,8 @@ import java.util.stream.Collectors;
 /**
  * 考试service
  *
- * @author tangyi
- * @date 2018/11/8 21:19
+ * @author zdz
+ * @date 2022/04/16 14:38
  */
 @Slf4j
 @AllArgsConstructor
@@ -56,8 +56,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
      *
      * @param examination examination
      * @return Examination
-     * @author tangyi
-     * @date 2019/1/3 14:06
      */
     @Override
     @Cacheable(value = "examination#" + CommonConstant.CACHE_EXPIRE, key = "#examination.id")
@@ -70,8 +68,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
 	 *
 	 * @param examinationDto examinationDto
 	 * @return int
-	 * @author tangyi
-	 * @date 2019/1/3 14:06
 	 */
 	public int insert(ExaminationDto examinationDto) {
 		this.initExaminationLogo(examinationDto);
@@ -91,8 +87,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
 	 * @param order       order
 	 * @param examination examination
 	 * @return PageInfo
-	 * @author tangyi
-	 * @date 2018/11/10 21:10
 	 */
 	public PageInfo<ExaminationDto> examinationList(String pageNum, String pageSize, String sort, String order, Examination examination) {
 		examination.setTenantCode(SysUtil.getTenantCode());
@@ -120,8 +114,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
      *
      * @param examinationDto examinationDto
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:07
      */
     @Transactional
     @CacheEvict(value = "examinationDto", key = "#examinationDto.id")
@@ -142,8 +134,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
      *
      * @param examination examination
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:07
      */
     @Override
     @Transactional
@@ -158,8 +148,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2018/12/4 9:51
      */
     @Override
     @Transactional
@@ -174,8 +162,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
 	 *
 	 * @param ids ids
 	 * @return int
-	 * @author tangyi
-	 * @date 2018/12/4 9:51
 	 */
 	@Transactional
     public void deleteExaminationSubject(Long[] ids) {
@@ -203,8 +189,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
      *
      * @param examination examination
      * @return int
-     * @author tangyi
-     * @date 2019/3/1 15:32
      */
     public int findExaminationCount(Examination examination) {
         return this.dao.findExaminationCount(examination);
@@ -219,8 +203,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
      * @param sort       sort
      * @param order      order
      * @return PageInfo
-     * @author tangyi
-     * @date 2019/06/16 16:00
      */
     public PageInfo<SubjectDto> findSubjectPageById(SubjectDto subjectDto, String pageNum, String pageSize, String sort, String order) {
         // 返回结果
@@ -246,8 +228,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
 	 * 获取全部题目
 	 * @param subjectDto subjectDto
 	 * @return List
-	 * @author tangyi
-	 * @date 2020/3/12 1:00 下午
 	 */
     public List<SubjectDto> allSubjectList(SubjectDto subjectDto) {
 		// 查询考试题目关联表
@@ -263,8 +243,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
      *
      * @param examinationId examinationId
      * @return ExaminationSubject
-     * @author tangyi
-     * @date 2019/06/18 14:34
      */
     public List<ExaminationSubject> findListByExaminationId(Long examinationId) {
         return examinationSubjectService.findListByExaminationId(examinationId);
@@ -275,8 +253,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
 	 *
 	 * @param examination examination
 	 * @return int
-	 * @author tangyi
-	 * @date 2019/10/27 20:08:58
 	 */
 	public int findExamUserCount(Examination examination) {
 		return this.dao.findExamUserCount(examination);
@@ -286,8 +262,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
 	 * 获取考试封面
 	 *
 	 * @param examinationDto examinationDto
-	 * @author tangyi
-	 * @date 2020/03/12 22:32:30
 	 */
 	public void initExaminationLogo(ExaminationDto examinationDto) {
 		try {
@@ -312,8 +286,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
 	/**
 	 * 根据考试ID生成二维码
 	 * @param examinationId examinationId
-	 * @author tangyi
-	 * @date 2020/3/15 1:16 下午
 	 */
 	public byte[] produceCode(Long examinationId) {
 		Examination examination = this.get(examinationId);
@@ -331,8 +303,6 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
 	/**
 	 * 根据考试ID生成二维码
 	 * @param examinationId examinationId
-	 * @author tangyi
-	 * @date 2020/3/21 5:38 下午
 	 */
 	public byte[] produceCodeV2(Long examinationId) {
 		Examination examination = this.get(examinationId);
@@ -346,4 +316,5 @@ public class ExaminationService extends CrudService<ExaminationMapper, Examinati
 		log.info("Share v2 examinationId: {}, url: {}", examinationId, url);
 		return outputStream.toByteArray();
 	}
+
 }

@@ -22,8 +22,8 @@ import java.util.List;
 /**
  * 题目分类controller
  *
- * @author tangyi
- * @date 2018/12/4 21:57
+ * @author zdz
+ * @date 2022/04/16 14:46
  */
 @AllArgsConstructor
 @Api("题库分类信息管理")
@@ -37,13 +37,11 @@ public class SubjectCategoryController extends BaseController {
      * 返回树形分类集合
      *
      * @return List
-     * @author tangyi
-     * @date 2018/12/04 22:03
      */
     @GetMapping(value = "categories")
     @ApiOperation(value = "获取分类列表")
     public List<SubjectCategoryDto> menus() {
-       return categoryService.menus();
+        return categoryService.menus();
     }
 
     /**
@@ -51,8 +49,6 @@ public class SubjectCategoryController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/04 21:59
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "获取分类信息", notes = "根据分类id获取分类详细信息")
@@ -66,8 +62,6 @@ public class SubjectCategoryController extends BaseController {
      *
      * @param subjectCategory subjectCategory
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/04 22:00
      */
     @PostMapping
     @AdminTenantTeacherAuthorization
@@ -85,8 +79,6 @@ public class SubjectCategoryController extends BaseController {
      *
      * @param subjectCategory subjectCategory
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/04 22:01
      */
     @PutMapping
     @AdminTenantTeacherAuthorization
@@ -103,8 +95,6 @@ public class SubjectCategoryController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/04 22:02
      */
     @DeleteMapping("/{id}")
     @AdminTenantTeacherAuthorization
@@ -116,4 +106,5 @@ public class SubjectCategoryController extends BaseController {
         subjectCategory.setId(id);
         return new ResponseBean<>(categoryService.delete(subjectCategory) > 0);
     }
+
 }

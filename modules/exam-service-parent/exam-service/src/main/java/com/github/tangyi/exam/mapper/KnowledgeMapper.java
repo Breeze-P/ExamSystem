@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 知识库Mapper
  *
- * @author tangyi
- * @date 2019/1/1 15:03
+ * @author zdz
+ * @date 2022/04/16 14:34
  */
 @Mapper
 public interface KnowledgeMapper extends CrudMapper<Knowledge> {

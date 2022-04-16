@@ -9,30 +9,58 @@ import com.github.tangyi.exam.enums.SubjectTypeEnum;
 
 /**
  * 题目类型
- * @author tangyi
- * @date 2019/12/10 18:10
+ *
+ * @author zdz
+ * @date 2022/04/16 14:28
  */
 public class SubjectTypeConverter implements Converter<Integer> {
 
-	@Override
-	public Class<?> supportJavaTypeKey() {
-		return Integer.class;
-	}
+    /**
+     * Java数据类型支持
+     *
+     * @return Java数据类型
+     */
+    @Override
+    public Class<?> supportJavaTypeKey() {
+        return Integer.class;
+    }
 
-	@Override
-	public CellDataTypeEnum supportExcelTypeKey() {
-		return CellDataTypeEnum.STRING;
-	}
+    /**
+     * Excel数据类型支持
+     *
+     * @return Excel数据类型
+     */
+    @Override
+    public CellDataTypeEnum supportExcelTypeKey() {
+        return CellDataTypeEnum.STRING;
+    }
 
-	@Override
-	public Integer convertToJavaData(CellData cellData, ExcelContentProperty contentProperty,
-			GlobalConfiguration globalConfiguration) throws Exception {
-		return SubjectTypeEnum.matchByName(cellData.getStringValue()).getValue();
-	}
+    /**
+     * 将Excel数据类型转化为对应的Java数据类型
+     *
+     * @param cellData            Excel数据类型
+     * @param contentProperty     Excel内容属性
+     * @param globalConfiguration 全局配置
+     * @return 对应的Java数据类型
+     */
+    @Override
+    public Integer convertToJavaData(CellData cellData, ExcelContentProperty contentProperty,
+                                     GlobalConfiguration globalConfiguration) throws Exception {
+        return SubjectTypeEnum.matchByName(cellData.getStringValue()).getValue();
+    }
 
-	@Override
-	public CellData<String> convertToExcelData(Integer value, ExcelContentProperty contentProperty,
-			GlobalConfiguration globalConfiguration) throws Exception {
-		return new CellData<>(SubjectTypeEnum.matchByValue(value).getName());
-	}
+    /**
+     * 将Java数据类型转化为对应的Excel数据类型
+     *
+     * @param value               Java数据类型
+     * @param contentProperty     Excel内容属性
+     * @param globalConfiguration 全局配置
+     * @return 对应的Excel数据类型
+     */
+    @Override
+    public CellData<String> convertToExcelData(Integer value, ExcelContentProperty contentProperty,
+                                               GlobalConfiguration globalConfiguration) throws Exception {
+        return new CellData<>(SubjectTypeEnum.matchByValue(value).getName());
+    }
+
 }

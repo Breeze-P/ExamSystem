@@ -18,9 +18,8 @@ import java.util.stream.Collectors;
 /**
  * 题目工具类
  *
- * @author tangyi
- * @version V1.0
- * @date 2018-11-28 12:56
+ * @author zdz
+ * @date 2022/04/16 14:32
  */
 public class SubjectUtil {
 
@@ -55,8 +54,6 @@ public class SubjectUtil {
      * @param subjectChoice subjectChoice
      * @param findAnswer findAnswer
 	 * @return List
-     * @author tangyi
-     * @date 2019/06/16 16:50
      */
     public static SubjectDto subjectChoicesToDto(SubjectChoices subjectChoice, boolean findAnswer) {
         if (subjectChoice == null)
@@ -92,8 +89,6 @@ public class SubjectUtil {
      * @param subjectChoices subjectChoices
      * @param findAnswer findAnswer
 	 * @return List
-     * @author tangyi
-     * @date 2019/06/16 16:50
      */
     public static List<SubjectDto> subjectChoicesToDto(List<SubjectChoices> subjectChoices, boolean findAnswer) {
         List<SubjectDto> subjectDtoList = new ArrayList<>();
@@ -109,8 +104,6 @@ public class SubjectUtil {
      * @param subjectShortAnswer subjectShortAnswer
      * @param findAnswer findAnswer
 	 * @return List
-     * @author tangyi
-     * @date 2019/06/16 16:59
      */
     public static SubjectDto subjectShortAnswerToDto(SubjectShortAnswer subjectShortAnswer, boolean findAnswer) {
         if (subjectShortAnswer == null)
@@ -144,8 +137,6 @@ public class SubjectUtil {
      * @param subjectShortAnswers subjectShortAnswers
      * @param findAnswer findAnswer
 	 * @return List
-     * @author tangyi
-     * @date 2019/06/16 16:59
      */
     public static List<SubjectDto> subjectShortAnswerToDto(List<SubjectShortAnswer> subjectShortAnswers, boolean findAnswer) {
         List<SubjectDto> subjectDtoList = new ArrayList<>();
@@ -161,8 +152,6 @@ public class SubjectUtil {
 	 *
 	 * @param subjectJudgement subjectJudgement
 	 * @return List
-	 * @author tangyi
-	 * @date 2020/02/22 12:23
 	 */
 	public static SubjectDto subjectJudgementToDto(SubjectJudgement subjectJudgement) {
 		return subjectJudgementToDto(subjectJudgement, true);
@@ -174,8 +163,6 @@ public class SubjectUtil {
      * @param subjectJudgement subjectJudgement
      * @param findAnswer findAnswer
 	 * @return List
-     * @author tangyi
-     * @date 2020/02/22 12:23
      */
     public static SubjectDto subjectJudgementToDto(SubjectJudgement subjectJudgement, boolean findAnswer) {
         if (subjectJudgement == null)
@@ -208,8 +195,6 @@ public class SubjectUtil {
 	 *
 	 * @param subjectJudgements subjectJudgements
 	 * @return List
-	 * @author tangyi
-	 * @date 2020/02/22 12:24
 	 */
 	public static List<SubjectDto> subjectJudgementsToDto(List<SubjectJudgement> subjectJudgements) {
 		return subjectJudgementsToDto(subjectJudgements, true);
@@ -221,8 +206,6 @@ public class SubjectUtil {
      * @param subjectJudgements subjectJudgements
      * @param findAnswer findAnswer
 	 * @return List
-     * @author tangyi
-     * @date 2020/02/22 12:24
      */
     public static List<SubjectDto> subjectJudgementsToDto(List<SubjectJudgement> subjectJudgements, boolean findAnswer) {
         List<SubjectDto> subjectDtoList = new ArrayList<>();
@@ -232,4 +215,5 @@ public class SubjectUtil {
         }
         return subjectDtoList;
     }
+
 }

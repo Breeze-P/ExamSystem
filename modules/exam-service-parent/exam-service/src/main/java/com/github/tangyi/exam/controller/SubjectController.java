@@ -31,8 +31,8 @@ import java.util.List;
 /**
  * 题目controller
  *
- * @author tangyi
- * @date 2018/11/8 21:29
+ * @author zdz
+ * @date 2022/04/16 14:46
  */
 @Slf4j
 @AllArgsConstructor
@@ -50,8 +50,6 @@ public class SubjectController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:43
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "获取题目信息", notes = "根据题目id获取题目详细信息")
@@ -71,8 +69,6 @@ public class SubjectController extends BaseController {
      * @param order    order
      * @param subject  subject
      * @return PageInfo
-     * @author tangyi
-     * @date 2018/11/10 21:43
      */
     @GetMapping("subjectList")
     @ApiOperation(value = "获取题目列表")
@@ -97,8 +93,6 @@ public class SubjectController extends BaseController {
      *
      * @param subject subject
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:43
      */
     @PostMapping
     @AdminTenantTeacherAuthorization
@@ -108,9 +102,9 @@ public class SubjectController extends BaseController {
     public ResponseBean<SubjectDto> addSubject(@RequestBody @Valid SubjectDto subject) {
         subject.setCommonValue(SysUtil.getUser(), SysUtil.getSysCode(), SysUtil.getTenantCode());
         if (!(subjectService.insert(subject) > 0)) {
-			subject = null;
-		}
-		return new ResponseBean<>(subject);
+            subject = null;
+        }
+        return new ResponseBean<>(subject);
     }
 
     /**
@@ -118,8 +112,6 @@ public class SubjectController extends BaseController {
      *
      * @param subject subject
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:43
      */
     @PutMapping
     @AdminTenantTeacherAuthorization
@@ -129,8 +121,8 @@ public class SubjectController extends BaseController {
     public ResponseBean<SubjectDto> updateSubject(@RequestBody @Valid SubjectDto subject) {
         subject.setCommonValue(SysUtil.getUser(), SysUtil.getSysCode(), SysUtil.getTenantCode());
         if (!(subjectService.update(subject) > 0)) {
-			subject = null;
-		}
+            subject = null;
+        }
         return new ResponseBean<>(subject);
     }
 
@@ -139,8 +131,6 @@ public class SubjectController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:43
      */
     @DeleteMapping("{id}")
     @AdminTenantTeacherAuthorization
@@ -163,8 +153,6 @@ public class SubjectController extends BaseController {
      * 导出题目
      *
      * @param ids ids
-     * @author tangyi
-     * @date 2018/11/28 12:53
      */
     @PostMapping("export")
     @AdminTenantTeacherAuthorization
@@ -182,7 +170,7 @@ public class SubjectController extends BaseController {
                               HttpServletResponse response) {
         try {
             List<SubjectDto> subjects = subjectService.export(ids, examinationId, categoryId);
-			ExcelToolUtil.writeExcel(request, response, SubjectUtil.convertToExcelModel(subjects), SubjectExcelModel.class);
+            ExcelToolUtil.writeExcel(request, response, SubjectUtil.convertToExcelModel(subjects), SubjectExcelModel.class);
         } catch (Exception e) {
             log.error("Export subject failed", e);
             throw new CommonException("Export subject failed, " + e.getMessage());
@@ -196,8 +184,6 @@ public class SubjectController extends BaseController {
      * @param categoryId    categoryId
      * @param file          file
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/28 12:59
      */
     @RequestMapping("import")
     @AdminTenantTeacherAuthorization
@@ -210,7 +196,7 @@ public class SubjectController extends BaseController {
                                                @ApiParam(value = "要上传的文件", required = true) MultipartFile file) {
         try {
             log.debug("Start import subject data, examinationId: {}, categoryId: {}", examinationId, categoryId);
-			return new ResponseBean<>(ExcelToolUtil.readExcel(file.getInputStream(), SubjectExcelModel.class, new SubjectImportListener(subjectService, examinationId, categoryId)));
+            return new ResponseBean<>(ExcelToolUtil.readExcel(file.getInputStream(), SubjectExcelModel.class, new SubjectImportListener(subjectService, examinationId, categoryId)));
         } catch (Exception e) {
             log.error("Import subject failed", e);
             throw new CommonException("Import subject failed");
@@ -220,10 +206,8 @@ public class SubjectController extends BaseController {
     /**
      * 批量删除
      *
-     * @param ids  ids
+     * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/04 9:55
      */
     @PostMapping("deleteAll")
     @AdminTenantTeacherAuthorization
@@ -237,15 +221,13 @@ public class SubjectController extends BaseController {
     /**
      * 查询题目和答题
      *
-     * @param subjectId    subjectId
-     * @param examRecordId examRecordId
-     * @param userId       userId
-     * @param nextType     -1：当前题目，0：下一题，1：上一题
-     * @param nextSubjectId nextSubjectId
+     * @param subjectId       subjectId
+     * @param examRecordId    examRecordId
+     * @param userId          userId
+     * @param nextType        -1：当前题目，0：下一题，1：上一题
+     * @param nextSubjectId   nextSubjectId
      * @param nextSubjectType 下一题的类型，选择题、判断题
-	 * @return ResponseBean
-     * @author tangyi
-     * @date 2019/01/16 22:25
+     * @return ResponseBean
      */
     @GetMapping("subjectAnswer")
     @ApiOperation(value = "查询题目和答题", notes = "根据题目id查询题目和答题")
@@ -253,12 +235,13 @@ public class SubjectController extends BaseController {
             @ApiImplicitParam(name = "examRecordId", value = "考试记录ID", required = true, dataType = "Long"),
             @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "String"),
             @ApiImplicitParam(name = "nextType", value = "-1：当前题目，0：下一题，1：上一题", dataType = "Integer")})
-    public ResponseBean<SubjectDto> subjectAnswer(@RequestParam("subjectId") @NotBlank Long subjectId,
-                                                  @RequestParam("examRecordId") @NotBlank Long examRecordId,
-                                                  @RequestParam(value = "userId", required = false) String userId,
-                                                  @RequestParam Integer nextType,
-                                                  @RequestParam(required = false) Long nextSubjectId,
-			@RequestParam(required = false) Integer nextSubjectType) {
+    public ResponseBean<SubjectDto> subjectAnswer(
+            @RequestParam("subjectId") @NotBlank Long subjectId,
+            @RequestParam("examRecordId") @NotBlank Long examRecordId,
+            @RequestParam(value = "userId", required = false) String userId,
+            @RequestParam Integer nextType,
+            @RequestParam(required = false) Long nextSubjectId,
+            @RequestParam(required = false) Integer nextSubjectType) {
         return new ResponseBean<>(answerService
                 .subjectAnswer(subjectId, examRecordId, nextType, nextSubjectId, nextSubjectType));
     }
@@ -266,15 +249,13 @@ public class SubjectController extends BaseController {
     /**
      * 查询题目和答题
      *
-     * @param subjectId    subjectId
-     * @param examRecordId examRecordId
-     * @param userId       userId
-     * @param nextType     -1：当前题目，0：下一题，1：上一题
-     * @param nextSubjectId nextSubjectId
+     * @param subjectId       subjectId
+     * @param examRecordId    examRecordId
+     * @param userId          userId
+     * @param nextType        -1：当前题目，0：下一题，1：上一题
+     * @param nextSubjectId   nextSubjectId
      * @param nextSubjectType 下一题的类型，选择题、判断题
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/01/16 22:25
      */
     @GetMapping("anonymousUser/subjectAnswer")
     @ApiOperation(value = "查询题目和答题", notes = "根据题目id查询题目和答题")
@@ -282,13 +263,15 @@ public class SubjectController extends BaseController {
             @ApiImplicitParam(name = "examRecordId", value = "考试记录ID", required = true, dataType = "Long"),
             @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "String"),
             @ApiImplicitParam(name = "nextType", value = "-1：当前题目，0：下一题，1：上一题", dataType = "Integer")})
-    public ResponseBean<SubjectDto> anonymousUserSubjectAnswer(@RequestParam("subjectId") @NotBlank Long subjectId,
-                                                  @RequestParam("examRecordId") @NotBlank Long examRecordId,
-                                                  @RequestParam(value = "userId", required = false) String userId,
-                                                  @RequestParam Integer nextType,
-                                                  @RequestParam(required = false) Long nextSubjectId,
-                                                  @RequestParam(required = false) Integer nextSubjectType) {
+    public ResponseBean<SubjectDto> anonymousUserSubjectAnswer(
+            @RequestParam("subjectId") @NotBlank Long subjectId,
+            @RequestParam("examRecordId") @NotBlank Long examRecordId,
+            @RequestParam(value = "userId", required = false) String userId,
+            @RequestParam Integer nextType,
+            @RequestParam(required = false) Long nextSubjectId,
+            @RequestParam(required = false) Integer nextSubjectType) {
         return new ResponseBean<>(answerService
                 .subjectAnswer(subjectId, examRecordId, nextType, nextSubjectId, nextSubjectType));
     }
+
 }

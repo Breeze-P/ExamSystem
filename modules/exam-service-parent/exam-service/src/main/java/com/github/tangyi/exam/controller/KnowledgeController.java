@@ -32,8 +32,8 @@ import java.util.Set;
 /**
  * 知识库controller
  *
- * @author tangyi
- * @date 2019/1/1 15:11
+ * @author zdz
+ * @date 2022/04/16 14:45
  */
 @Slf4j
 @AllArgsConstructor
@@ -51,8 +51,6 @@ public class KnowledgeController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/1/1 15:15
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "获取知识信息", notes = "根据知识id获取知识详细信息")
@@ -70,8 +68,6 @@ public class KnowledgeController extends BaseController {
      * @param order     order
      * @param knowledge knowledge
      * @return PageInfo
-     * @author tangyi
-     * @date 2019/1/1 15:15
      */
     @GetMapping("knowledgeList")
     @ApiOperation(value = "获取知识列表")
@@ -82,11 +78,12 @@ public class KnowledgeController extends BaseController {
             @ApiImplicitParam(name = CommonConstant.ORDER, value = "排序方向", defaultValue = CommonConstant.PAGE_ORDER_DEFAULT, dataType = "String"),
             @ApiImplicitParam(name = "knowledge", value = "知识信息", dataType = "Knowledge")
     })
-    public PageInfo<KnowledgeDto> knowledgeList(@RequestParam(value = CommonConstant.PAGE_NUM, required = false, defaultValue = CommonConstant.PAGE_NUM_DEFAULT) String pageNum,
-                                                @RequestParam(value = CommonConstant.PAGE_SIZE, required = false, defaultValue = CommonConstant.PAGE_SIZE_DEFAULT) String pageSize,
-                                                @RequestParam(value = CommonConstant.SORT, required = false, defaultValue = CommonConstant.PAGE_SORT_DEFAULT) String sort,
-                                                @RequestParam(value = CommonConstant.ORDER, required = false, defaultValue = CommonConstant.PAGE_ORDER_DEFAULT) String order,
-                                                Knowledge knowledge) {
+    public PageInfo<KnowledgeDto> knowledgeList(
+            @RequestParam(value = CommonConstant.PAGE_NUM, required = false, defaultValue = CommonConstant.PAGE_NUM_DEFAULT) String pageNum,
+            @RequestParam(value = CommonConstant.PAGE_SIZE, required = false, defaultValue = CommonConstant.PAGE_SIZE_DEFAULT) String pageSize,
+            @RequestParam(value = CommonConstant.SORT, required = false, defaultValue = CommonConstant.PAGE_SORT_DEFAULT) String sort,
+            @RequestParam(value = CommonConstant.ORDER, required = false, defaultValue = CommonConstant.PAGE_ORDER_DEFAULT) String order,
+            Knowledge knowledge) {
         knowledge.setTenantCode(SysUtil.getTenantCode());
         // 查询知识
         PageInfo<Knowledge> knowledgePageInfo = knowledgeService.findPage(PageUtil.pageInfo(pageNum, pageSize, sort, order), knowledge);
@@ -132,8 +129,6 @@ public class KnowledgeController extends BaseController {
      *
      * @param knowledge knowledge
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/1/1 15:15
      */
     @PostMapping
     @ApiOperation(value = "创建知识", notes = "创建知识")
@@ -149,8 +144,6 @@ public class KnowledgeController extends BaseController {
      *
      * @param knowledge knowledge
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/1/1 15:15
      */
     @PutMapping
     @ApiOperation(value = "更新知识信息", notes = "根据知识id更新知识的基本信息")
@@ -166,8 +159,6 @@ public class KnowledgeController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/1/1 15:15
      */
     @DeleteMapping("{id}")
     @ApiOperation(value = "删除知识", notes = "根据ID删除知识")
@@ -175,14 +166,14 @@ public class KnowledgeController extends BaseController {
     @Log("删除知识")
     public ResponseBean<Boolean> deleteKnowledge(@PathVariable Long id) {
         boolean success = false;
-		Knowledge knowledge = knowledgeService.get(id);
-		if (knowledge != null) {
-			knowledge.setCommonValue(SysUtil.getUser(), SysUtil.getSysCode(), SysUtil.getTenantCode());
-			success = knowledgeService.delete(knowledge) > 0;
-		}
-		// 删除附件
-		if (knowledge != null && knowledge.getAttachmentId() != null)
-			success = userServiceClient.deleteAttachment(knowledge.getAttachmentId()).getData();
+        Knowledge knowledge = knowledgeService.get(id);
+        if (knowledge != null) {
+            knowledge.setCommonValue(SysUtil.getUser(), SysUtil.getSysCode(), SysUtil.getTenantCode());
+            success = knowledgeService.delete(knowledge) > 0;
+        }
+        // 删除附件
+        if (knowledge != null && knowledge.getAttachmentId() != null)
+            success = userServiceClient.deleteAttachment(knowledge.getAttachmentId()).getData();
         return new ResponseBean<>(success);
     }
 
@@ -191,8 +182,6 @@ public class KnowledgeController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/1/1 15:15
      */
     @PostMapping("deleteAll")
     @ApiOperation(value = "批量删除知识", notes = "根据知识id批量删除知识")
@@ -200,8 +189,9 @@ public class KnowledgeController extends BaseController {
     @Log("批量删除知识")
     public ResponseBean<Boolean> deleteAllKnowledge(@RequestBody Long[] ids) {
         boolean success = false;
-		if (ArrayUtils.isNotEmpty(ids))
-			success = knowledgeService.deleteAll(ids) > 0;
+        if (ArrayUtils.isNotEmpty(ids))
+            success = knowledgeService.deleteAll(ids) > 0;
         return new ResponseBean<>(success);
     }
+
 }

@@ -6,14 +6,23 @@ import org.apache.commons.lang.StringUtils;
 import java.util.List;
 
 /**
- * 工具类
- * @author tangyi
- * @date 2019/12/8 22:42
+ * 处理答案的工具类
+ *
+ * @author zdz
+ * @date 2022/04/16 14:31
  */
 public class AnswerHandlerUtil {
 
+	/**
+	 * 正则表达式相关
+	 */
 	private static final String REGEX_COMMA = "^,*|,*$";
 
+	/**
+	 * 记录答案，正确的与错误的
+	 * @param results 答案
+	 * @return 答案
+	 */
 	public static AnswerHandleResult addAll(List<AnswerHandleResult> results) {
 		AnswerHandleResult result = new AnswerHandleResult();
 		int score = 0;
@@ -43,4 +52,5 @@ public class AnswerHandlerUtil {
 		}
 		return str;
 	}
+
 }

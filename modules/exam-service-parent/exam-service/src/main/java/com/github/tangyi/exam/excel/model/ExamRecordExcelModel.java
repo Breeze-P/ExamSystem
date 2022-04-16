@@ -14,9 +14,10 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 考试记录
- * @author tangyi
- * @date 2019/12/10 17:41
+ * 考试记录ExcelModel
+ *
+ * @author zdz
+ * @date 2022/04/16 14:25
  */
 @Data
 @ExcelModel("考试记录")
@@ -51,4 +52,5 @@ public class ExamRecordExcelModel {
 
 	@ExcelProperty(value = "提交状态", converter = SubmitStatusConverter.class)
 	private Integer submitStatus;
+
 }

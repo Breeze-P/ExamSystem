@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 /**
  * MQ配置
  *
- * @author tangyi
- * @date 2019/5/3 14:53
+ * @author zdz
+ * @date 2022/04/16 14:21
  */
 @Configuration
 public class RabbitSubmitExaminationConfig {
@@ -17,10 +17,11 @@ public class RabbitSubmitExaminationConfig {
     /**
      * 提交考试队列
      *
-     * @return Queue
+     * @return 考试队列
      */
     @Bean
     public Queue submitExaminationQueue() {
         return new Queue(MqConstant.SUBMIT_EXAMINATION_QUEUE);
     }
+
 }

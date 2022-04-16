@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * 考试题目关联mapper
  *
- * @author tangyi
- * @date 2019/6/16 15:37
+ * @author zdz
+ * @date 2022/04/16 14:33
  */
 @Mapper
 public interface ExaminationSubjectMapper extends CrudMapper<ExaminationSubject> {
@@ -20,8 +20,6 @@ public interface ExaminationSubjectMapper extends CrudMapper<ExaminationSubject>
      *
      * @param examinationSubject examinationSubject
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 21:58
      */
     int deleteBySubjectId(ExaminationSubject examinationSubject);
 
@@ -30,8 +28,6 @@ public interface ExaminationSubjectMapper extends CrudMapper<ExaminationSubject>
      *
      * @param examinationSubject examinationSubject
      * @return List
-     * @author tangyi
-     * @date 2019/06/17 12:18
      */
     List<ExaminationSubject> findListBySubjectId(ExaminationSubject examinationSubject);
 
@@ -40,8 +36,6 @@ public interface ExaminationSubjectMapper extends CrudMapper<ExaminationSubject>
      *
      * @param examinationId examinationId
      * @return List
-     * @author tangyi
-     * @date 2019/06/18 14:37
      */
     List<ExaminationSubject> findListByExaminationId(Long examinationId);
 
@@ -50,8 +44,6 @@ public interface ExaminationSubjectMapper extends CrudMapper<ExaminationSubject>
      *
      * @param examinationSubject examinationSubject
      * @return ExaminationSubject
-     * @author tangyi
-     * @date 2019/06/18 23:17
      */
     ExaminationSubject findByExaminationIdAndSubjectId(ExaminationSubject examinationSubject);
 
@@ -60,8 +52,6 @@ public interface ExaminationSubjectMapper extends CrudMapper<ExaminationSubject>
      *
      * @param examinationSubject examinationSubject
      * @return ExaminationSubject
-     * @author tangyi
-     * @date 2019-09-14 16:41
      */
     ExaminationSubject getByPreviousId(ExaminationSubject examinationSubject);
 
@@ -70,8 +60,6 @@ public interface ExaminationSubjectMapper extends CrudMapper<ExaminationSubject>
      *
      * @param examinationSubject examinationSubject
      * @return ExaminationSubject
-     * @author tangyi
-     * @date 2019/10/07 20:40:16
      */
     ExaminationSubject getPreviousByCurrentId(ExaminationSubject examinationSubject);
 
@@ -80,8 +68,7 @@ public interface ExaminationSubjectMapper extends CrudMapper<ExaminationSubject>
      *
      * @param examinationSubject examinationSubject
      * @return List
-     * @author tangyi
-     * @date 2019/10/24 21:47:24
      */
     List<ExaminationSubject> findListByCategoryId(ExaminationSubject examinationSubject);
+
 }

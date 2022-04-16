@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 /**
- * @author tangyi
- * @date 2019-03-16 15:30
+ * 考试controller
+ *
+ * @author zdz
+ * @date 2022/04/16 14:43
  */
 @RestController
 public class ExamController {
@@ -16,4 +18,5 @@ public class ExamController {
     public String sayHello(Principal principal, String name) {
         return "hello, " + name + ", principal: " + principal.toString();
     }
+
 }

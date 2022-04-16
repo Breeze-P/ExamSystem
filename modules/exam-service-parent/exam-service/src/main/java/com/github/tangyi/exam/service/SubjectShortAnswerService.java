@@ -19,8 +19,8 @@ import java.util.List;
 /**
  * 简答题service
  *
- * @author tangyi
- * @date 2019/6/16 14:58
+ * @author zdz
+ * @date 2022/04/16 14:42
  */
 @Service
 public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMapper, SubjectShortAnswer>
@@ -31,8 +31,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param subjectShortAnswer subjectShortAnswer
      * @return SubjectShortAnswer
-     * @author tangyi
-     * @date 2019/6/16 14:58
      */
     @Override
     @Cacheable(value = "subjectShortAnswer#" + CommonConstant.CACHE_EXPIRE, key = "#subjectShortAnswer.id")
@@ -45,8 +43,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param subjectShortAnswer subjectShortAnswer
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 14:58
      */
     @Override
     @Transactional
@@ -59,8 +55,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param subjectShortAnswer subjectShortAnswer
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 14:58
      */
     @Override
     @Transactional
@@ -74,8 +68,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param subjectShortAnswer subjectShortAnswer
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 14:58
      */
     @Override
     @Transactional
@@ -89,8 +81,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param subjectShortAnswer subjectShortAnswer
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 22:58
      */
     @Transactional
     @CacheEvict(value = "subjectShortAnswer", key = "#subjectShortAnswer.id")
@@ -103,8 +93,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 14:58
      */
     @Override
     @Transactional
@@ -118,8 +106,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 22:58
      */
     @Transactional
     @CacheEvict(value = "subjectShortAnswer", allEntries = true)
@@ -132,8 +118,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param id id
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/06/16 17:36
      */
     @Override
     public SubjectDto getSubject(Long id) {
@@ -147,8 +131,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      * @param previousId    previousId
      * @param nextType      0：下一题，1：上一题
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/09/14 17:05
      */
     @Override
     public SubjectDto getNextByCurrentIdAndType(Long examinationId, Long previousId, Integer nextType) {
@@ -160,8 +142,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param subjectDto subjectDto
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/06/16 17:54
      */
     @Override
     @Transactional
@@ -178,8 +158,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param subjectDto subjectDto
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/06/16 17:54
      */
     @Override
     @Transactional
@@ -197,8 +175,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param subjectDto subjectDto
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/06/16 17:54
      */
     @Override
     @Transactional
@@ -214,8 +190,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param subjectDto subjectDto
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/06/16 22:59
      */
     @Override
     @Transactional
@@ -231,8 +205,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param ids ids
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/06/16 17:54
      */
     @Override
     @Transactional
@@ -246,8 +218,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param ids ids
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/06/16 22:59
      */
     @Override
     @Transactional
@@ -261,8 +231,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param subjectDto subjectDto
      * @return List
-     * @author tangyi
-     * @date 2019/06/16 18:17
      */
     @Override
     public List<SubjectDto> findSubjectList(SubjectDto subjectDto) {
@@ -277,8 +245,6 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      * @param pageInfo   pageInfo
      * @param subjectDto subjectDto
      * @return PageInfo
-     * @author tangyi
-     * @date 2019/06/16 18:17
      */
     @Override
     public PageInfo<SubjectDto> findSubjectPage(PageInfo pageInfo, SubjectDto subjectDto) {
@@ -296,11 +262,10 @@ public class SubjectShortAnswerService extends CrudService<SubjectShortAnswerMap
      *
      * @param ids ids
      * @return List
-     * @author tangyi
-     * @date 2019/06/16 18:17
      */
     @Override
     public List<SubjectDto> findSubjectListById(Long[] ids) {
         return SubjectUtil.subjectShortAnswerToDto(this.findListById(ids), true);
     }
+
 }

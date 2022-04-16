@@ -13,8 +13,9 @@ import java.util.List;
 
 /**
  * 简答题
- * @author tangyi
- * @date 2019/12/8 22:00
+ *
+ * @author zdz
+ * @date 2022/04/16 14:51
  */
 @Slf4j
 @AllArgsConstructor
@@ -32,6 +33,12 @@ public class ShortAnswerHandler extends AbstractAnswerHandler {
 		return subject.getAnswer().getAnswer().equals(answer.getAnswer());
 	}
 
+	/**
+	 * 判断正误
+	 * @param answer     answer
+	 * @param subject    subject
+	 * @param rightScore rightScore
+	 */
 	@Override
 	public void judge(Answer answer, SubjectDto subject, List<Double> rightScore) {
 		if (judgeRight(answer, subject)) {
@@ -44,4 +51,5 @@ public class ShortAnswerHandler extends AbstractAnswerHandler {
 		}
 		answer.setMarkStatus(AnswerConstant.MARKED);
 	}
+
 }

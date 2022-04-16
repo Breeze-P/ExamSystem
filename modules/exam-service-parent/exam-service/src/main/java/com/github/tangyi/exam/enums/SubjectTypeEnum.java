@@ -10,23 +10,41 @@ import lombok.Getter;
 /**
  * 题目类型枚举
  *
- * @author tangyi
- * @date 2019/6/16 16:22
+ * @author zdz
+ * @date 2022/04/16 14:24
  */
 @Getter
 @AllArgsConstructor
 public enum SubjectTypeEnum {
 
+	/**
+	 * 选择题
+	 */
 	CHOICES("选择题", 0, SubjectChoicesService.class),
 
+	/**
+	 * 简答题
+	 */
 	SHORT_ANSWER("简答题", 1, SubjectShortAnswerService.class),
 
+	/**
+	 * 判断题
+	 */
 	JUDGEMENT("判断题", 2, SubjectJudgementService.class),
 
+	/**
+	 * 多选题
+	 */
 	MULTIPLE_CHOICES("多选题", 3, SubjectChoicesService.class);
 
+	/**
+	 * 字符串值
+	 */
 	private String name;
 
+	/**
+	 * int值
+	 */
 	private Integer value;
 
 	private Class<? extends ISubjectService> service;
@@ -60,4 +78,5 @@ public enum SubjectTypeEnum {
 		}
 		return CHOICES;
 	}
+
 }

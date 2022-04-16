@@ -33,8 +33,8 @@ import java.util.List;
 /**
  * 考试controller
  *
- * @author tangyi
- * @date 2018/11/8 21:26
+ * @author zdz
+ * @date 2022/04/16 14:43
  */
 @Slf4j
 @AllArgsConstructor
@@ -50,8 +50,6 @@ public class ExaminationController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:08
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "获取考试信息", notes = "根据考试id获取考试详细信息")
@@ -65,8 +63,6 @@ public class ExaminationController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:08
      */
     @GetMapping("/anonymousUser/{id}")
     @ApiOperation(value = "获取考试信息", notes = "根据考试id获取考试详细信息")
@@ -84,8 +80,6 @@ public class ExaminationController extends BaseController {
      * @param order       order
      * @param examination examination
      * @return PageInfo
-     * @author tangyi
-     * @date 2018/11/10 21:10
      */
     @GetMapping("examinationList")
     @ApiOperation(value = "获取考试列表")
@@ -96,11 +90,12 @@ public class ExaminationController extends BaseController {
             @ApiImplicitParam(name = CommonConstant.ORDER, value = "排序方向", defaultValue = CommonConstant.PAGE_ORDER_DEFAULT, dataType = "String"),
             @ApiImplicitParam(name = "examination", value = "考试信息", dataType = "Examination")
     })
-    public PageInfo<ExaminationDto> examinationList(@RequestParam(value = CommonConstant.PAGE_NUM, required = false, defaultValue = CommonConstant.PAGE_NUM_DEFAULT) String pageNum,
-                                                    @RequestParam(value = CommonConstant.PAGE_SIZE, required = false, defaultValue = CommonConstant.PAGE_SIZE_DEFAULT) String pageSize,
-                                                    @RequestParam(value = CommonConstant.SORT, required = false, defaultValue = CommonConstant.PAGE_SORT_DEFAULT) String sort,
-                                                    @RequestParam(value = CommonConstant.ORDER, required = false, defaultValue = CommonConstant.PAGE_ORDER_DEFAULT) String order,
-                                                    Examination examination) {
+    public PageInfo<ExaminationDto> examinationList(
+            @RequestParam(value = CommonConstant.PAGE_NUM, required = false, defaultValue = CommonConstant.PAGE_NUM_DEFAULT) String pageNum,
+            @RequestParam(value = CommonConstant.PAGE_SIZE, required = false, defaultValue = CommonConstant.PAGE_SIZE_DEFAULT) String pageSize,
+            @RequestParam(value = CommonConstant.SORT, required = false, defaultValue = CommonConstant.PAGE_SORT_DEFAULT) String sort,
+            @RequestParam(value = CommonConstant.ORDER, required = false, defaultValue = CommonConstant.PAGE_ORDER_DEFAULT) String order,
+            Examination examination) {
         return examinationService.examinationList(pageNum, pageSize, sort, order, examination);
     }
 
@@ -113,8 +108,6 @@ public class ExaminationController extends BaseController {
      * @param order      order
      * @param subjectDto subjectDto
      * @return PageInfo
-     * @author tangyi
-     * @date 2019/6/16 15:45
      */
     @RequestMapping("subjectList")
     @ApiOperation(value = "获取题目列表")
@@ -129,31 +122,28 @@ public class ExaminationController extends BaseController {
                                             @RequestParam(value = CommonConstant.PAGE_SIZE, required = false, defaultValue = CommonConstant.PAGE_SIZE_DEFAULT) String pageSize,
                                             @RequestParam(value = CommonConstant.SORT, required = false, defaultValue = CommonConstant.PAGE_SORT_DEFAULT) String sort,
                                             @RequestParam(value = CommonConstant.ORDER, required = false, defaultValue = CommonConstant.PAGE_ORDER_DEFAULT) String order,
-			SubjectDto subjectDto) {
+                                            SubjectDto subjectDto) {
         return examinationService.findSubjectPageById(subjectDto, pageNum, pageSize, sort, order);
     }
 
     /**
      * 获取全部题目
+     *
      * @param subjectDto subjectDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2020/3/12 1:00 下午
      */
-	@RequestMapping("anonymousUser/allSubjectList")
-	@ApiOperation(value = "获取全部题目列表")
-	@ApiImplicitParam(name = "subjectDto", value = "题目信息", dataType = "SubjectDto")
+    @RequestMapping("anonymousUser/allSubjectList")
+    @ApiOperation(value = "获取全部题目列表")
+    @ApiImplicitParam(name = "subjectDto", value = "题目信息", dataType = "SubjectDto")
     public ResponseBean<List<SubjectDto>> allSubjectList(SubjectDto subjectDto) {
-		return new ResponseBean<>(examinationService.allSubjectList(subjectDto));
-	}
+        return new ResponseBean<>(examinationService.allSubjectList(subjectDto));
+    }
 
     /**
      * 创建
      *
      * @param examinationDto examinationDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:14
      */
     @PostMapping
     @AdminTenantTeacherAuthorization
@@ -169,8 +159,6 @@ public class ExaminationController extends BaseController {
      *
      * @param examinationDto examinationDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:15
      */
     @PutMapping
     @AdminTenantTeacherAuthorization
@@ -186,8 +174,6 @@ public class ExaminationController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/10 21:20
      */
     @DeleteMapping("{id}")
     @AdminTenantTeacherAuthorization
@@ -213,8 +199,6 @@ public class ExaminationController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/03 22:03
      */
     @PostMapping("deleteAll")
     @AdminTenantTeacherAuthorization
@@ -237,14 +221,12 @@ public class ExaminationController extends BaseController {
      *
      * @param examinationId examinationId
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/06/18 14:31
      */
     @ApiImplicitParam(name = "examinationId", value = "考试ID", required = true, paramType = "path")
     @GetMapping("/{examinationId}/subjectIds")
     public ResponseBean<List<ExaminationSubject>> findExaminationSubjectIds(@PathVariable Long examinationId) {
-		List<ExaminationSubject> subjects = examinationService.findListByExaminationId(examinationId);
-		subjects.forEach(BaseEntity::clearCommonValue);
+        List<ExaminationSubject> subjects = examinationService.findListByExaminationId(examinationId);
+        subjects.forEach(BaseEntity::clearCommonValue);
         return new ResponseBean<>(subjects);
     }
 
@@ -253,8 +235,6 @@ public class ExaminationController extends BaseController {
      *
      * @param examinationId examinationId
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/06/18 14:31
      */
     @ApiImplicitParam(name = "examinationId", value = "考试ID", required = true, paramType = "path")
     @GetMapping("/anonymousUser/{examinationId}/subjectIds")
@@ -266,10 +246,9 @@ public class ExaminationController extends BaseController {
 
     /**
      * 根据考试ID生成二维码
+     *
      * @param examinationId examinationId
-     * @param response response
-     * @author tangyi
-     * @date 2020/3/15 1:16 下午
+     * @param response      response
      */
     @ApiOperation(value = "生成二维码", notes = "生成二维码")
     @ApiImplicitParams({
@@ -287,10 +266,9 @@ public class ExaminationController extends BaseController {
 
     /**
      * 根据考试ID生成二维码
+     *
      * @param examinationId examinationId
-     * @param response response
-     * @author tangyi
-     * @date 2020/3/21 5:38 下午
+     * @param response      response
      */
     @ApiOperation(value = "生成二维码(v2)", notes = "生成二维码(v2)")
     @ApiImplicitParams({
@@ -300,9 +278,12 @@ public class ExaminationController extends BaseController {
     public void produceCodeV2(@PathVariable Long examinationId, HttpServletResponse response) throws Exception {
         response.setHeader("Cache-Control", "no-store, no-cache");
         response.setContentType("image/jpeg");
-        try (ByteArrayInputStream inputStream = new ByteArrayInputStream(examinationService.produceCodeV2(examinationId)); ServletOutputStream out = response.getOutputStream()) {
+        try (ByteArrayInputStream inputStream =
+                     new ByteArrayInputStream(examinationService.produceCodeV2(examinationId));
+             ServletOutputStream out = response.getOutputStream()) {
             BufferedImage image = ImageIO.read(inputStream);
             ImageIO.write(image, "PNG", out);
         }
     }
+
 }

@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * 选择题Mapper
  *
- * @author tangyi
- * @date 2019/6/16 14:55
+ * @author zdz
+ * @date 2022/04/16 14:34
  */
 @Mapper
 public interface SubjectOptionMapper extends CrudMapper<SubjectOption> {
@@ -20,8 +20,6 @@ public interface SubjectOptionMapper extends CrudMapper<SubjectOption> {
      *
      * @param subjectOption subjectOption
      * @return List
-     * @author tangyi
-     * @date 2019/6/16 14:55
      */
     List<SubjectOption> getBySubjectChoicesId(SubjectOption subjectOption);
 
@@ -30,8 +28,6 @@ public interface SubjectOptionMapper extends CrudMapper<SubjectOption> {
      *
      * @param subjectOptionList subjectOptionList
      * @return int
-     * @author tangyi
-     * @date 2019/6/16 14:55
      */
     int insertBatch(List<SubjectOption> subjectOptionList);
 
@@ -40,8 +36,6 @@ public interface SubjectOptionMapper extends CrudMapper<SubjectOption> {
      *
      * @param subjectOption subjectOption
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 21:54
      */
     int deleteBySubjectChoicesId(SubjectOption subjectOption);
 
@@ -50,8 +44,7 @@ public interface SubjectOptionMapper extends CrudMapper<SubjectOption> {
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 22:40
      */
     int physicalDeleteAll(Long[] ids);
+
 }

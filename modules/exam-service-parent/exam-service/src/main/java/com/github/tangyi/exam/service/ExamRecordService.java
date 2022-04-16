@@ -44,8 +44,8 @@ import java.util.stream.Collectors;
 /**
  * 考试记录service
  *
- * @author tangyi
- * @date 2018/11/8 21:20
+ * @author zdz
+ * @date 2022/04/16 14:37
  */
 @Slf4j
 @AllArgsConstructor
@@ -65,8 +65,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
      *
      * @param examRecord examRecord
      * @return ExamRecord
-     * @author tangyi
-     * @date 2019/1/3 14:10
      */
     @Override
     @Cacheable(value = "record#" + CommonConstant.CACHE_EXPIRE, key = "#examRecord.id")
@@ -83,8 +81,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
 	 * @param order      order
 	 * @param examRecord examRecord
 	 * @return PageInfo
-	 * @author tangyi
-	 * @date 2018/11/10 21:33
 	 */
     public PageInfo<ExaminationRecordDto> examRecordList(ExaminationRecord examRecord, String pageNum, String pageSize, String sort, String order) {
 		examRecord.setTenantCode(SysUtil.getTenantCode());
@@ -134,8 +130,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
      *
      * @param examRecord examRecord
      * @return ExamRecord
-     * @author tangyi
-     * @date 2019/1/3 14:10
      */
     @Override
     @Transactional
@@ -149,8 +143,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
      *
      * @param examRecord examRecord
      * @return ExamRecord
-     * @author tangyi
-     * @date 2019/1/3 14:10
      */
     @Override
     @Transactional
@@ -164,8 +156,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
      *
      * @param examRecord examRecord
      * @return ExamRecord
-     * @author tangyi
-     * @date 2018/12/26 13:58
      */
     public ExaminationRecord getByUserIdAndExaminationId(ExaminationRecord examRecord) {
         return this.dao.getByUserIdAndExaminationId(examRecord);
@@ -176,8 +166,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:11
      */
     @Override
     @Transactional
@@ -226,8 +214,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
 	 * 查询考试记录数
 	 * @param examinationRecord examinationRecord
 	 * @return int
-	 * @author tangyi
-	 * @date 2020/1/31 5:17 下午
 	 */
 	public int findExaminationRecordCount(ExaminationRecord examinationRecord) {
 		return this.dao.findExaminationRecordCount(examinationRecord);
@@ -238,8 +224,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
 	 * 根据时间范围查询考试记录数
 	 * @param start start
 	 * @return List
-	 * @author tangyi
-	 * @date 2020/1/31 10:17 下午
 	 */
 	public List<ExaminationRecord> findExaminationRecordCountByDate(Date start) {
 		return this.dao.findExaminationRecordCountByDate(start);
@@ -251,8 +235,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
 	 * @param ids ids
 	 * @param request request
 	 * @param response response
-	 * @author tangyi
-	 * @date 2018/12/31 22:28
 	 */
 	public void exportExamRecord(Long[] ids, HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -307,8 +289,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
 	 * 查询参与考试人数
 	 *
 	 * @return ExaminationDashboardDto
-	 * @author tangyi
-	 * @date 2019/10/27 20:07:38
 	 */
 	public ExaminationDashboardDto findExamDashboardData(String tenantCode) {
 		ExaminationDashboardDto dashboardDto = new ExaminationDashboardDto();
@@ -330,8 +310,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
 	 * @param tenantCode tenantCode
 	 * @param pastDays pastDays
 	 * @return ExaminationDashboardDto
-	 * @author tangyi
-	 * @date 2020/1/31 5:46 下午
 	 */
 	public ExaminationDashboardDto findExamRecordTendency(String tenantCode, int pastDays) {
 		ExaminationDashboardDto dashboardDto = new ExaminationDashboardDto();
@@ -366,8 +344,6 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
 	 * 成绩详情
 	 * @param id id
 	 * @return ExaminationRecordDto
-	 * @author tangyi
-	 * @date 2020/2/21 9:26 上午
 	 */
 	public ExaminationRecordDto details(Long id) {
 		ExaminationRecord examRecord = this.get(id);
@@ -407,4 +383,5 @@ public class ExamRecordService extends CrudService<ExamRecordMapper, Examination
 		this.fillExamUserInfo(Collections.singletonList(examRecordDto), new Long[] {examRecord.getUserId()});
 		return examRecordDto;
 	}
+
 }

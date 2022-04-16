@@ -52,8 +52,8 @@ import java.util.stream.Collectors;
 /**
  * 答题service
  *
- * @author tangyi
- * @date 2018/11/8 21:17
+ * @author zdz
+ * @date 2022/04/16 14:35
  */
 @Slf4j
 @AllArgsConstructor
@@ -87,8 +87,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      *
      * @param answer answer
      * @return Answer
-     * @author tangyi
-     * @date 2019/1/3 14:27
      */
     @Override
     @Cacheable(value = "answer#" + CommonConstant.CACHE_EXPIRE, key = "#answer.id")
@@ -101,8 +99,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      *
      * @param answer answer
      * @return Answer
-     * @author tangyi
-     * @date 2019/01/21 19:41
      */
     public Answer getAnswer(Answer answer) {
         return this.dao.getAnswer(answer);
@@ -113,8 +109,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      *
      * @param answer answer
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:27
      */
     @Override
     @Transactional
@@ -129,8 +123,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      *
      * @param answer answer
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:27
      */
     @Transactional
     @CacheEvict(value = "answer", key = "#answer.id")
@@ -169,8 +161,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      *
      * @param answer answer
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:27
      */
     @Override
     @Transactional
@@ -184,8 +174,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:27
      */
     @Override
     @Transactional
@@ -199,8 +187,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      *
      * @param answer answer
      * @return int
-     * @author tangyi
-     * @date 2019/04/30 18:03
      */
     @Transactional
     public int save(Answer answer) {
@@ -217,8 +203,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      * @param nextSubjectId   nextSubjectId
      * @param nextSubjectType 下一题的类型，选择题、判断题
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/05/01 11:42
      */
     @Transactional
     public SubjectDto saveAndNext(AnswerDto answerDto, Integer type, Long nextSubjectId, Integer nextSubjectType) {
@@ -241,8 +225,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
 	 * @param sysCode       sysCode
 	 * @param tenantCode       tenantCode
 	 * @return int
-	 * @author tangyi
-	 * @date 2019/05/01 11:42
 	 */
 	@Transactional
 	public int save(AnswerDto answerDto, String userCode, String sysCode, String tenantCode) {
@@ -268,8 +250,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      * 提交答卷，自动统计选择题得分
      *
      * @param answer answer
-     * @author tangyi
-     * @date 2018/12/26 14:09
      */
     @Transactional
     public void submit(Answer answer) {
@@ -306,8 +286,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      * 更新排名信息
 	 * 基于Redis的sort set数据结构
      * @param record record
-     * @author tangyi
-     * @date 2019/12/8 23:21
      */
     private void updateRank(ExaminationRecord record) {
 		redisTemplate.opsForZSet().add(AnswerConstant.CACHE_PREFIX_RANK + record.getExaminationId(), JsonMapper.getInstance().toJson(record), record.getScore());
@@ -321,8 +299,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      *
      * @param answer answer
      * @return boolean
-     * @author tangyi
-     * @date 2019/05/03 14:35
      */
     @Transactional
     public boolean submitAsync(Answer answer) {
@@ -353,8 +329,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      *
      * @param examRecord examRecord
      * @return StartExamDto
-     * @author tangyi
-     * @date 2019/04/30 23:06
      */
     @Transactional
     public StartExamDto start(ExaminationRecord examRecord) {
@@ -376,8 +350,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      * @param nextSubjectId   nextSubjectId
      * @param nextSubjectType 下一题的类型，选择题、判断题
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/04/30 17:10
      */
     @Transactional
     public SubjectDto subjectAnswer(Long subjectId, Long examRecordId, Integer nextType, Long nextSubjectId, Integer nextSubjectType) {
@@ -425,8 +397,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      *
      * @param answers answers
      * @return Map
-     * @author tangyi
-     * @date 2019/06/18 16:32
      */
     private Map<String, List<Answer>> distinctAnswer(List<Answer> answers) {
         Map<String, List<Answer>> distinctMap = new HashMap<>();
@@ -463,8 +433,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      * @param nextSubjectType  nextSubjectType
      * @param nextType         nextType
      * @return AnswerDto
-     * @author tangyi
-     * @date 2019/06/18 23:05
      */
     public AnswerDto answerInfo(Long recordId, Long currentSubjectId, Integer nextSubjectType, Integer nextType) {
         ExaminationRecord record = examRecordService.get(recordId);
@@ -536,8 +504,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      *
      * @param examRecord examRecord
      * @return Boolean
-     * @author tangyi
-     * @date 2019/06/19 14:44
      */
     public Boolean completeMarking(ExaminationRecord examRecord) {
         long start = System.currentTimeMillis();
@@ -567,8 +533,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      * 获取排名数据
      * @param recordId recordId
      * @return List
-     * @author tangyi
-     * @date 2019/12/8 23:36
      */
 	public List<RankInfoDto> getRankInfo(Long recordId) {
 		List<RankInfoDto> rankInfos = new ArrayList<>();
@@ -616,8 +580,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      * @param recordId recordId
      * @param answer   answer
      * @return List
-     * @author tangyi
-     * @date 2020/02/19 22:50
      */
 	public PageInfo<AnswerDto> answerListInfo(String pageNum, String pageSize, String sort, String order, Long recordId, Answer answer) {
         List<AnswerDto> answerDtos = new ArrayList<>();
@@ -664,8 +626,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
 	 * 根据examRecordId查询
 	 * @param examRecordId examRecordId
 	 * @return List
-	 * @author tangyi
-	 * @date 2020/2/21 1:08 下午
 	 */
 	public List<Answer> findListByExamRecordId(Long examRecordId) {
 		return this.dao.findListByExamRecordId(examRecordId);
@@ -675,8 +635,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      * 移动端提交答题
      * @param examinationId examinationId
      * @return ResponseBean
-     * @author tangyi
-     * @date 2020/03/15 16:08
      */
     @Transactional
 	public boolean anonymousUserSubmit(Long examinationId, String identifier, List<SubjectDto> subjectDtos) {
@@ -738,8 +696,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      * 自动判分
      * @param distinctAnswer distinctAnswer
      * @return ResponseBean
-     * @author tangyi
-     * @date 2020/03/15 16:21
      */
     public AnswerHandleResult handleAll(Map<String, List<Answer>> distinctAnswer) {
         // 暂时只自动统计单选题、多选题、判断题，简答题由老师阅卷批改
@@ -756,8 +712,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      * @param examinationId examinationId
      * @param identifier identifier
      * @return StartExamDto
-     * @author tangyi
-     * @date 2020/3/21 5:51 下午
      */
     @Transactional
     public StartExamDto anonymousUserStart(Long examinationId, String identifier) {
@@ -785,8 +739,6 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
      * @param applicationCode applicationCode
      * @param tenantCode tenantCode
      * @return StartExamDto
-     * @author tangyi
-     * @date 2019/04/30 23:06
      */
     @Transactional
     public StartExamDto start(Long userId, String identifier, Long examinationId, String applicationCode, String tenantCode) {
@@ -823,4 +775,5 @@ public class AnswerService extends CrudService<AnswerMapper, Answer> {
         }
         return startExamDto;
     }
+
 }

@@ -9,8 +9,8 @@ import java.util.List;
 /**
  * 答题Mapper
  *
- * @author tangyi
- * @date 2018/11/8 21:09
+ * @author zdz
+ * @date 2022/04/16 14:31
  */
 @Mapper
 public interface AnswerMapper extends CrudMapper<Answer> {
@@ -20,8 +20,6 @@ public interface AnswerMapper extends CrudMapper<Answer> {
      *
      * @param answer answer
      * @return Answer
-     * @author tangyi
-     * @date 2019/01/21 19:38
      */
     Answer getAnswer(Answer answer);
 
@@ -29,8 +27,7 @@ public interface AnswerMapper extends CrudMapper<Answer> {
      * 根据examRecordId查询
      * @param examRecordId examRecordId
      * @return List
-     * @author tangyi
-     * @date 2020/2/21 1:08 下午
      */
     List<Answer> findListByExamRecordId(Long examRecordId);
+
 }

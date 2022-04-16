@@ -5,17 +5,32 @@ import lombok.Getter;
 
 /**
  * 提交状态
- * @author tangyi
- * @date 2019/12/10 17:53
+ *
+ * @author zdz
+ * @date 2022/04/16 14:25
  */
 @Getter
 @AllArgsConstructor
 public enum SubmitStatusEnum {
 
-	SUBMITTED("已提交", 0), UNSUBMITTED("未提交", 1);
+	/**
+	 * 已提交
+	 */
+	SUBMITTED("已提交", 0),
 
+	/**
+	 * 未提交
+	 */
+	UNSUBMITTED("未提交", 1);
+
+	/**
+	 * 字符串值
+	 */
 	private String name;
 
+	/**
+	 * int值
+	 */
 	private Integer value;
 
 	public static SubmitStatusEnum matchByValue(Integer value) {
@@ -35,4 +50,5 @@ public enum SubmitStatusEnum {
 		}
 		return UNSUBMITTED;
 	}
+
 }

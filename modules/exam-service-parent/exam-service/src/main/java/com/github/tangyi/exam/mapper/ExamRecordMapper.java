@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * 考试记录Mapper
  *
- * @author tangyi
- * @date 2018/11/8 21:12
+ * @author zdz
+ * @date 2022/04/16 14:33
  */
 @Mapper
 public interface ExamRecordMapper extends CrudMapper<ExaminationRecord> {
@@ -21,8 +21,6 @@ public interface ExamRecordMapper extends CrudMapper<ExaminationRecord> {
      *
      * @param examRecord examRecord
      * @return Score
-     * @author tangyi
-     * @date 2018/12/26 13:56
      */
     ExaminationRecord getByUserIdAndExaminationId(ExaminationRecord examRecord);
 
@@ -31,8 +29,6 @@ public interface ExamRecordMapper extends CrudMapper<ExaminationRecord> {
 	 *
 	 * @param examinationRecord examinationRecord
 	 * @return int
-	 * @author tangyi
-	 * @date 2020/1/31 5:17 下午
 	 */
 	int findExaminationRecordCount(ExaminationRecord examinationRecord);
 
@@ -40,8 +36,7 @@ public interface ExamRecordMapper extends CrudMapper<ExaminationRecord> {
 	 * 时间范围条件查询
 	 * @param start start
 	 * @return List
-	 * @author tangyi
-	 * @date 2020/2/1 11:57 上午
 	 */
 	List<ExaminationRecord> findExaminationRecordCountByDate(Date start);
+
 }

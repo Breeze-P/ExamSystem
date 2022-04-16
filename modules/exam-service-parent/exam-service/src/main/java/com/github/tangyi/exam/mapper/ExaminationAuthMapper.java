@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 考试权限Mapper
  *
- * @author tangyi
- * @date 2019-07-16 14:03
+ * @author zdz
+ * @date 2022/04/16 14:33
  */
 @Mapper
 public interface ExaminationAuthMapper extends CrudMapper<ExaminationAuth> {

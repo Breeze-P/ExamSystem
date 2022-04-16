@@ -25,8 +25,8 @@ import java.util.List;
 /**
  * 选择题service
  *
- * @author tangyi
- * @date 2018/11/8 21:23
+ * @author zdz
+ * @date 2022/04/16 14:39
  */
 @AllArgsConstructor
 @Service
@@ -42,8 +42,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectChoices subjectChoices
      * @return SubjectChoices
-     * @author tangyi
-     * @date 2019/1/3 14:24
      */
     @Override
     @Cacheable(value = "subjectChoices#" + CommonConstant.CACHE_EXPIRE, key = "#subjectChoices.id")
@@ -64,8 +62,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectChoices subjectChoices
      * @return int
-     * @author tangyi
-     * @date 2019/01/23 20:19
      */
     int getExaminationTotalSubject(SubjectChoices subjectChoices) {
         return 0;
@@ -76,8 +72,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectChoices subjectChoices
      * @return int
-     * @author tangyi
-     * @date 2019/01/23 20:03
      */
     @Override
     @Transactional
@@ -90,8 +84,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectChoices subjectChoices
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:24
      */
     @Override
     @Transactional
@@ -108,8 +100,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      * @param examinationId  examinationId
      * @param subjectChoices subjectChoices
      * @return SubjectChoices
-     * @author tangyi
-     * @date 2019-09-14 16:47
      */
     public SubjectChoices getByCurrentId(Long examinationId, SubjectChoices subjectChoices) {
         ExaminationSubject examinationSubject = new ExaminationSubject();
@@ -127,8 +117,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      * @param examinationId  examinationId
      * @param subjectChoices subjectChoices
      * @return SubjectChoices
-     * @author tangyi
-     * @date 2019-09-14 16:47
      */
     public SubjectChoices getByPreviousId(Long examinationId, SubjectChoices subjectChoices) {
         ExaminationSubject examinationSubject = new ExaminationSubject();
@@ -146,8 +134,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      * @param examinationId  examinationId
      * @param subjectChoices subjectChoices
      * @return SubjectChoices
-     * @author tangyi
-     * @date 2019/10/07 20:40:16
      */
     public SubjectChoices getPreviousByCurrentId(Long examinationId, SubjectChoices subjectChoices) {
         ExaminationSubject examinationSubject = new ExaminationSubject();
@@ -164,8 +150,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectChoices subjectChoices
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:24
      */
     @Override
     @Transactional
@@ -182,8 +166,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectChoices subjectChoices
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 22:44
      */
     @Transactional
     @CacheEvict(value = "subjectChoices", key = "#subjectChoices.id")
@@ -199,8 +181,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/1/3 14:24
      */
     @Override
     @Transactional
@@ -219,8 +199,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 22:44
      */
     @Transactional
     @CacheEvict(value = "subjectChoices", allEntries = true)
@@ -237,8 +215,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      * 删除题目的选项和与考试的关联
      *
      * @param subjectId subjectId
-     * @author tangyi
-     * @date 2019/06/16 22:09
      */
     @Transactional
     public void deleteOptionAndRelation(Long subjectId) {
@@ -257,8 +233,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param id id
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/06/16 17:36
      */
     @Override
     public SubjectDto getSubject(Long id) {
@@ -280,8 +254,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      * @param previousId    previousId
      * @param nextType      0：下一题，1：上一题
      * @return SubjectDto
-     * @author tangyi
-     * @date 2019/09/14 16:35
      */
     @Override
     @Transactional
@@ -303,8 +275,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectDto subjectDto
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 17:50
      */
     @Override
     @Transactional
@@ -321,8 +291,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
     /**
      * 保存选项
      * @param subjectChoices subjectChoices
-     * @author tangyi
-     * @date 2020/01/17 22:30:48
      */
     @Transactional
     public void insertOptions(SubjectChoices subjectChoices) {
@@ -346,8 +314,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectDto subjectDto
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 17:50
      */
     @Override
     @Transactional
@@ -366,8 +332,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectDto subjectDto
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 17:50
      */
     @Override
     @Transactional
@@ -383,8 +347,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectDto subjectDto
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 22:50
      */
     @Override
     @Transactional
@@ -400,8 +362,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 17:50
      */
     @Override
     @Transactional
@@ -415,8 +375,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param ids ids
      * @return int
-     * @author tangyi
-     * @date 2019/06/16 22:51
      */
     @Override
     @Transactional
@@ -430,8 +388,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectDto subjectDto
      * @return List
-     * @author tangyi
-     * @date 2019/06/16 18:16
      */
     @Override
     public List<SubjectDto> findSubjectList(SubjectDto subjectDto) {
@@ -446,8 +402,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      * @param pageInfo   pageInfo
      * @param subjectDto subjectDto
      * @return PageInfo
-     * @author tangyi
-     * @date 2019/06/16 18:16
      */
     @Override
     public PageInfo<SubjectDto> findSubjectPage(PageInfo pageInfo, SubjectDto subjectDto) {
@@ -471,8 +425,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param ids ids
      * @return List
-     * @author tangyi
-     * @date 2019/06/16 18:16
      */
     @Override
     public List<SubjectDto> findSubjectListById(Long[] ids) {
@@ -484,8 +436,6 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
      *
      * @param subjectId subjectId
      * @return SubjectChoices
-     * @author tangyi
-     * @date 2019/10/07 21:03:43
      */
     private SubjectChoices getSubjectChoicesById(Long subjectId) {
         SubjectChoices subjectChoices = new SubjectChoices();
@@ -497,4 +447,5 @@ public class SubjectChoicesService extends CrudService<SubjectChoicesMapper, Sub
         subjectChoices.setOptions(options);
         return subjectChoices;
     }
+
 }

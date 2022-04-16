@@ -12,9 +12,10 @@ import com.github.tangyi.exam.excel.converter.SubjectTypeConverter;
 import lombok.Data;
 
 /**
- * 题目信息
- * @author tangyi
- * @date 2019/12/10 18:03
+ * 题目信息ExcelModel
+ *
+ * @author zdz
+ * @date 2022/04/16 14:26
  */
 @Data
 @ExcelModel("题目信息")
@@ -56,4 +57,5 @@ public class SubjectExcelModel {
 
 	@ExcelProperty("选项")
 	private String options;
+
 }

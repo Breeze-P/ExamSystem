@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 题目分类Mapper
  *
- * @author tangyi
- * @date 2018/12/4 21:48
+ * @author zdz
+ * @date 2022/04/16 14:34
  */
 @Mapper
 public interface SubjectCategoryMapper extends CrudMapper<SubjectCategory> {
