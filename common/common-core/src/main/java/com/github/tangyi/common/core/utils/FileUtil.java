@@ -57,7 +57,6 @@ public class FileUtil {
     }
 
     /**
-     *
      * 删除目录及目录下的文件
      *
      * @param dirName 被删除的目录所在的文件路径
@@ -97,7 +96,6 @@ public class FileUtil {
                 }
             }
         }
-
         if (!flag) {
             log.debug("delete dir failure!");
             return false;
@@ -113,7 +111,6 @@ public class FileUtil {
     }
 
     /**
-     *
      * 删除单个文件
      *
      * @param fileName 被删除的文件名
@@ -134,4 +131,5 @@ public class FileUtil {
             return true;
         }
     }
+
 }
