@@ -3,8 +3,10 @@ package com.github.tangyi.common.basic.utils.excel.annotation;
 import java.lang.annotation.*;
 
 /**
- * @author tangyi
- * @date 2019/12/10 16:04
+ * Excel Model注解
+ *
+ * @author zdz
+ * @date 2022/04/16 11:13
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -13,13 +15,13 @@ public @interface ExcelModel {
 
 	/**
 	 * 模块名，用于导出时的文件名
-	 * @return String
+	 * @return 导出文件名
 	 */
 	String value() default "";
 
 	/**
 	 * 页名
-	 * @return String
+	 * @return 页名
 	 */
 	String[] sheets() default {"sheet1"};
 

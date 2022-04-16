@@ -1,12 +1,20 @@
 package com.github.tangyi.common.basic.utils.excel.exception;
 
 /**
- * @author tangyi
- * @date 2019/12/9 21:47
+ * Excel相关异常类
+ *
+ * @author zdz
+ * @date 2022/04/16 11:23
  */
 public class ExcelException extends RuntimeException {
 
-	public ExcelException(String msg) {
-		super(msg);
-	}
+    /**
+     * Excel相关异常
+     *
+     * @param msg 异常信息
+     */
+    public ExcelException(String msg) {
+        super(msg);
+    }
+
 }
