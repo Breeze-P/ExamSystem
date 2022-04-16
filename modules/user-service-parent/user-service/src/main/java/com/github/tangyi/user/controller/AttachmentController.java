@@ -38,8 +38,8 @@ import java.util.stream.Collectors;
 /**
  * 附件信息管理
  *
- * @author tangyi
- * @date 2018/10/30 20:45
+ * @author zdz
+ * @date 2022/04/16 13:55
  */
 @Slf4j
 @AllArgsConstructor
@@ -48,8 +48,14 @@ import java.util.stream.Collectors;
 @RequestMapping("/v1/attachment")
 public class AttachmentController extends BaseController {
 
+    /**
+     * 附件service
+     */
     private final AttachmentService attachmentService;
 
+    /**
+     * 系统属性
+     */
     private final SysProperties sysProperties;
 
     /**
@@ -57,8 +63,6 @@ public class AttachmentController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/01/01 19:56
      */
     @ApiOperation(value = "获取附件信息", notes = "根据附件id获取附件详细信息")
     @ApiImplicitParam(name = "id", value = "附件ID", required = true, dataType = "Long", paramType = "path")
@@ -78,8 +82,6 @@ public class AttachmentController extends BaseController {
      * @param order      order
      * @param attachment attachment
      * @return PageInfo
-     * @author tangyi
-     * @date 2018/10/30 21:05
      */
     @GetMapping("attachmentList")
     @ApiOperation(value = "获取附件列表")
@@ -104,8 +106,6 @@ public class AttachmentController extends BaseController {
      *
      * @param file       file
      * @param attachment attachment
-     * @author tangyi
-     * @date 2018/10/30 21:54
      */
     @PostMapping("upload")
     @ApiOperation(value = "上传文件", notes = "上传文件")
@@ -136,8 +136,6 @@ public class AttachmentController extends BaseController {
      * 下载文件
      *
      * @param id id
-     * @author tangyi
-     * @date 2018/10/30 22:26
      */
     @GetMapping("download")
     @ApiOperation(value = "下载附件", notes = "根据ID下载附件")
@@ -179,8 +177,6 @@ public class AttachmentController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/10/30 22:44
      */
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除附件", notes = "根据ID删除附件")
@@ -201,8 +197,6 @@ public class AttachmentController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/4 10:01
      */
     @PostMapping("deleteAll")
     @ApiOperation(value = "批量删除附件", notes = "根据附件id批量删除附件")
@@ -224,8 +218,6 @@ public class AttachmentController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/01/01 22:16
      */
     @PostMapping(value = "findById")
     @ApiOperation(value = "批量查询附件信息", notes = "根据附件ID批量查询附件信息")
@@ -249,8 +241,6 @@ public class AttachmentController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/06/19 15:47
      */
     @GetMapping("/{id}/canPreview")
     @ApiOperation(value = "判断附件是否支持预览", notes = "根据附件ID判断附件是否支持预览")
@@ -267,8 +257,6 @@ public class AttachmentController extends BaseController {
      *
      * @param response response
      * @param id id
-     * @author tangyi
-     * @date 2019/06/19 15:47
      */
     @GetMapping("/preview")
     @ApiOperation(value = "预览附件", notes = "根据附件ID预览附件")
@@ -290,4 +278,5 @@ public class AttachmentController extends BaseController {
         out.close();
         stream.close();
     }
+
 }

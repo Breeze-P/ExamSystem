@@ -17,24 +17,28 @@ import java.util.List;
 /**
  * 角色service
  *
- * @author tangyi
- * @date 2018/8/26 14:16
+ * @author zdz
+ * @date 2022/04/16 13:43
  */
 @AllArgsConstructor
 @Service
 public class RoleService extends CrudService<RoleMapper, Role> {
 
+    /**
+     * 角色菜单关联
+     */
     private final RoleMenuMapper roleMenuMapper;
 
+    /**
+     * 用户角色关联
+     */
     private final UserRoleMapper userRoleMapper;
 
     /**
      * 查询所有角色
      *
-     * @param role role
-     * @return List
-     * @author tangyi
-     * @date 2019/05/15 23:32
+     * @param role 角色
+     * @return 角色列表
      */
     @Override
     @Cacheable(value = "role#" + CommonConstant.CACHE_EXPIRE, key = "#role.applicationCode")
@@ -43,12 +47,10 @@ public class RoleService extends CrudService<RoleMapper, Role> {
     }
 
     /**
-     * 根据角色code查询
+     * 根据角色code查询角色
      *
-     * @param role role
-     * @return Role
-     * @author tangyi
-     * @date 2019/09/21 12:07:47
+     * @param role 角色code
+     * @return 角色
      */
     @Cacheable(value = "role#" + CommonConstant.CACHE_EXPIRE, key = "#role.roleCode")
     public Role findByRoleCode(Role role) {
@@ -56,10 +58,10 @@ public class RoleService extends CrudService<RoleMapper, Role> {
     }
 
     /**
-     * 新增
+     * 新增角色
      *
-     * @param role
-     * @return int
+     * @param role 角色
+     * @return 是否插入成功
      */
     @Override
     @Transactional
@@ -69,10 +71,10 @@ public class RoleService extends CrudService<RoleMapper, Role> {
     }
 
     /**
-     * 更新
+     * 更新角色信息
      *
-     * @param role role
-     * @return int
+     * @param role 角色
+     * @return 是否更新成功
      */
     @Override
     @Transactional
@@ -82,10 +84,10 @@ public class RoleService extends CrudService<RoleMapper, Role> {
     }
 
     /**
-     * 删除
+     * 删除角色
      *
-     * @param role role
-     * @return int
+     * @param role 角色
+     * @return 是否删除成功
      */
     @Override
     @Transactional
@@ -97,4 +99,5 @@ public class RoleService extends CrudService<RoleMapper, Role> {
         userRoleMapper.deleteByRoleId(role.getId());
         return super.delete(role);
     }
+
 }

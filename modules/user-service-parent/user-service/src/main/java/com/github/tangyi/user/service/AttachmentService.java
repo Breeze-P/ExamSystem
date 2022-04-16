@@ -17,8 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.InputStream;
 
 /**
- * @author tangyi
- * @date 2018/10/30 20:55
+ * 附件service
+ *
+ * @author zdz
+ * @date 2022/04/16 12:09
  */
 @Slf4j
 @AllArgsConstructor
@@ -26,10 +28,10 @@ import java.io.InputStream;
 public class AttachmentService extends CrudService<AttachmentMapper, Attachment> {
 
 	/**
-	 * 根据id查询
+	 * 根据id查询附件
 	 *
-	 * @param attachment attachment
-	 * @return Attachment
+	 * @param attachment 附件信息
+	 * @return 附件信息
 	 */
 	@Cacheable(value = "attachment#" + CommonConstant.CACHE_EXPIRE, key = "#attachment.id")
 	@Override
@@ -40,8 +42,8 @@ public class AttachmentService extends CrudService<AttachmentMapper, Attachment>
 	/**
 	 * 根据id更新
 	 *
-	 * @param attachment attachment
-	 * @return int
+	 * @param attachment 附件信息
+	 * @return 是否更新成功
 	 */
 	@Override
 	@Transactional
@@ -51,21 +53,20 @@ public class AttachmentService extends CrudService<AttachmentMapper, Attachment>
 	}
 
 	/**
-	 * 下载
+	 * 下载附件
 	 *
-	 * @param attachment attachment
-	 * @return InputStream
+	 * @param attachment 附件信息
+	 * @return 负责下载的输入流
 	 */
 	public InputStream download(Attachment attachment) throws Exception {
-		// 下载附件
 		return UploadInvoker.getInstance().download(attachment);
 	}
 
 	/**
 	 * 删除
 	 *
-	 * @param attachment attachment
-	 * @return int
+	 * @param attachment 附件信息
+	 * @return 是否删除成功
 	 */
 	@Override
 	@Transactional
@@ -78,7 +79,7 @@ public class AttachmentService extends CrudService<AttachmentMapper, Attachment>
 	 * 批量删除
 	 *
 	 * @param ids ids
-	 * @return int
+	 * @return 是否删除成功
 	 */
 	@Override
 	@Transactional
@@ -90,15 +91,14 @@ public class AttachmentService extends CrudService<AttachmentMapper, Attachment>
 	/**
 	 * 获取附件的预览地址
 	 *
-	 * @param attachment attachment
-	 * @return String
-	 * @author tangyi
-	 * @date 2019/06/21 17:45
+	 * @param attachment 附件信息
+	 * @return 预览地址
 	 */
 	@Cacheable(value = "attachment_preview#" + CommonConstant.CACHE_EXPIRE, key = "#attachment.id")
 	public String getPreviewUrl(Attachment attachment) {
 		attachment = this.get(attachment);
 		if (attachment != null) {
+			// 处理URL地址
 			String preview = attachment.getPreviewUrl();
 			if (StringUtils.isNotBlank(preview) && !preview.startsWith("http")) {
 				preview = "http://" + preview;
@@ -110,4 +110,5 @@ public class AttachmentService extends CrudService<AttachmentMapper, Attachment>
 		}
 		return "";
 	}
+
 }

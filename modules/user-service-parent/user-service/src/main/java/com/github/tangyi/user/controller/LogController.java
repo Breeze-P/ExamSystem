@@ -23,8 +23,8 @@ import javax.validation.Valid;
 /**
  * 日志controller
  *
- * @author tangyi
- * @date 2018/10/31 20:48
+ * @author zdz
+ * @date 2022/04/16 13:59
  */
 @Slf4j
 @AllArgsConstructor
@@ -33,6 +33,9 @@ import javax.validation.Valid;
 @RequestMapping("/v1/log")
 public class LogController extends BaseController {
 
+    /**
+     * 日志service
+     */
     private final LogService logService;
 
     /**
@@ -40,8 +43,6 @@ public class LogController extends BaseController {
      *
      * @param id id
      * @return Log
-     * @author tangyi
-     * @date 2018/9/14 18:20
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "获取日志信息", notes = "根据日志id获取日志详细信息")
@@ -64,8 +65,6 @@ public class LogController extends BaseController {
      * @param order    order
      * @param log      log
      * @return PageInfo
-     * @author tangyi
-     * @date 2018/10/24 0024 22:13
      */
     @GetMapping("logList")
     @ApiOperation(value = "获取日志列表")
@@ -90,8 +89,6 @@ public class LogController extends BaseController {
      *
      * @param log log
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/03/27 23:14
      */
     @PostMapping
     @ApiOperation(value = "新增日志", notes = "新增日志")
@@ -106,8 +103,6 @@ public class LogController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/10/31 21:27
      */
     @DeleteMapping("/{id}")
     @AdminAuthorization
@@ -124,8 +119,6 @@ public class LogController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/4 10:12
      */
     @PostMapping("deleteAll")
     @AdminAuthorization
@@ -141,4 +134,5 @@ public class LogController extends BaseController {
         }
         return new ResponseBean<>(success);
     }
+
 }

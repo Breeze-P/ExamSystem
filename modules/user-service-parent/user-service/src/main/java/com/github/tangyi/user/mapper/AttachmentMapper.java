@@ -7,9 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 附件mapper
  *
- * @author tangyi
- * @date 2018/10/30 20:55
+ * @author zdz
+ * @date 2022/04/16 11:58
  */
 @Mapper
 public interface AttachmentMapper extends CrudMapper<Attachment> {
+
 }

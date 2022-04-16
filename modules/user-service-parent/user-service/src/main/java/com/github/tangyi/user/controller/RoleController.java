@@ -29,8 +29,8 @@ import java.util.stream.Stream;
 /**
  * 角色controller
  *
- * @author tangyi
- * @date 2018/8/26 22:50
+ * @author zdz
+ * @date 2022/04/16 14:02
  */
 @Slf4j
 @AllArgsConstructor
@@ -39,8 +39,14 @@ import java.util.stream.Stream;
 @RequestMapping("/v1/role")
 public class RoleController extends BaseController {
 
+    /**
+     * 用户service
+     */
     private final RoleService roleService;
 
+    /**
+     * 用户菜单关联service
+     */
     private final RoleMenuService roleMenuService;
 
     /**
@@ -48,8 +54,6 @@ public class RoleController extends BaseController {
      *
      * @param id id
      * @return RoleVo
-     * @author tangyi
-     * @date 2018/9/14 18:20
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "获取角色信息", notes = "根据角色id获取角色详细信息")
@@ -67,8 +71,6 @@ public class RoleController extends BaseController {
      * @param order    order
      * @param role     role
      * @return PageInfo
-     * @author tangyi
-     * @date 2018/10/24 22:13
      */
     @GetMapping("roleList")
     @ApiOperation(value = "获取角色列表")
@@ -93,8 +95,6 @@ public class RoleController extends BaseController {
      *
      * @param role role
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/05/15 23:29
      */
     @GetMapping("allRoles")
     @ApiOperation(value = "获取全部角色列表")
@@ -110,8 +110,6 @@ public class RoleController extends BaseController {
      *
      * @param role role
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/9/14 18:22
      */
     @PutMapping
     @AdminTenantTeacherAuthorization
@@ -128,8 +126,6 @@ public class RoleController extends BaseController {
      *
      * @param role role
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/10/28 14:20
      */
     @PutMapping("roleMenuUpdate")
     @ApiOperation(value = "更新角色菜单信息", notes = "更新角色菜单信息")
@@ -152,8 +148,6 @@ public class RoleController extends BaseController {
      *
      * @param role role
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/9/14 18:23
      */
     @PostMapping
     @AdminTenantTeacherAuthorization
@@ -170,8 +164,6 @@ public class RoleController extends BaseController {
      *
      * @param id id
      * @return RoleVo
-     * @author tangyi
-     * @date 2018/9/14 18:24
      */
     @DeleteMapping("/{id}")
     @AdminTenantTeacherAuthorization
@@ -191,8 +183,6 @@ public class RoleController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/4 10:00
      */
     @PostMapping("deleteAll")
     @AdminTenantTeacherAuthorization
@@ -209,4 +199,5 @@ public class RoleController extends BaseController {
         }
         return new ResponseBean<>(success);
     }
+
 }

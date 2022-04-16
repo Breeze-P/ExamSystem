@@ -22,8 +22,8 @@ import java.util.stream.Stream;
 /**
  * 部门service
  *
- * @author tangyi
- * @date 2018/8/26 22:46
+ * @author zdz
+ * @date 2022/04/16 12:11
  */
 @Service
 public class DeptService extends CrudService<DeptMapper, Dept> {
@@ -31,8 +31,8 @@ public class DeptService extends CrudService<DeptMapper, Dept> {
     /**
      * 删除部门
      *
-     * @param dept dept
-     * @return int
+     * @param dept 部门
+     * @return 是否删除成功
      */
     @Transactional
     @Override
@@ -44,10 +44,8 @@ public class DeptService extends CrudService<DeptMapper, Dept> {
     /**
      * 根据用户批量查询
      *
-     * @param userList userList
-     * @return List
-     * @author tangyi
-     * @date 2019/07/03 22:06:50
+     * @param userList 用户集合
+     * @return 部门集合
      */
     public List<Dept> getListByUsers(List<User> userList) {
         return this.findListById(userList.stream().filter(tempUser -> tempUser.getDeptId() != null).map(User::getDeptId).distinct().toArray(Long[]::new));
@@ -56,9 +54,7 @@ public class DeptService extends CrudService<DeptMapper, Dept> {
 	/**
 	 * 查询树形部门集合
 	 *
-	 * @return List
-	 * @author tangyi
-	 * @date 2018/10/25 12:57
+	 * @return 部门集合
 	 */
 	public List<DeptDto> depts() {
 		Dept dept = new Dept();
@@ -74,4 +70,5 @@ public class DeptService extends CrudService<DeptMapper, Dept> {
 		}
 		return new ArrayList<>();
 	}
+
 }

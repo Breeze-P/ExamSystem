@@ -44,8 +44,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author tangyi
- * @date 2018-08-25 16:20
+ * 用户信息controller
+ *
+ * @author zdz
+ * @date 2022/04/16 14:08
  */
 @Slf4j
 @AllArgsConstructor
@@ -54,12 +56,24 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/v1/user")
 public class UserController extends BaseController {
 
+    /**
+     * 用户service
+     */
     private final UserService userService;
 
+    /**
+     * 用户角色关联service
+     */
     private final UserRoleService userRoleService;
 
+    /**
+     * 部门service
+     */
     private final DeptService deptService;
 
+    /**
+     * 用户授权信息关联service
+     */
     private final UserAuthsService userAuthsService;
 
     /**
@@ -125,8 +139,6 @@ public class UserController extends BaseController {
      * @param order    order
      * @param userVo   userVo
      * @return PageInfo
-     * @author tangyi
-     * @date 2018/8/26 22:56
      */
     @GetMapping("userList")
     @ApiOperation(value = "获取用户列表")
@@ -173,8 +185,6 @@ public class UserController extends BaseController {
      *
      * @param userDto userDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/8/26 14:34
      */
     @PostMapping
     @AdminTenantTeacherAuthorization
@@ -191,8 +201,6 @@ public class UserController extends BaseController {
      * @param id      id
      * @param userDto userDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/8/26 15:06
      */
     @PutMapping("/{id:[a-zA-Z0-9,]+}")
     @AdminTenantTeacherAuthorization
@@ -213,8 +221,6 @@ public class UserController extends BaseController {
      *
      * @param userDto userDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/10/30 10:06
      */
     @PutMapping("updateInfo")
     @ApiOperation(value = "更新用户基本信息", notes = "根据用户id更新用户的基本信息")
@@ -232,8 +238,6 @@ public class UserController extends BaseController {
      *
      * @param userDto userDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/06/21 20:09
      */
     @PutMapping("anonymousUser/updatePassword")
     @ApiOperation(value = "修改用户密码", notes = "修改用户密码")
@@ -248,8 +252,6 @@ public class UserController extends BaseController {
      *
      * @param userDto userDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/06/21 18:08
      */
     @PutMapping("updateAvatar")
     @ApiOperation(value = "更新用户头像", notes = "根据用户id更新用户的头像信息")
@@ -264,8 +266,6 @@ public class UserController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/8/26 15:28
      */
     @DeleteMapping("/{id}")
     @AdminTenantTeacherAuthorization
@@ -287,8 +287,6 @@ public class UserController extends BaseController {
      * 导出
      *
      * @param ids ids
-     * @author tangyi
-     * @date 2018/11/26 22:11
      */
     @PostMapping("export")
     @AdminTenantTeacherAuthorization
@@ -332,8 +330,6 @@ public class UserController extends BaseController {
      *
      * @param file file
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/28 12:44
      */
     @PostMapping("import")
     @AdminTenantTeacherAuthorization
@@ -353,8 +349,6 @@ public class UserController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/4 9:58
      */
     @PostMapping("deleteAll")
     @AdminTenantTeacherAuthorization
@@ -378,8 +372,6 @@ public class UserController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/31 21:16
      */
     @PostMapping(value = "findById")
     @ApiOperation(value = "根据ID查询用户", notes = "根据ID查询用户")
@@ -393,8 +385,6 @@ public class UserController extends BaseController {
      *
      * @param userDto userDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/01/10 22:35
      */
     @ApiOperation(value = "注册", notes = "注册")
     @ApiImplicitParams({
@@ -416,8 +406,6 @@ public class UserController extends BaseController {
      * @param identifier   identifier
      * @param tenantCode   tenantCode
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/04/23 15:35
      */
     @ApiOperation(value = "检查账号是否存在", notes = "检查账号是否存在")
     @ApiImplicitParams({
@@ -435,8 +423,6 @@ public class UserController extends BaseController {
      *
      * @param userVo userVo
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/05/09 22:09
      */
     @PostMapping("userCount")
     public ResponseBean<Integer> userCount(UserVo userVo) {
@@ -448,8 +434,6 @@ public class UserController extends BaseController {
      *
      * @param userDto userDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/6/7 12:00
      */
     @PutMapping("anonymousUser/resetPassword")
     @AdminTenantTeacherAuthorization
@@ -465,8 +449,6 @@ public class UserController extends BaseController {
      *
      * @param userDto userDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2020/02/29 16:55
      */
     @PutMapping("anonymousUser/updateLoginInfo")
     @ApiOperation(value = "更新用户登录信息", notes = "根据用户id更新用户的登录信息")
@@ -488,4 +470,5 @@ public class UserController extends BaseController {
         }
         return new ResponseBean<>(success);
     }
+
 }

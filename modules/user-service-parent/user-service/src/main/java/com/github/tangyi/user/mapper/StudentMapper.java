@@ -5,11 +5,12 @@ import com.github.tangyi.user.api.module.Student;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 学生Mapper
+ * 学生 mapper
  *
- * @author tangyi
- * @date 2019/07/09 15:27
+ * @author zdz
+ * @date 2022/04/16 12:00
  */
 @Mapper
 public interface StudentMapper extends CrudMapper<Student> {
+
 }

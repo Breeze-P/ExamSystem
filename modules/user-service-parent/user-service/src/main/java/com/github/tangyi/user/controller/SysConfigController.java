@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 系统配置controller
  *
- * @author tangyi
- * @date 2019-02-28 17:29
+ * @author zdz
+ * @date 2022/04/16 14:04
  */
 @AllArgsConstructor
 @Api("系统配置信息管理")
@@ -24,14 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/sysConfig")
 public class SysConfigController extends BaseController {
 
+    /**
+     * 系统属性
+     */
     private final SysProperties sysProperties;
 
     /**
      * 获取系统配置
      *
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/2/28 17:31
      */
     @GetMapping
     @ApiOperation(value = "获取系统配置", notes = "获取系统配置")
@@ -40,4 +41,5 @@ public class SysConfigController extends BaseController {
         BeanUtils.copyProperties(sysProperties, sysConfigDto);
         return new ResponseBean<>(sysConfigDto);
     }
+
 }

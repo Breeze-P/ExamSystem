@@ -32,25 +32,32 @@ import java.util.stream.Stream;
 /**
  * 菜单service
  *
- * @author tangyi
- * @date 2018/8/26 22:45
+ * @author zdz
+ * @date 2022/04/16 13:55
  */
 @AllArgsConstructor
 @Service
 public class MenuService extends CrudService<MenuMapper, Menu> {
 
+	/**
+	 * 菜单mapper
+	 */
 	private final MenuMapper menuMapper;
 
+	/**
+	 * 角色菜单关联service
+	 */
 	private final RoleMenuService roleMenuService;
 
+	/**
+	 * 系统属性
+	 */
 	private final SysProperties sysProperties;
 
 	/**
 	 * 返回当前用户的树形菜单集合
 	 *
-	 * @return List
-	 * @author tangyi
-	 * @date 2019-09-14 14:41
+	 * @return 菜单集合
 	 */
 	public List<MenuDto> findUserMenu() {
 		List<MenuDto> menuDtoList = new ArrayList<>();
@@ -111,9 +118,7 @@ public class MenuService extends CrudService<MenuMapper, Menu> {
 	 *
 	 * @param role       角色标识
 	 * @param tenantCode 租户标识
-	 * @return List
-	 * @author tangyi
-	 * @date 2018/8/27 16:00
+	 * @return 菜单集合
 	 */
 	@Cacheable(value = "menu#" + CommonConstant.CACHE_EXPIRE, key = "#role")
 	public List<Menu> findMenuByRole(String role, String tenantCode) {
@@ -132,9 +137,7 @@ public class MenuService extends CrudService<MenuMapper, Menu> {
 	 *
 	 * @param roleList   roleList
 	 * @param tenantCode tenantCode
-	 * @return List
-	 * @author tangyi
-	 * @date 2019/07/03 23:50:35
+	 * @return 菜单集合
 	 */
 	private List<Menu> finMenuByRoleList(List<Role> roleList, String tenantCode) {
 		List<Menu> menus = Lists.newArrayList();
@@ -150,9 +153,7 @@ public class MenuService extends CrudService<MenuMapper, Menu> {
 	 * 查询全部菜单，包括租户本身的菜单和默认租户的菜单
 	 *
 	 * @param menu menu
-	 * @return List
-	 * @author tangyi
-	 * @date 2019/04/10 17:58
+	 * @return 菜单集合
 	 */
 	@Override
 	public List<Menu> findAllList(Menu menu) {
@@ -174,8 +175,6 @@ public class MenuService extends CrudService<MenuMapper, Menu> {
 	 *
 	 * @param menu menu
 	 * @return int
-	 * @author tangyi
-	 * @date 2018/10/28 15:56
 	 */
 	@Transactional
 	@Override
@@ -189,8 +188,6 @@ public class MenuService extends CrudService<MenuMapper, Menu> {
 	 *
 	 * @param menu menu
 	 * @return int
-	 * @author tangyi
-	 * @date 2018/10/30 20:19
 	 */
 	@Transactional
 	@Override
@@ -244,8 +241,6 @@ public class MenuService extends CrudService<MenuMapper, Menu> {
 	 *
 	 * @param menu menu
 	 * @return int
-	 * @author tangyi
-	 * @date 2018/8/27 16:22
 	 */
 	@Override
 	@Transactional
@@ -267,8 +262,6 @@ public class MenuService extends CrudService<MenuMapper, Menu> {
 	 *
 	 * @param menus menus
 	 * @return int
-	 * @author tangyi
-	 * @date 2019-09-03 12:19
 	 */
 	@Transactional
 	public int insertBatch(List<Menu> menus) {
@@ -280,9 +273,7 @@ public class MenuService extends CrudService<MenuMapper, Menu> {
 	 *
 	 * @param defaultMenus defaultMenus
 	 * @param tenantMenus  tenantMenus
-	 * @return List
-	 * @author tangyi
-	 * @date 2019-09-14 14:45
+	 * @return 菜单集合
 	 */
 	private List<Menu> mergeMenu(List<Menu> defaultMenus, List<Menu> tenantMenus) {
 		if (CollectionUtils.isEmpty(tenantMenus))
@@ -319,8 +310,6 @@ public class MenuService extends CrudService<MenuMapper, Menu> {
 	 * @param sysCode         sysCode
 	 * @param tenantCode      tenantCode
 	 * @return
-	 * @author tangyi
-	 * @date 2019-09-14 15:57
 	 */
 	@Transactional
 	public void updateRoleMenu(Long menuId, List<Long> childrenMenuIds, String userCode, String sysCode,
@@ -402,4 +391,5 @@ public class MenuService extends CrudService<MenuMapper, Menu> {
 		}
 		return new ArrayList<>();
 	}
+
 }

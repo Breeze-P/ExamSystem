@@ -19,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 
 /**
- * 验证码
+ * 验证码controller
  *
- * @author tangyi
- * @date 2018-09-14-19:24
+ * @author zdz
+ * @date 2022/04/16 14:08
  */
 @AllArgsConstructor
 @Api("生成验证码")
@@ -30,16 +30,21 @@ import java.awt.image.BufferedImage;
 @RequestMapping(value = "/v1/code")
 public class ValidateCodeController extends BaseController {
 
+    /**
+     * 验证码生成器
+     */
     private final Producer producer;
 
+    /**
+     * 用户service
+     */
     private final UserService userService;
 
     /**
-     * 生成验证码
+     * 生成验证码逻辑
      *
      * @param random random
-     * @author tangyi
-     * @date 2018/9/14 20:13
+     * @param response 响应
      */
     @ApiOperation(value = "生成验证码", notes = "生成验证码")
     @ApiImplicitParams({
@@ -47,6 +52,7 @@ public class ValidateCodeController extends BaseController {
     })
     @GetMapping("/{random}")
     public void produceCode(@PathVariable String random, HttpServletResponse response) throws Exception {
+        // 设置响应的消息头等信息
         response.setHeader("Cache-Control", "no-store, no-cache");
         response.setContentType("image/jpeg");
         // 生成文字验证码
@@ -58,4 +64,5 @@ public class ValidateCodeController extends BaseController {
 			ImageIO.write(image, "JPEG", out);
 		}
     }
+
 }

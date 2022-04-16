@@ -35,8 +35,8 @@ import java.util.stream.Stream;
 /**
  * 菜单controller
  *
- * @author tangyi
- * @date 2018/8/26 22:48
+ * @author zdz
+ * @date 2022/04/16 14:00
  */
 @Slf4j
 @AllArgsConstructor
@@ -74,8 +74,6 @@ public class MenuController extends BaseController {
      *
      * @param menu menu
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/8/27 16:12
      */
     @PostMapping
     @AdminTenantTeacherAuthorization
@@ -92,8 +90,6 @@ public class MenuController extends BaseController {
      *
      * @param menu menu
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/10/24 16:34
      */
     @PutMapping
     @AdminTenantTeacherAuthorization
@@ -110,8 +106,6 @@ public class MenuController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/8/27 16:19
      */
     @DeleteMapping("/{id}")
     @AdminTenantTeacherAuthorization
@@ -129,8 +123,6 @@ public class MenuController extends BaseController {
      *
      * @param id
      * @return Menu
-     * @author tangyi
-     * @date 2018/8/27 16:11
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "获取菜单信息", notes = "根据菜单id获取菜单详细信息")
@@ -148,8 +140,6 @@ public class MenuController extends BaseController {
      * @param order    order
      * @param menu     menu
      * @return PageInfo
-     * @author tangyi
-     * @date 2018/8/26 23:17
      */
     @GetMapping("menuList")
     @ApiOperation(value = "获取菜单列表")
@@ -176,8 +166,6 @@ public class MenuController extends BaseController {
      * @param role       角色标识
      * @param tenantCode 租户标识
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/8/27 15:58
      */
     @GetMapping("anonymousUser/findMenuByRole/{role}")
     @ApiOperation(value = "根据角色查找菜单", notes = "根据角色id获取角色菜单")
@@ -191,8 +179,6 @@ public class MenuController extends BaseController {
      *
      * @param tenantCode 租户标识
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/04/26 11:50
      */
     @GetMapping("anonymousUser/findAllMenu")
     @ApiOperation(value = "查询所有菜单", notes = "查询所有菜单")
@@ -225,8 +211,6 @@ public class MenuController extends BaseController {
      * 导出菜单
      *
      * @param ids ids
-     * @author tangyi
-     * @date 2018/11/28 12:46
      */
     @PostMapping("export")
     @AdminTenantTeacherAuthorization
@@ -256,8 +240,6 @@ public class MenuController extends BaseController {
      *
      * @param file file
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/11/28 12:51
      */
     @PostMapping("import")
     @AdminTenantTeacherAuthorization
@@ -266,10 +248,12 @@ public class MenuController extends BaseController {
     public ResponseBean<Boolean> importMenu(@ApiParam(value = "要上传的文件", required = true) MultipartFile file) {
         try {
             log.debug("Start import menu data");
-            return new ResponseBean<>(ExcelToolUtil.readExcel(file.getInputStream(), MenuExcelModel.class, new MenuImportListener(menuService)));
+            return new ResponseBean<>(ExcelToolUtil.readExcel(file.getInputStream(),
+                    MenuExcelModel.class, new MenuImportListener(menuService)));
         } catch (Exception e) {
             log.error("Import menu data failed", e);
         }
         return new ResponseBean<>(Boolean.FALSE);
     }
+
 }

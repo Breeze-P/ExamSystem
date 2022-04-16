@@ -6,10 +6,10 @@ import com.github.tangyi.user.api.module.User;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 用户mapper接口
+ * 用户 mapper
  *
- * @author tangyi
- * @date 2018-08-25 15:27
+ * @author zdz
+ * @date 2022/04/16 12:01
  */
 @Mapper
 public interface UserMapper extends CrudMapper<User> {
@@ -17,8 +17,9 @@ public interface UserMapper extends CrudMapper<User> {
     /**
      * 查询用户数量
      *
-     * @param userVo userVo
-     * @return Integer
+     * @param userVo 用户VO类
+     * @return 用户数量
      */
     Integer userCount(UserVo userVo);
+
 }

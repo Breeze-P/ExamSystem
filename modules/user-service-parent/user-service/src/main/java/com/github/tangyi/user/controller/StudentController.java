@@ -27,8 +27,8 @@ import java.util.Optional;
 /**
  * 学生管理Controller
  *
- * @author tangyi
- * @date 2019/07/09 15:29
+ * @author zdz
+ * @date 2022/04/16 14:03
  */
 @Slf4j
 @AllArgsConstructor
@@ -37,6 +37,9 @@ import java.util.Optional;
 @RequestMapping("/v1/students")
 public class StudentController extends BaseController {
 
+    /**
+     * 学生service
+     */
     private final StudentService studentService;
 
     /**
@@ -44,8 +47,6 @@ public class StudentController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/07/09 15:30
      */
     @ApiOperation(value = "获取学生信息", notes = "根据学生id获取学生详细信息")
     @ApiImplicitParam(name = "id", value = "学生ID", required = true, dataType = "Long", paramType = "path")
@@ -63,8 +64,6 @@ public class StudentController extends BaseController {
      * @param order      order
      * @param studentDto studentDto
      * @return PageInfo
-     * @author tangyi
-     * @date 2019/07/09 15:31
      */
     @GetMapping("studentList")
     @ApiOperation(value = "获取学生列表")
@@ -91,8 +90,6 @@ public class StudentController extends BaseController {
      *
      * @param studentDto studentDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/07/09 15:31
      */
     @PostMapping
     @ApiOperation(value = "新增学生", notes = "新增学生")
@@ -107,8 +104,6 @@ public class StudentController extends BaseController {
      *
      * @param studentDto studentDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/07/09 15:32
      */
     @PutMapping
     @ApiOperation(value = "更新学生信息", notes = "根据学生id更新学生的基本信息")
@@ -132,8 +127,6 @@ public class StudentController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/07/09 15:33
      */
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除学生", notes = "根据ID删除学生")
@@ -155,8 +148,6 @@ public class StudentController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/07/09 15:34
      */
     @PostMapping("deleteAll")
     @ApiOperation(value = "批量删除学生", notes = "根据学生id批量删除学生")
@@ -178,8 +169,6 @@ public class StudentController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/07/09 15:34
      */
     @RequestMapping(value = "findById", method = RequestMethod.POST)
     @ApiOperation(value = "根据ID查询学生", notes = "根据ID查询学生")
@@ -188,4 +177,5 @@ public class StudentController extends BaseController {
         List<Student> studentList = studentService.findListById(ids);
         return Optional.ofNullable(studentList).isPresent() ? new ResponseBean<>(studentList) : null;
     }
+
 }

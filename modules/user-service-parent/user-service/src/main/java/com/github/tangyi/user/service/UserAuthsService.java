@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 用户授权Service
+ * 用户授权信息关联service
  *
- * @author tangyi
- * @date 2019/07/03 11:45
+ * @author zdz
+ * @date 2022/04/16 13:50
  */
 @AllArgsConstructor
 @Slf4j
@@ -25,10 +25,8 @@ public class UserAuthsService extends CrudService<UserAuthsMapper, UserAuths> {
     /**
      * 根据唯一标识查询
      *
-     * @param userAuths userAuths
-     * @return UserAuths
-     * @author tangyi
-     * @date 2019/07/03 11:52:27
+     * @param userAuths 用户授权信息关联列表
+     * @return 用户授权信息关联
      */
     public UserAuths getByIdentifier(UserAuths userAuths) {
         return this.dao.getByIdentifier(userAuths);
@@ -37,10 +35,8 @@ public class UserAuthsService extends CrudService<UserAuthsMapper, UserAuths> {
     /**
      * 根据用户批量查询用户权限
      *
-     * @param userList userList
-     * @return List
-     * @author tangyi
-     * @date 2019/07/03 21:58:31
+     * @param userList 用户列表
+     * @return 用户授权信息关联列表
      */
     public List<UserAuths> getListByUsers(List<User> userList) {
         return this.dao.getListByUserIds(userList.stream().map(User::getId).distinct().toArray(Long[]::new));
@@ -50,9 +46,7 @@ public class UserAuthsService extends CrudService<UserAuthsMapper, UserAuths> {
      * 根据唯一标识删除
      *
      * @param userAuths userAuths
-     * @return int
-     * @author tangyi
-     * @date 2019/07/04 11:39:50
+     * @return 是否操作成功
      */
     @Transactional
     public int deleteByIdentifier(UserAuths userAuths) {
@@ -63,9 +57,7 @@ public class UserAuthsService extends CrudService<UserAuthsMapper, UserAuths> {
      * 根据用户ID删除
      *
      * @param userAuths userAuths
-     * @return int
-     * @author tangyi
-     * @date 2019/07/04 11:42:50
+     * @return 是否操作成功
      */
     @Transactional
     public int deleteByUserId(UserAuths userAuths) {
@@ -76,9 +68,7 @@ public class UserAuthsService extends CrudService<UserAuthsMapper, UserAuths> {
      * 批量插入
      *
      * @param userAuths userAuths
-     * @return int
-     * @author tangyi
-     * @date 2019-09-03 13:07
+     * @return 是否操作成功
      */
     @Transactional
     public int insertBatch(List<UserAuths> userAuths) {

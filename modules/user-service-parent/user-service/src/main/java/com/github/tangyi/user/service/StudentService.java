@@ -17,36 +17,43 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 学生Service
  *
- * @author tangyi
- * @date 2019/07/09 15:28
+ * @author zdz
+ * @date 2022/04/16 12:16
  */
 @AllArgsConstructor
 @Service
 public class StudentService extends CrudService<StudentMapper, Student> {
 
+    /**
+     * 用户service
+     */
     private final UserService userService;
 
+    /**
+     * 用户学生关联service
+     */
     private final UserStudentService userStudentService;
 
     /**
      * 新增学生
      *
-     * @param studentDto studentDto
-     * @return int
-     * @author tangyi
-     * @date 2019/07/10 18:18:04
+     * @param studentDto 学生数据传输对象实例
+     * @return 是否添加成功
      */
     @Transactional
     public int add(StudentDto studentDto) {
-        String currentUser = SysUtil.getUser(), tenantCode = SysUtil.getTenantCode();
+        String currentUser = SysUtil.getUser();
+        String tenantCode = SysUtil.getTenantCode();
         Long userId = studentDto.getUserId();
+        // 查询当前用户
         if (userId != null) {
-            // 查询当前用户
             UserVo userVo = userService.findUserByIdentifier(currentUser, tenantCode);
-            if (userVo == null)
+            if (userVo == null) {
                 throw new CommonException("Get user info failed");
+            }
             userId = userVo.getId();
         }
+        // 将学生DTO内信息赋值给学生实例
         Student student = new Student();
         BeanUtils.copyProperties(studentDto, student);
         student.setCommonValue(currentUser, SysUtil.getSysCode(), tenantCode);
@@ -55,11 +62,13 @@ public class StudentService extends CrudService<StudentMapper, Student> {
         userStudent.setCommonValue(currentUser, SysUtil.getSysCode(), tenantCode);
         userStudent.setUserId(userId);
         userStudent.setStudentId(student.getId());
-        // 默认关系类型是爸爸
-        if (studentDto.getRelationshipType() == null)
+        // 默认关系是父子关系
+        if (studentDto.getRelationshipType() == null) {
             userStudent.setRelationshipType(UserStudentConstant.RELATIONSHIP_TYPE_FATHER);
+        }
+        // 保存新增的学生
         userStudentService.insert(userStudent);
-        // 保存学生
         return this.insert(student);
     }
+
 }

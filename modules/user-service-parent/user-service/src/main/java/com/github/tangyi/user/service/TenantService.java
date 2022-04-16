@@ -16,24 +16,39 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 租户Service
+ * 租户service
  *
- * @author tangyi
- * @date 2019/5/22 22:51
+ * @author zdz
+ * @date 2022/04/16 13:48
  */
 @Slf4j
 @AllArgsConstructor
 @Service
 public class TenantService extends CrudService<TenantMapper, Tenant> {
 
+    /**
+     * 用户service
+     */
     private final UserService userService;
 
+    /**
+     * 用户授权信息关联service
+     */
     private final UserAuthsService userAuthsService;
 
+    /**
+     * 用户角色关联service
+     */
     private final UserRoleService userRoleService;
 
+    /**
+     * 角色service
+     */
     private final RoleService roleService;
 
+    /**
+     * 菜单service
+     */
     private final MenuService menuService;
 
     /**
@@ -41,8 +56,6 @@ public class TenantService extends CrudService<TenantMapper, Tenant> {
      *
      * @param tenantCode tenantCode
      * @return Tenant
-     * @author tangyi
-     * @date 2019/05/26 10:28
      */
     @Cacheable(value = "tenant#" + CommonConstant.CACHE_EXPIRE, key = "#tenantCode")
     public Tenant getByTenantCode(String tenantCode) {
@@ -52,10 +65,8 @@ public class TenantService extends CrudService<TenantMapper, Tenant> {
     /**
      * 新增租户，自动初始化租户管理员账号
      *
-     * @param tenant tenant
-     * @return int
-     * @author tangyi
-     * @date 2019-09-02 11:41
+     * @param tenant 租户信息
+     * @return 是否添加成功
      */
     @Transactional
     @CacheEvict(value = "tenant", key = "#tenant.tenantCode")
@@ -64,12 +75,10 @@ public class TenantService extends CrudService<TenantMapper, Tenant> {
     }
 
     /**
-     * 更新
+     * 更新租户信息
      *
-     * @param tenant tenant
-     * @return Tenant
-     * @author tangyi
-     * @date 2019/05/26 10:28
+     * @param tenant 租户信息
+     * @return 是否更新成功
      */
     @Transactional
     @CacheEvict(value = "tenant", key = "#tenant.tenantCode")
@@ -108,12 +117,10 @@ public class TenantService extends CrudService<TenantMapper, Tenant> {
     }
 
     /**
-     * 删除
+     * 删除租户
      *
-     * @param tenant tenant
-     * @return Tenant
-     * @author tangyi
-     * @date 2019/05/26 10:28
+     * @param tenant 需要删除的租户信息
+     * @return 是否删除成功
      */
     @Transactional
     @CacheEvict(value = "tenant", key = "#tenant.tenantCode")
@@ -124,18 +131,15 @@ public class TenantService extends CrudService<TenantMapper, Tenant> {
         menu.setTenantCode(tenant.getTenantCode());
         menuService.deleteByTenantCode(menu);
         // TODO 删除用户
-
         // TODO 删除权限
         return super.delete(tenant);
     }
 
     /**
-     * 删除
+     * 批量删除
      *
-     * @param ids ids
-     * @return Tenant
-     * @author tangyi
-     * @date 2019/05/26 10:37
+     * @param ids IDs
+     * @return 是否删除成功
      */
     @Transactional
     @CacheEvict(value = "tenant", allEntries = true)
@@ -146,11 +150,11 @@ public class TenantService extends CrudService<TenantMapper, Tenant> {
 
     /**
      * 查询单位数量
-     * @return Integer
-     * @author tangyi
-     * @date 2019/12/18 5:09 下午
+     *
+     * @return 租户数量
      */
-	public Integer tenantCount() {
-		return this.dao.tenantCount();
-	}
+    public Integer tenantCount() {
+        return this.dao.tenantCount();
+    }
+
 }

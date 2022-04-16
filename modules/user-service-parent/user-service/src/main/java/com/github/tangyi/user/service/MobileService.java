@@ -18,31 +18,34 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 手机管理Service
+ * 手机管理service
  *
- * @author tangyi
- * @date 2019/07/02 09:35
+ * @author zdz
+ * @date 2022/04/16 13:41
  */
 @Slf4j
 @AllArgsConstructor
 @Service
 public class MobileService {
 
+    /**
+     * Redis template
+     */
     private final RedisTemplate redisTemplate;
 
+    /**
+     * Msc service客户端
+     */
     private final MscServiceClient mscServiceClient;
 
     /**
      * 发送短信
      *
-     * @param mobile     mobile
-     * @return ResponseBean
-     * @author tangyi
-     * @date 2019/07/02 09:36:52
+     * @param mobile 手机号码
+     * @return 包含操作处理结果的响应Bean
      */
     public ResponseBean<Boolean> sendSms(String mobile) {
         String key = CommonConstant.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + "@" + mobile;
-        // TODO 校验时间
         String code = RandomUtil.randomNumbers(Integer.parseInt(CommonConstant.CODE_SIZE));
         log.debug("Generate validate code success: {}, {}", mobile, code);
         redisTemplate.opsForValue().set(key, code, SecurityConstant.DEFAULT_SMS_EXPIRE, TimeUnit.SECONDS);
@@ -50,10 +53,13 @@ public class MobileService {
         SmsDto smsDto = new SmsDto();
         smsDto.setReceiver(mobile);
         smsDto.setContent(String.format(SmsConstant.SMS_TEMPLATE, code));
+        // 发送短信验证码
         ResponseBean<?> result = mscServiceClient.sendSms(smsDto);
-        if (!ResponseUtil.isSuccess(result))
+        if (!ResponseUtil.isSuccess(result)) {
             throw new ServiceException("Send validate code error: " + result.getMsg());
+        }
         log.info("Send validate result: {}", result.getData());
         return new ResponseBean<>(Boolean.TRUE, code);
     }
+
 }

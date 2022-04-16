@@ -26,8 +26,8 @@ import java.util.stream.Stream;
 /**
  * 部门controller
  *
- * @author tangyi
- * @date 2018/8/26 0026 22:49
+ * @author zdz
+ * @date 2022/04/16 13:58
  */
 @AllArgsConstructor
 @Api("部门信息管理")
@@ -35,14 +35,15 @@ import java.util.stream.Stream;
 @RequestMapping("/v1/dept")
 public class DeptController extends BaseController {
 
+    /**
+     * 部门service
+     */
     private final DeptService deptService;
 
     /**
      * 查询树形部门集合
      *
      * @return List
-     * @author tangyi
-     * @date 2018/10/25 12:57
      */
     @GetMapping(value = "depts")
     @ApiOperation(value = "获取部门列表")
@@ -55,8 +56,6 @@ public class DeptController extends BaseController {
      *
      * @param id id
      * @return Dept
-     * @author tangyi
-     * @date 2018/8/28 10:11
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "获取部门信息", notes = "根据部门id获取部门详细信息")
@@ -70,8 +69,6 @@ public class DeptController extends BaseController {
      *
      * @param dept dept
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/8/28 10:15
      */
     @PostMapping
     @AdminTenantTeacherAuthorization
@@ -88,8 +85,6 @@ public class DeptController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/8/28 10:16
      */
     @DeleteMapping("/{id}")
     @AdminTenantTeacherAuthorization
@@ -108,8 +103,6 @@ public class DeptController extends BaseController {
      *
      * @param dept dept
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/8/28 10:22
      */
     @PutMapping
     @AdminTenantTeacherAuthorization
@@ -126,8 +119,6 @@ public class DeptController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2018/12/31 22:13
      */
     @RequestMapping(value = "findById", method = RequestMethod.POST)
     @ApiOperation(value = "批量查询部门信息", notes = "根据Ids批量查询信息")
@@ -145,4 +136,5 @@ public class DeptController extends BaseController {
         }
         return returnT;
     }
+
 }

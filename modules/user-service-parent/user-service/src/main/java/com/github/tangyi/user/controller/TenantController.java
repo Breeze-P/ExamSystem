@@ -26,8 +26,8 @@ import java.util.Optional;
 /**
  * 租户管理Controller
  *
- * @author tangyi
- * @date 2019/5/22 22:52
+ * @author zdz
+ * @date 2022/04/16 14:06
  */
 @Slf4j
 @AllArgsConstructor
@@ -36,6 +36,9 @@ import java.util.Optional;
 @RequestMapping("/v1/tenant")
 public class TenantController extends BaseController {
 
+    /**
+     * 租户service
+     */
     private final TenantService tenantService;
 
     /**
@@ -43,8 +46,6 @@ public class TenantController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/05/22 22:53
      */
     @ApiOperation(value = "获取租户信息", notes = "根据租户id获取租户详细信息")
     @ApiImplicitParam(name = "id", value = "租户ID", required = true, dataType = "Long", paramType = "path")
@@ -58,8 +59,6 @@ public class TenantController extends BaseController {
      *
      * @param tenantCode tenantCode
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/05/26 10:23
      */
     @GetMapping("anonymousUser/findTenantByTenantCode/{tenantCode}")
     public ResponseBean<Tenant> findTenantByTenantCode(@PathVariable String tenantCode) {
@@ -75,8 +74,6 @@ public class TenantController extends BaseController {
      * @param order    order
      * @param tenant   tenant
      * @return PageInfo
-     * @author tangyi
-     * @date 2019/05/22 23:29
      */
     @GetMapping("tenantList")
     @ApiOperation(value = "获取租户列表")
@@ -100,8 +97,6 @@ public class TenantController extends BaseController {
      *
      * @param tenant tenant
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/05/22 23:32
      */
     @PostMapping
     @ApiOperation(value = "创建租户", notes = "创建租户")
@@ -120,8 +115,6 @@ public class TenantController extends BaseController {
      *
      * @param tenant tenant
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/05/22 23:33
      */
     @PutMapping
     @ApiOperation(value = "更新租户信息", notes = "根据租户id更新租户的基本信息")
@@ -141,8 +134,6 @@ public class TenantController extends BaseController {
      *
      * @param id id
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/05/22 23:35
      */
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除租户", notes = "根据ID删除租户")
@@ -164,8 +155,6 @@ public class TenantController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/05/22 23:37
      */
     @PostMapping("deleteAll")
     @ApiOperation(value = "批量删除租户", notes = "根据租户id批量删除租户")
@@ -174,8 +163,9 @@ public class TenantController extends BaseController {
     public ResponseBean<Boolean> deleteAll(@RequestBody Long[] ids) {
         boolean success = false;
         try {
-            if (ArrayUtils.isNotEmpty(ids))
+            if (ArrayUtils.isNotEmpty(ids)) {
                 success = tenantService.deleteAll(ids) > 0;
+            }
         } catch (Exception e) {
             log.error("Delete tenant failed", e);
         }
@@ -187,8 +177,6 @@ public class TenantController extends BaseController {
      *
      * @param ids ids
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/05/22 23:38
      */
     @RequestMapping(value = "findById", method = RequestMethod.POST)
     @ApiOperation(value = "根据ID查询租户", notes = "根据ID查询租户")
@@ -197,4 +185,5 @@ public class TenantController extends BaseController {
         List<Tenant> tenantList = tenantService.findListById(ids);
         return Optional.ofNullable(tenantList).isPresent() ? new ResponseBean<>(tenantList) : null;
     }
+
 }

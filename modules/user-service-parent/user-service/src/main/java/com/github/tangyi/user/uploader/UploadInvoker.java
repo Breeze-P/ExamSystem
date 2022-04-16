@@ -14,22 +14,42 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author tangyi
- * @date 2020/04/05 14:16
+ * 上传操作invoker
+ *
+ * @author zdz
+ * @date 2022/04/16 11:44
  */
 @Slf4j
 public class UploadInvoker {
 
-    private Map<Integer, IUploader> uploaderMap = null;
-
+    /**
+     * uploadInvoker单例实例
+     */
     private static UploadInvoker instance;
 
+    /**
+     * 上传器map
+     */
+    private Map<Integer, IUploader> uploaderMap = null;
+
+    /**
+     * 附件service类
+     */
     private AttachmentService attachmentService;
 
+    /**
+     * 构造器
+     * @param attachmentService 附件service类
+     */
     public UploadInvoker(AttachmentService attachmentService) {
         this.attachmentService = attachmentService;
     }
 
+    /**
+     * 单例，获取uploadInvoker单例实例
+     *
+     * @return uploadInvoker单例实例
+     */
     public synchronized static UploadInvoker getInstance() {
         if (instance == null) {
             instance = new UploadInvoker(SpringContextHolder.getApplicationContext().getBean(AttachmentService.class));
@@ -40,15 +60,15 @@ public class UploadInvoker {
     /**
      * 上传附件
      *
-     * @param attachment attachment
-     * @param bytes      bytes
-     * @return Attachment
-     * @author tangyi
-     * @date 2020/04/05 14:27
+     * @param attachment 需要上传的附件信息
+     * @param bytes      buffer
+     * @return 附件信息
      */
     public Attachment upload(Attachment attachment, byte[] bytes) {
-        if (attachment == null || bytes == null)
+        if (attachment == null || bytes == null) {
             return null;
+        }
+        // 设置附件的上传类型
         if (attachment.getUploadType() == null) {
             String uploadType = SpringContextHolder.getApplicationContext().getBean(SysProperties.class).getAttachUploadType();
             if (StringUtils.isNotBlank(uploadType)) {
@@ -56,8 +76,11 @@ public class UploadInvoker {
             }
         }
         IUploader uploader = this.getUploader(attachment.getUploadType());
-        if (uploader == null)
+        // 若没有对应的上传器，则抛出异常
+        if (uploader == null) {
             throw new CommonException("uploader is null");
+        }
+        // 上传附件
         attachment = uploader.upload(attachment, bytes);
         if (attachment != null) {
             uploader.save(attachment);
@@ -70,8 +93,6 @@ public class UploadInvoker {
      *
      * @param attachment attachment
      * @return Attachment
-     * @author tangyi
-     * @date 2020/04/05 14:29
      */
     public InputStream download(Attachment attachment) {
         if (attachment == null)
@@ -87,8 +108,6 @@ public class UploadInvoker {
      *
      * @param attachment attachment
      * @return Attachment
-     * @author tangyi
-     * @date 2020/04/05 14:29
      */
     public boolean delete(Attachment attachment) {
         if (attachment == null)
@@ -104,8 +123,6 @@ public class UploadInvoker {
      *
      * @param ids ids
      * @return Attachment
-     * @author tangyi
-     * @date 2020/04/05 15:03
      */
     public boolean deleteAll(Long[] ids) {
         boolean result = false;
@@ -129,8 +146,6 @@ public class UploadInvoker {
      *
      * @param uploadType uploadType
      * @return IUploader
-     * @author tangyi
-     * @date 2020/04/05 14:17
      */
     private IUploader getUploader(Integer uploadType) {
         IUploader uploader;
@@ -152,4 +167,5 @@ public class UploadInvoker {
         }
         return uploader;
     }
+
 }

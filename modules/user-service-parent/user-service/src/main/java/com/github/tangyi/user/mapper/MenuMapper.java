@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * 菜单mapper
  *
- * @author tangyi
- * @date 2018/8/26 22:34
+ * @author zdz
+ * @date 2022/04/16 11:59
  */
 @Mapper
 public interface MenuMapper extends CrudMapper<Menu> {
@@ -21,22 +21,24 @@ public interface MenuMapper extends CrudMapper<Menu> {
      *
      * @param role       角色标识
      * @param tenantCode 租户标识
-     * @return List
+     * @return 菜单列表
      */
     List<Menu> findByRole(@Param("role") String role, @Param("tenantCode") String tenantCode);
 
     /**
      * 批量插入
      *
-     * @param menus menus
-     * @return int
+     * @param menus 菜单列表
+     * @return 是否插入成功
      */
     int insertBatch(List<Menu> menus);
 
     /**
      * 根据租户code删除
-     * @param menu menu
-     * @return int
+     *
+     * @param menu 菜单
+     * @return 是否删除成功
      */
     int deleteByTenantCode(Menu menu);
+
 }
