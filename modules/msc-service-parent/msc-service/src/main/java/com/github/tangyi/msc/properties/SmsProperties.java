@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 短信相关配置
  *
- * @author tangyi
- * @date 2019/6/22 13:31
+ * @author zdz
+ * @date 2022/04/16 14:56
  */
 @Data
 @Configuration
@@ -58,4 +58,5 @@ public class SmsProperties {
      * action
      */
     private String action;
+
 }

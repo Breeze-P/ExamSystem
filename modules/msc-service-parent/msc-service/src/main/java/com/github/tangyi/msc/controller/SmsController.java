@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 发送短信接口
  *
- * @author tangyi
- * @date 2019/6/22 12:59
+ * @author zdz
+ * @date 2022/04/16 14:56
  */
 @Slf4j
 @AllArgsConstructor
@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/v1/sms")
 public class SmsController extends BaseController {
 
+    /**
+     * 短信service
+     */
     private final SmsService smsService;
 
     /**
@@ -34,8 +37,6 @@ public class SmsController extends BaseController {
      *
      * @param smsDto smsDto
      * @return ResponseBean
-     * @author tangyi
-     * @date 2019/06/22 13:12
      */
     @PostMapping("sendSms")
     public ResponseBean<SmsResponse> sendSms(@RequestBody SmsDto smsDto) {
@@ -44,4 +45,5 @@ public class SmsController extends BaseController {
         log.info("Send message success, response: {}", smsResponse);
         return new ResponseBean<>(smsResponse);
     }
+
 }
