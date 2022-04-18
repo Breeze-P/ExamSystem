@@ -33,6 +33,8 @@
 <script>
 import { courseList } from '@/api/exam/course'
 import { messageWarn, notifyFail } from '@/utils/util'
+import user from '@/store/modules/user.js'
+import roleList from '@/const/roles.js'
 
 export default {
   data () {
