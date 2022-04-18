@@ -1,7 +1,6 @@
 <h1 align="center">Welcome to HelloTeam Exam System 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-3.7.0-blue.svg?cacheSeconds=2592000" />
-  <a href="需求规格说明书.doc" target="_blank">
+<a href="https://github.com/Breeze-P/ExamSystem/tree/main/需求规格说明书.doc" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="#" target="_blank">
@@ -16,10 +15,6 @@
 > 支持PC、H5
 
 ### 🏠 [主页](https://github.com/Breeze-P/ExamSystem)
-
-### ✨ [在线体验-前台](http://two.404forever.com/#/home)
-
-### ✨ [在线体验-后台](http://two.404forever.com/#/home:81)
 
 测试账号：
 
@@ -59,7 +54,7 @@
 
 ## 系统架构
 
-![image](https://github.com/Breeze-P/ExamSystem/docs/images/系统架构图v3.0.png)
+![image](/docs/images/系统架构图v3.0.png)
 
 ## 功能概述
 
@@ -107,19 +102,19 @@
 <table>
 	<tr>
 	    <td><img src="docs/images/image_web.png" alt="首页"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_web_home.png" alt="首页"/></td>
+        <td><img src="docs/images/image_web_home.png" alt="首页"/></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_web_exams.png" alt="考试列表"/></td>
+        <td><img src="docs/images/image_web_exams.png" alt="考试列表"/></td>
         <td><img src="docs/images/image_web_exam.png" alt="考试"/></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_web_record.png" alt="考试记录"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_web_incorrect_answer.png" alt="错题列表"/></td>
+        <td><img src="docs/images/image_web_record.png" alt="考试记录"/></td>
+        <td><img src="docs/images/image_web_incorrect_answer.png" alt="错题列表"/></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_web_courses.png" alt="热门课程"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_web_login.png" alt="登录"/></td>
+        <td><img src="docs/images/image_web_courses.png" alt="热门课程"/></td>
+        <td><img src="docs/images/image_web_login.png" alt="登录"/></td>
     </tr>
 </table>
 
@@ -127,28 +122,28 @@
 
 <table>
 	<tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_login.png" alt="登录"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_exam.png" alt="首页"/></td>
+        <td><img src="docs/images/image_ui_login.png" alt="登录"/></td>
+        <td><img src="docs/images/image_ui_exam.png" alt="首页"/></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_menu.png" alt="菜单"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_menu_manage.png" alt="菜单管理"/></td>
+        <td><img src="docs/images/image_ui_menu.png" alt="菜单"/></td>
+        <td><img src="docs/images/image_ui_menu_manage.png" alt="菜单管理"/></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_role_manage.png" alt="角色管理"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_route_manage.png" alt="路由管理"/></td>
+        <td><img src="docs/images/image_ui_role_manage.png" alt="角色管理"/></td>
+        <td><img src="docs/images/image_ui_route_manage.png" alt="路由管理"/></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_subjects_manage.png" alt="题库管理"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_subjects_rich_edit.png" alt="题目编辑"/></td>
+        <td><img src="docs/images/image_ui_subjects_manage.png" alt="题库管理"/></td>
+        <td><img src="docs/images/image_ui_subjects_rich_edit.png" alt="题目编辑"/></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_score_manage.png" alt="成绩管理"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_score_detail.png" alt="成绩详情"/></td>
+        <td><img src="docs/images/image_ui_score_manage.png" alt="成绩管理"/></td>
+        <td><img src="docs/images/image_ui_score_detail.png" alt="成绩详情"/></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_log_manage.png" alt="日志监控"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_consul.png" alt="consul监控"/></td>
+        <td><img src="docs/images/image_ui_log_manage.png" alt="日志监控"/></td>
+        <td><img src="docs/images/image_ui_consul.png" alt="consul监控"/></td>
     </tr>
 </table>
 
@@ -156,24 +151,24 @@
 
 <table>
 	<tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_spring_boot_admin.png" alt="服务监控"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_spring_boot_admin01.png" alt="服务监控"/></td>
+        <td><img src="docs/images/image_ui_spring_boot_admin.png" alt="服务监控"/></td>
+        <td><img src="docs/images/image_ui_spring_boot_admin01.png" alt="服务监控"/></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_swagger.png" alt="swagger文档"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_elk.png" alt="elk日志"/></td>
+        <td><img src="docs/images/image_ui_swagger.png" alt="swagger文档"/></td>
+        <td><img src="docs/images/image_ui_elk.png" alt="elk日志"/></td>
     </tr>
     <tr>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_zipkin1.png" alt="zipkin"/></td>
-        <td><img src="https://github.com/Breeze-P/ExamSystem/docs/images/image_ui_zipkin2.png" alt="zipkin"/></td>
+        <td><img src="docs/images/image_ui_zipkin1.png" alt="zipkin"/></td>
+        <td><img src="docs/images/image_ui_zipkin2.png" alt="zipkin"/></td>
     </tr>
 </table>
 
 ## 部署文档
 
-- [后端部署](docs/deploy/HelloTeam考试系统-本地部署（后端）.pdf)
+- [后端部署](https://github.com/Breeze-P/ExamSystem/tree/main/docs/deploy/HelloTeam考试系统-本地部署（后端）.pdf)
 
-- [前端部署](docs/deploy/HelloTeam考试系统-本地部署教程（前端）.pdf)
+- [前端部署](https://github.com/Breeze-P/ExamSystem/tree/main/docs/deploy/HelloTeam考试系统-本地部署教程（前端）.pdf)
 
 ## 作者
 
