@@ -2,7 +2,7 @@
   <div class="menu-wrapper">
     <div style="background-color: #282828;">
       <div class="logo">
-        <span>sg-</span>admin<div class="el-form--inline"></div>
+        <span>HelloTeam</span><div class="el-form--inline">admin</div>
       </div>
     </div>
     <template v-for="(item, index) in menu">
@@ -50,10 +50,17 @@ export default {
       return path == null ? index + '' : path
     },
     open (item) {
-      this.$router.push({
-        path: resolveUrlPath(item.path, item.label),
-        query: item.query
-      })
+      if (item.label === '首页') {
+        this.$router.push({
+          path: '/dashboard',
+          query: item.query
+        })
+      } else {
+        this.$router.push({
+          path: resolveUrlPath(item.path, item.label),
+          query: item.query
+        })
+      }
     }
   }
 }

@@ -18,7 +18,7 @@
             <el-form-item prop="password">
               <el-input :placeholder="$t('login.credential')" :type="passwordType" v-model="loginForm.credential" name="credential" auto-complete="on" @keyup.enter.native="handleLogin"/>
             </el-form-item>
-            <!-- <el-form-item prop="code">
+            <el-form-item prop="code">
               <el-row>
                 <el-col :span="14">
                   <el-input :maxlength="code.len" v-model="loginForm.code" size="small" auto-complete="off" placeholder="请输入验证码" @keyup.enter.native="handleLogin" />
@@ -30,7 +30,7 @@
                   </div>
                 </el-col>
               </el-row>
-            </el-form-item> -->
+            </el-form-item>
             <el-form-item>
               <el-button class="login-btn" type="primary" :loading="loading" @click.native.prevent="handleLogin"> {{ $t('login.logIn') }}</el-button>
             </el-form-item>
@@ -53,7 +53,7 @@ export default {
   data () {
     return {
       loginForm: {
-        tenantCode: 'helloteam',
+        tenantCode: 'gitee',
         identifier: 'preview',
         credential: '123456',
         code: '',

@@ -17,7 +17,7 @@
           </el-switch>
         </div>
 
-        <a class="animated fadeIn hi">{{ tip }},{{ userInfo.name }}</a>
+        <a class="animated fadeIn hi">{{ tip }} , {{ userInfo.name }}</a>
 
         <el-tooltip :content="$t('navbar.lock')" effect="dark" placement="bottom">
           <lock class="lock right-menu-item"/>
@@ -27,13 +27,6 @@
           <screenfull class="screenfull right-menu-item"/>
         </el-tooltip>
 
-        <el-tooltip :content="$t('navbar.size')" effect="dark" placement="bottom">
-          <size-select class="international right-menu-item"/>
-        </el-tooltip>
-
-        <el-tooltip :content="$t('navbar.theme')" effect="dark" placement="bottom">
-          <theme-picker class="theme-switch right-menu-item"/>
-        </el-tooltip>
       </template>
 
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
