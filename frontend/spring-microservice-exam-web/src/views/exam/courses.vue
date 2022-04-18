@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="clever-category bg-img" style="background-image: url(static/img/bg-img/bg2.jpg);">
-      <h3>艺术 & 设计</h3>
+    <div class="clever-category bg-img" style="background: #90acd0;">
+      <h3 v-if="userInfo.roles[0] === roleList.TEACHER">我教的课</h3>
+      <h3 v-else>我上的课</h3>
     </div>
     <div class="content-container">
       <div class="course-card-list">
         <transition name="fade-transform" mode="out-in" v-for="course in courseList" :key="course.id">
-          <div class="single-popular-course mb-80" v-show="course.show">
-            <img :src="course.logoUrl" alt="">
+          <div class="single-popular-course mb-80" v-show="course.show" @click="handleStartCourse(course)">
             <div class="course-content">
               <h4>{{ course.courseName }}</h4>
               <div class="meta d-flex align-items-center">
@@ -16,19 +16,6 @@
                 <a href="#">{{ course.teacher }}</a>
               </div>
               <p>{{ course.courseDescription }}</p>
-            </div>
-            <div class="seat-rating-fee d-flex justify-content-between">
-              <div class="seat-rating h-100 d-flex align-items-center">
-                <div class="seat">
-                  <i class="el-icon-user-solid" aria-hidden="true"></i> 10
-                </div>
-                <div class="rating">
-                  <i class="el-icon-star-on" aria-hidden="true"></i> 4.5
-                </div>
-              </div>
-              <div class="course-fee h-100">
-                <a href="#" @click="handleStartCourse(course)">免费</a>
-              </div>
             </div>
           </div>
         </transition>
@@ -61,7 +48,9 @@ export default {
         courseName: '',
         status: 0
       },
-      courseList: []
+      courseList: [],
+      userInfo: user.state.userInfo,
+      roleList: roleList
     }
   },
   created () {
@@ -73,6 +62,7 @@ export default {
       this.loading = true
       courseList(this.query).then(response => {
         const { total, isLastPage, list } = response.data
+        console.log(response.data)
         this.updateCourseList(list)
         this.total = total
         this.isLastPage = isLastPage

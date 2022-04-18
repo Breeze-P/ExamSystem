@@ -1,37 +1,9 @@
 <template>
   <div class="content-container">
-    <!-- 搜索框 -->
-    <div class="search-form">
-      <el-form ref="examForm" :inline="true" :model="query" label-width="100px" class="examForm">
-        <el-form-item label="考试名称" prop="examinationName">
-          <el-input v-model="query.examinationName" autocomplete="off" placeholder="考试名称" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('examForm')">搜索</el-button>
-          <el-button @click="resetForm('examForm')">重置</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
-
-    <!-- 分类 -->
-    <div class="category-list">
-      <ul>
-        <li :class="activeTag === '1' ? 'active' : ''" @click="changeTag('1')">全部</li>
-        <li :class="activeTag === '2' ? 'active' : ''" @click="changeTag('2')">最新发布</li>
-        <li :class="activeTag === '3' ? 'active' : ''" @click="changeTag('3')">最多点击</li>
-        <li :class="activeTag === '4' ? 'active' : ''" @click="changeTag('4')">参数人数</li>
-      </ul>
-    </div>
-    <!-- 考试卡片列表 -->
+    <h1 :style="`margin: 30px`">考试中心</h1>
     <div class="exam-card-list">
       <transition name="fade-transform" mode="out-in" v-for="exam in examList" :key="exam.id">
-        <div class="card-item" v-show="exam.show">
-          <div>
-            <a href="javascript: void(-1);" class="card-item-snapshoot"
-               :style="'background-image: url(' + exam.logoUrl + ');'"
-               @click="startExam(exam)">
-            </a>
-          </div>
+        <div style="cursor: pointer" class="card-item" v-show="exam.show" @click="startExam(exam)">
           <div class="card-item-detail">
             <div>
               <a href="javascript:void(-1);" @click="startExam(exam)"></a>
@@ -43,10 +15,10 @@
             </div>
             <div class="card-item-course" v-if="exam.course !== undefined && exam.course !== null">
               <div class="card-item-course-detail mb-12">
-                <a href="#">{{ exam.course.courseName }}</a>
+                <span @click.stop="handleComeIntoCourse(exam.course.id)">{{ exam.course.courseName }}</span>
               </div>
               <div class="card-item-course-detail mb-12">
-                <a href="#">{{ exam.startTime | timeFilter }}~{{ exam.endTime | timeFilter }}</a>
+                <span>{{ exam.startTime | timeFilter }}~{{ exam.endTime | timeFilter }}</span>
               </div>
             </div>
           </div>
@@ -266,6 +238,9 @@ export default {
           list[i].show = true
         }, 250 + (100 * i))
       }
+    },
+    handleComeIntoCourse (id) {
+      this.$router.push({name: 'course-details', query: {courseId: id}})
     }
   }
 }
@@ -334,8 +309,9 @@ export default {
       .card-item-detail {
         padding: 20px;
         .card-item-name {
-          display: -webkit-box;
-          overflow: hidden;
+          overflow:hidden; //超出的文本隐藏
+          text-overflow:ellipsis; //溢出用省略号显示
+          white-space:nowrap; //溢出不换行
         }
         .card-item-course {
           --x-height-multiplier: 0.342;
@@ -346,7 +322,7 @@ export default {
           .card-item-course-detail {
             color: rgba(0,0,0,.54);
             fill: rgba(0,0,0,.54);
-            a {
+            span {
               color: rgba(0, 0, 0, 0.4);
               display: inline-block;
               font-size: 14px;

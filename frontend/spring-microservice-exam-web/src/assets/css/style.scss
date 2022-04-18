@@ -446,6 +446,7 @@ img {
 
 .single-popular-course {
   position: relative;
+  display: flex;
   z-index: 1;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   border-radius: 6px;
@@ -453,8 +454,9 @@ img {
   cursor: pointer;
   img {
     display: block;
-    width: 100%;
-    border-radius: 6px 6px 0 0;
+    height: 140px;
+    width: 140px;
+    border-radius: 6px 0 0 0;
   }
   .course-content {
     padding: 25px;
@@ -614,7 +616,7 @@ img {
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 350px;
+  height: 200px;
   .single-course-intro-content {
     width: 425px;
     height: auto;
@@ -624,15 +626,15 @@ img {
     @media #{$breakpoint-xs} {
       width: 280px;
     }
-    .ratings {
-      margin-bottom: 20px;
-      i {
-        color: #e3d21b;
-        font-size: 13px;
-        padding: 0 3px;
-        display: inline-block;
-      }
-    }
+    // .ratings {
+    //   margin-bottom: 20px;
+    //   i {
+    //     color: #e3d21b;
+    //     font-size: 13px;
+    //     padding: 0 3px;
+    //     display: inline-block;
+    //   }
+    // }
     h3 {
       font-size: 30px;
       margin-bottom: 10px;

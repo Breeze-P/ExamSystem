@@ -8,9 +8,9 @@
               <a class="nav-brand hidden-sm-only" href="/">HelloTeam</a>
               <div class="classy-menu">
                 <div class="classynav">
-                  <div class="search-area hidden-sm-only">
+                  <!-- <div class="search-area hidden-sm-only">
                     <el-input type="search" prefix-icon="el-icon-search" v-model="query" name="search" id="search" placeholder="搜索" @keyup.enter="search()"/>
-                  </div>
+                  </div> -->
                   <el-menu :default-active="activeIndex"
                            mode="horizontal"
                            text-color="rgba(0, 0, 0, 0.45)"
@@ -18,31 +18,11 @@
                            :unique-opened=true
                            @select="handleSelect">
                     <el-menu-item index="/index" @click="open('/home')">首页</el-menu-item>
-                    <el-menu-item index="/exams" @click="open('/exams')">考试</el-menu-item>
                     <el-menu-item index="/courses" @click="open('/courses')">课程</el-menu-item>
-                    <el-submenu index="/other">
-                      <template slot="title">记录</template>
-                      <el-menu-item index="exam-record" @click="open('/exam-record')">考试记录</el-menu-item>
-                      <el-menu-item index="incorrect" @click="todo">错题本</el-menu-item>
-                    </el-submenu>
-                    <el-submenu index="/u">
-                      <template slot="title">帮助</template>
-                      <el-menu-item index="u-source" @click="open('https://gitee.com/wells2333/spring-microservice-exam')">
-                        源码地址
-                      </el-menu-item>
-                      <el-menu-item index="u-deploy" @click="open('https://www.kancloud.cn/tangyi/spring-microservice-exam/1322870')">
-                        部署文档
-                      </el-menu-item>
-                      <el-menu-item index="c-log" @click="open('https://gitee.com/wells2333/spring-microservice-exam/blob/master/CHANGELOG.md')">
-                        更新日志
-                      </el-menu-item>
-                      <el-menu-item index="c-overview"  @click="open('https://www.kancloud.cn/tangyi/spring-microservice-exam/1322864#6__112')">
-                        规划总览
-                      </el-menu-item>
-                      <el-menu-item index="u-admin" @click="open('http://118.25.138.130:81')">
-                        管理后台
-                      </el-menu-item>
-                    </el-submenu>
+                    <el-menu-item index="/exams" @click="open('/exams')">考试</el-menu-item>
+                    <el-menu-item v-if="userInfo.roles && userInfo.roles[0]===roleList.TEACHER"index="/bank" @click="open('/bank')">题库</el-menu-item>
+                    <!-- <el-menu-item v-else index="/scores" @click="open('/scores')">成绩</el-menu-item> -->
+                    <el-menu-item v-else index="exam-record" @click="open('/exam-record')">成绩</el-menu-item>
                     <el-submenu v-if="login" index="/user-info">
                       <template slot="title">
                         <img :src="userInfo.avatarUrl" style="height: 30px;border-radius: 50%;margin-right: 6px;"/>
@@ -71,7 +51,8 @@
 <script>
 import OMain from './common/main'
 import { mapState } from 'vuex'
-import { isNotEmpty, messageWarn } from '@/utils/util'
+import { messageWarn } from '@/utils/util'
+import roleList from '@/const/roles.js'
 import FixedHeader from 'vue-fixed-header'
 
 export default {
@@ -86,6 +67,7 @@ export default {
     })
   },
   created () {
+    console.log(this.userInfo)
     this.checkLogin()
   },
   // 检测路由变化
@@ -99,7 +81,8 @@ export default {
       activeIndex: '/index',
       login: false,
       input: '',
-      query: ''
+      query: '',
+      roleList: roleList
     }
   },
   methods: {
@@ -163,11 +146,6 @@ export default {
     checkLogin () {
       if (this.userInfo.id !== undefined) {
         this.login = true
-      }
-    },
-    search () {
-      if (isNotEmpty(this.query)) {
-        this.$router.push({name: 'exams', query: {query: this.query}})
       }
     },
     todo () {

@@ -103,6 +103,11 @@ export const constantRouterMap = [
     component: () => import('@/views/mobileV2/Index')
   },
   {
+    path: '/bank',
+    name: 'bank',
+    component: () => import('@/views/bank/Index')
+  },
+  {
     path: '*',
     redirect: '/home'
   }

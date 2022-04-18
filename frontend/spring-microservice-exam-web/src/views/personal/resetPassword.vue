@@ -2,13 +2,13 @@
   <div id="password">
     <el-row class="password-msg">
       <el-col :span="24" style="color: black;">
-        <h1>修改密码</h1>
+        <div class="modify-title">修改密码</div>
       </el-col>
     </el-row>
     <el-row>
       <el-col :span="20" :offset="2" style="margin-top:10px;">
         <el-card class="box-card">
-          <el-form ref="form" :rules="rules" :label-position="labelPosition" :model="userInfo" label-width="100px" style="width: 90%;">
+          <el-form ref="form" :rules="rules" :label-position="labelPosition" :model="userInfo" label-width="100px">
             <el-row>
               <el-col :span="12" :offset="6">
                 <el-form-item label="账号：" prop="identifier">
@@ -38,11 +38,9 @@
               </el-col>
             </el-row>
             <el-row>
-              <el-col :span="12" :offset="8">
-                <el-form-item>
-                  <el-button type="primary" @click="update">保存</el-button>
-                </el-form-item>
-              </el-col>
+              <div class="submit-button">
+                  <el-button type="primary" style="width: 120px;" @click="update">保存</el-button>
+              </div>
             </el-row>
           </el-form>
         </el-card>
@@ -126,7 +124,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" rel="stylesheet/scss" scoped>
+  @font-face {
+    font-family: "HelloTeamfont";
+    src: url("../../../static/font/ZCOOLXiaoWei-Regular.ttf");
+  }
   #password {
     margin-bottom: 20px;
+
+    font-family: HelloTeamfont;
+  }
+
+  .modify-title {
+    width: 100vw;
+    line-height: 40px;
+    text-align: center;
+
+    margin-top: 60px;
+
+    font-size: 30px;
+    font-weight: 400;
+  }
+
+  .submit-button {
+    display: flex;
+    justify-content: center;
   }
 </style>

@@ -2,26 +2,17 @@
   <div>
     <transition name="fade-transform" mode="out-in">
       <div v-show="!loading">
-        <div class="single-course-intro d-flex align-items-center justify-content-center" :style="'background-image: url(' + course.logoUrl + ');'">
+        <div class="single-course-intro d-flex align-items-center justify-content-center">
           <div class="single-course-intro-content text-center">
-            <div class="rate">
-              <el-rate
-                v-model="value"
-                disabled
-                text-color="#ff9900"
-                score-template="{value}">
-              </el-rate>
-            </div>
             <h3>{{ course.courseName }}</h3>
             <div class="meta d-flex align-items-center justify-content-center">
               <a href="#">{{ course.teacher }}</a>
               <span><i class="fa fa-circle" aria-hidden="true"></i></span>
               <a href="#">{{ course.college }} &amp; {{ course.major }}</a>
             </div>
-            <div class="price">免费</div>
           </div>
         </div>
-        <div class="single-course-content padding-80">
+        <div class="single-course-content">
           <el-row class="my-content-container ml-100 mr-100">
             <el-col :span="18" style="padding-right: 40px;">
               <el-tabs>
@@ -56,11 +47,10 @@
                 </el-tab-pane>
                 <el-tab-pane>
               <span slot="label">
-                <el-button type="default" class="course-content-btn">报名学员</el-button>
+                <el-button type="default" class="course-content-btn">班级成员</el-button>
               </span>
                   <div class="about-members mb-30">
-                    <h4>报名学员</h4>
-                    <p>{{ course.courseDescription }}</p>
+                    <h4>班级成员</h4>
                   </div>
                 </el-tab-pane>
                 <el-tab-pane>
@@ -68,15 +58,16 @@
                 <el-button type="default" class="course-content-btn">学习交流</el-button>
               </span>
                   <div class="about-review mb-30">
-                    <h4>学习交流</h4>
-                    <p>{{ course.courseDescription }}</p>
+                    <h4>评论发布</h4>
+                    <el-input v-model="comment" placeholder="请输入评论" :value="comment"></el-input>
+                    <div class="comment-button" @click="handleCommitComment"><el-button type="primary" plain>提交</el-button></div>
                   </div>
                 </el-tab-pane>
               </el-tabs>
             </el-col>
             <el-col :span="6">
               <div class="course-sidebar">
-                <el-button type="primary" class="clever-btn mb-30 w-100" @click="buyCourse">购买课程</el-button>
+                <el-button type="primary" class="clever-btn mb-30 w-100" @click="handleExam">查看考试</el-button>
                 <div class="sidebar-widget">
                   <h4>课程特色</h4>
                   <ul class="features-list">
@@ -98,18 +89,6 @@
                     </li>
                   </ul>
                 </div>
-                <div class="sidebar-widget">
-                  <h4>猜你喜欢</h4>
-                  <div class="single--courses d-flex align-items-center" v-for="course in likes" :key="course.id">
-                    <div class="thumb">
-                      <img src="static/img/bg-img/yml.jpg" alt="">
-                    </div>
-                    <div class="content">
-                      <h5>{{ course.courseName }}</h5>
-                      <h6>{{ course.price }}</h6>
-                    </div>
-                  </div>
-                </div>
               </div>
             </el-col>
           </el-row>
@@ -120,7 +99,7 @@
 </template>
 <script>
 import { getObj } from '@/api/exam/course'
-import { messageWarn } from '@/utils/util'
+import { messageSuccess } from '@/utils/util'
 
 export default {
   data () {
@@ -128,12 +107,12 @@ export default {
       loading: true,
       courseId: '',
       course: {},
-      value: 3.7,
       likes: [{
         id: 1,
         courseName: '应用文写作',
         price: '$20'
-      }]
+      }],
+      comment: ''
     }
   },
   created () {
@@ -152,8 +131,13 @@ export default {
         console.error(error)
       })
     },
-    buyCourse () {
-      messageWarn(this, '功能正在开发中')
+    handleCommitComment () {
+      // 提交评论
+      this.comment = ''
+      messageSuccess(this, '提交成功')
+    },
+    handleExam () {
+      this.$router.push('/exams')
     }
   }
 }
@@ -181,6 +165,11 @@ export default {
     text-align: center;
     margin-right: 10px;
     margin-bottom: 10px;
+
+    &:hover {
+      color: #3762f0;
+      border-color: #3762f0;
+    }
   }
 
   .clever-btn {
@@ -203,5 +192,10 @@ export default {
   }
   .my-content-container {
     margin-top: 0;
+  }
+
+  .comment-button {
+    margin-top: 20px;
+    text-align: right;
   }
 </style>

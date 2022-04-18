@@ -6,7 +6,7 @@
           <el-col :span="3" :offset="2" class="footer-col">
             <h4>链接</h4>
             <a target="_blank" href="https://github.com/Breeze-P/ExamSystem">GITHUB</a>
-            <a target="_blank" href="http://118.25.138.130:81">管理后台</a>
+            <a target="_blank" href="http://localhost:8081">管理后台</a>
             <a target="_blank" href="">更新日志</a>
           </el-col>
           <el-col :span="3" class="footer-col">

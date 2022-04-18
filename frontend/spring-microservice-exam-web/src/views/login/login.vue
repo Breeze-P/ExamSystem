@@ -8,106 +8,122 @@
       <image xlink:href="static/img/login/bg_web.jpg" width="1440" height="480" filter="url(#blur)"></image>
     </svg>
     <!-- 注册、登录表单 -->
-    <div class="login-wrap">
-      <el-tabs v-model="activeName">
-        <!-- 注册 -->
-        <el-tab-pane label="注册" name="/register" class="login-wrap-title">
-          <el-form ref="registerForm" :model="register.form" :rules="register.rules" class="register-form" label-position="left" auto-complete="off">
-            <el-form-item prop="identifier">
-              <el-input placeholder="用户名" v-model="register.form.identifier" name="identifier" type="text" auto-complete="off"/>
-            </el-form-item>
-            <el-form-item prop="email">
-              <el-input placeholder="邮箱" v-model="register.form.email" name="email" type="text" auto-complete="off"/>
-            </el-form-item>
-            <el-form-item prop="credential">
-              <el-input placeholder="密码" :type="register.passwordType" v-model="register.form.credential" name="credential" auto-complete="off" @keyup.enter.native="handleRegister"/>
-            </el-form-item>
-            <el-form-item prop="code">
-              <el-row :span="24">
-                <el-col :span="14">
-                  <el-input :maxlength="register.code.len" v-model="register.form.code" auto-complete="off" placeholder="请输入验证码" @keyup.enter.native="handleRegister" />
-                </el-col>
-                <el-col :span="10">
-                  <div class="login-code">
-                    <span v-if="register.code.type === 'text'" class="login-code-img" @click="refreshRegisterCode">{{ register.code.value }}</span>
-                    <img v-else :src="register.code.src" alt="验证码" class="login-code-img" @click="refreshRegisterCode">
-                  </div>
-                </el-col>
-              </el-row>
-            </el-form-item>
-            <el-form-item>
-              <el-button :loading="register.loading" type="primary" @click.native.prevent="handleRegister">注册</el-button>
-            </el-form-item>
-          </el-form>
-        </el-tab-pane>
-        <!-- 登录 -->
-        <el-tab-pane label="登录" name="/login" class="login-wrap-title">
-          <div v-if="!useSmsLogin">
-            <el-form ref="loginForm" :model="login.form" :rules="login.rules" class="login-form" auto-complete="on" label-position="left">
+    <div class="view-wrap">
+      <div class="login-wrap">
+        <el-tabs v-model="activeName">
+          <!-- 注册 -->
+          <el-tab-pane label="注册" name="/register" class="login-wrap-title">
+            <el-form ref="registerForm" :model="register.form" :rules="register.rules" class="register-form" label-position="left" auto-complete="off">
               <el-form-item prop="identifier">
-                <el-input placeholder="用户名或邮箱" v-model="login.form.identifier" name="identifier" type="text" auto-complete="on"/>
+                <el-input placeholder="用户名" v-model="register.form.identifier" name="identifier" type="text" auto-complete="off"/>
+              </el-form-item>
+              <el-form-item prop="email">
+                <el-input placeholder="邮箱" v-model="register.form.email" name="email" type="text" auto-complete="off"/>
+              </el-form-item>
+              <el-form-item prop="role">
+                <el-select placeholder="选择身份" v-model="register.form.roleName" name="role">
+                  <el-option label='学生' value='普通用户'></el-option>
+                  <el-option label='教师' value='教师'></el-option>
+                </el-select>
               </el-form-item>
               <el-form-item prop="credential">
-                <el-input placeholder="密码" :type="login.passwordType" v-model="login.form.credential" name="credential" auto-complete="on" @keyup.enter.native="handleLogin"/>
-                <span class="forgot-suffix">
-                <span class="forgot-link">
-                  <router-link to="/reset-password">
-                    <span>忘记密码?</span>
-                  </router-link>
-                </span>
-              </span>
+                <el-input placeholder="密码" :type="register.passwordType" v-model="register.form.credential" name="credential" auto-complete="off" @keyup.enter.native="handleRegister"/>
               </el-form-item>
-              <!-- <el-form-item prop="code">
+              <el-form-item prop="code">
                 <el-row :span="24">
                   <el-col :span="14">
-                    <el-input :maxlength="login.code.len" v-model="login.form.code" auto-complete="off" placeholder="请输入验证码" @keyup.enter.native="handleLogin" />
+                    <el-input :maxlength="register.code.len" v-model="register.form.code" auto-complete="off" placeholder="请输入验证码" @keyup.enter.native="handleRegister" />
                   </el-col>
                   <el-col :span="10">
                     <div class="login-code">
-                      <span v-if="login.code.type === 'text'" class="login-code-img" @click="refreshLoginCode">{{ login.code.value }}</span>
-                      <img v-else :src="login.code.src" alt="验证码" class="login-code-img" @click="refreshLoginCode">
+                      <span v-if="register.code.type === 'text'" class="login-code-img" @click="refreshRegisterCode">{{ register.code.value }}</span>
+                      <img v-else :src="register.code.src" alt="验证码" class="login-code-img" @click="refreshRegisterCode">
                     </div>
                   </el-col>
                 </el-row>
-              </el-form-item> -->
-              <el-form-item>
-                <el-button :loading="login.loading" type="primary" @click.native.prevent="handleLogin">登录</el-button>
-              </el-form-item>
-              <div class="sms-login">
-                <span @click="smsLogin">短信验证码登录</span>
-              </div>
-            </el-form>
-          </div>
-          <!-- 验证码登录-->
-          <div v-else>
-            <el-form ref="smsLoginForm" :model="sms.form" :rules="sms.rules" class="login-form" auto-complete="off" label-position="left">
-              <el-form-item prop="phone">
-                <el-input placeholder="手机号码" v-model="sms.form.phone" name="phone" type="text" auto-complete="off"/>
-              </el-form-item>
-              <el-form-item prop="code">
-                <el-input class="sms-code-input" placeholder="4位验证码" v-model="sms.form.code" name="code" type="text" auto-complete="off"/>
-                <el-button class="sms-code-send" @click="handleSendSms" :loading="sms.sending">发送验证码</el-button>
               </el-form-item>
               <el-form-item>
-                <el-button :loading="sms.loading" type="primary" @click.native.prevent="handleSmsLogin">登录</el-button>
+                <el-button :loading="register.loading" type="primary" @click.native.prevent="handleRegister">注册</el-button>
               </el-form-item>
-              <div class="sms-login">
-                <span @click="accountLogin">账号密码登录</span>
-              </div>
             </el-form>
-          </div>
-          <!-- 第三方登录 -->
-          <div class="third-login">
-            <el-row>
-              <el-col :span="24" class="third-link">
-                <a title="微信登录" href="">
-                  <span class="wechat"></span>微信
-                </a>
-              </el-col>
-            </el-row>
-          </div>
-        </el-tab-pane>
-      </el-tabs>
+            <!-- <el-card class="box-card">
+              <div slot="header" class="login-wrap-title">
+                <span>TIPS</span>
+              </div>
+              <div class="text">
+                <span>这里是<b>HOSTER</b>申请页, 以学校为单位申请管理员权限。</span>
+              </div>
+            </el-card> -->
+          </el-tab-pane>
+          <!-- 登录 -->
+          <el-tab-pane label="登录" name="/login" class="login-wrap-title">
+            <div v-if="!useSmsLogin">
+              <el-form ref="loginForm" :model="login.form" :rules="login.rules" class="login-form" auto-complete="on" label-position="left">
+                <el-form-item prop="identifier">
+                  <el-input placeholder="用户名" v-model="login.form.identifier" name="identifier" type="text" auto-complete="on"/>
+                </el-form-item>
+                <el-form-item prop="credential">
+                  <el-input placeholder="密码" :type="login.passwordType" v-model="login.form.credential" name="credential" auto-complete="on" @keyup.enter.native="handleLogin"/>
+                  <span class="forgot-suffix">
+                  <span class="forgot-link">
+                    <router-link to="/reset-password">
+                      <span>忘记密码?</span>
+                    </router-link>
+                  </span>
+                </span>
+                </el-form-item>
+                <el-form-item prop="code">
+                  <el-row :span="24">
+                    <el-col :span="14">
+                      <el-input :maxlength="login.code.len" v-model="login.form.code" auto-complete="off" placeholder="请输入验证码" @keyup.enter.native="handleLogin" />
+                    </el-col>
+                    <el-col :span="10">
+                      <div class="login-code">
+                        <span v-if="login.code.type === 'text'" class="login-code-img" @click="refreshLoginCode">{{ login.code.value }}</span>
+                        <img v-else :src="login.code.src" alt="验证码" class="login-code-img" @click="refreshLoginCode">
+                      </div>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-form-item>
+                  <el-button :loading="login.loading" type="primary" @click.native.prevent="handleLogin">登录</el-button>
+                </el-form-item>
+                <div class="sms-login">
+                  <span @click="smsLogin">短信验证码登录</span>
+                </div>
+              </el-form>
+            </div>
+            <!-- 验证码登录-->
+            <div v-else>
+              <el-form ref="smsLoginForm" :model="sms.form" :rules="sms.rules" class="login-form" auto-complete="off" label-position="left">
+                <el-form-item prop="phone">
+                  <el-input placeholder="手机号码" v-model="sms.form.phone" name="phone" type="text" auto-complete="off"/>
+                </el-form-item>
+                <el-form-item prop="code">
+                  <el-input class="sms-code-input" placeholder="4位验证码" v-model="sms.form.code" name="code" type="text" auto-complete="off"/>
+                  <el-button class="sms-code-send" @click="handleSendSms" :loading="sms.sending">发送验证码</el-button>
+                </el-form-item>
+                <el-form-item>
+                  <el-button :loading="sms.loading" type="primary" @click.native.prevent="handleSmsLogin">登录</el-button>
+                </el-form-item>
+                <div class="sms-login">
+                  <span @click="accountLogin">账号密码登录</span>
+                </div>
+              </el-form>
+            </div>
+            <!-- 第三方登录 -->
+            <!-- <div class="third-login">
+              <el-row>
+                <el-col :span="24" class="third-link">
+                  <a title="微信登录" href="">
+                    <span class="wechat"></span>微信
+                  </a>
+                </el-col>
+              </el-row>
+            </div> -->
+          </el-tab-pane>
+        </el-tabs>
+      </div>
     </div>
   </div>
 </template>
@@ -125,10 +141,10 @@ export default {
       if (!isNotEmpty(value)) {
         return callback(new Error('请输入用户名'))
       }
-      // 检查用户名是否存在
+      // 检查用户名/学校名称是否存在
       checkExist(value).then(response => {
         if (isNotEmpty(response.data) && response.data.data) {
-          callback(new Error('用户名已存在！'))
+          callback(new Error('该学校名称已被注册！'))
         } else {
           callback()
         }
@@ -181,7 +197,8 @@ export default {
           credential: '',
           code: '',
           randomStr: '',
-          rememberMe: false
+          rememberMe: false,
+          roleName: '普通用户'
         },
         rules: {
           identifier: [{ validator: checkRegisterUsername, trigger: 'blur' }],
@@ -278,7 +295,11 @@ export default {
           this.$store.dispatch('RegisterByUsername', this.register.form).then(() => {
             this.register.loading = false
             this.$message.success('注册成功！')
-            this.$router.push({ path: '/login' })
+            if (this.$route.path === '/login') {
+              window.location.reload()
+            } else {
+              this.$router.push({ path: '/login' })
+            }
           }).catch(() => {
             this.register.loading = false
             this.refreshRegisterCode()
@@ -326,7 +347,7 @@ export default {
       })
     },
     openMsg () {
-      this.$message.warning('你咋忘不了吃呢？')
+      this.$message.warning('Im the king,boy.')
     }
   }
 }
@@ -345,6 +366,12 @@ export default {
     display: flex;
     justify-content: center;
   }
+  .view-wrap {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .login-wrap {
     width: 330px;
     border-radius: 5px;
@@ -352,6 +379,9 @@ export default {
     margin: 20px;
     background: #ffffff;
     color: #71767a;
+    .el-card__header {
+      padding: 6px;
+    }
     .el-tabs__item {
       font-size: 20px;
     }

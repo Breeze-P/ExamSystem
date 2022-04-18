@@ -19,7 +19,7 @@
                 <img src="static/img/core-img/star.png" alt="">
               </div>
               <h2>
-                <count-to :start-val="0" :end-val="200" :duration="2600" class="counter"/>
+                <count-to :start-val="0" :end-val="counts.host" :duration="2600" class="counter"/>
               </h2>
               <h5>用户数</h5>
             </div>
@@ -32,7 +32,7 @@
                 <img src="static/img/core-img/star.png" alt="">
               </div>
               <h2>
-                <count-to :start-val="0" :end-val="500" :duration="2600" class="counter"/>
+                <count-to :start-val="0" :end-val="counts.exam" :duration="2600" class="counter"/>
               </h2>
               <h5>考试数</h5>
             </div>
@@ -45,7 +45,7 @@
                 <img src="static/img/core-img/star.png" alt="">
               </div>
               <h2>
-                <count-to :start-val="0" :end-val="233" :duration="2600" class="counter"/>
+                <count-to :start-val="0" :end-val="counts.question" :duration="2600" class="counter"/>
               </h2>
               <h5>题目数</h5>
             </div>
@@ -58,7 +58,7 @@
                 <img src="static/img/core-img/star.png" alt="">
               </div>
               <h2>
-                <count-to :start-val="0" :end-val="300" :duration="2600" class="counter"/>
+                <count-to :start-val="0" :end-val="counts.course" :duration="2600" class="counter"/>
               </h2>
               <h5>课程数</h5>
             </div>
@@ -71,7 +71,7 @@
       <el-row>
         <el-col :span="24">
           <div class="section-heading">
-            <h3>热门课程</h3>
+            <h3>热门租户</h3>
           </div>
         </el-col>
       </el-row>
@@ -79,28 +79,12 @@
         <el-col :span="6">
           <transition name="fade-transform" mode="out-in">
             <div class="single-popular-course" v-show="showCourses">
-              <img src="static/img/bg-img/c1.jpg" alt="">
+              <img :src="hotHost.one.avatarUrl" alt="">
               <div class="course-content">
-                <h4>英语语法</h4>
-                <div class="meta d-flex align-items-center">
-                  <a href="#">Tanma</a>
-                  <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                  <a href="#">艺术 &amp; 设计</a>
-                </div>
-                <p>7天搞定英语语法，一线名师带你突破英语基础语法困境，扎实提升。</p>
-              </div>
-              <div class="seat-rating-fee d-flex justify-content-between">
-                <div class="seat-rating h-100 d-flex align-items-center">
-                  <div class="seat">
-                    <i class="el-icon-user-solid" aria-hidden="true"></i> 10
-                  </div>
-                  <div class="rating">
-                    <i class="el-icon-star-on" aria-hidden="true"></i> 4.5
-                  </div>
-                </div>
-                <div class="course-fee h-100">
-                  <a href="#" class="free">免费</a>
-                </div>
+                <h4>{{ hotHost.one.name }}</h4>
+                <p>{{`老师数：${hotHost.one.teacher}`}}</p>
+                <p>{{`学生数：${hotHost.one.student}`}}</p>
+                <p>{{`课程数：${hotHost.one.course}`}}</p>
               </div>
             </div>
           </transition>
@@ -108,28 +92,12 @@
         <el-col :span="6">
           <transition name="fade-transform" mode="out-in">
             <div class="single-popular-course mb-80" v-show="showCourses">
-              <img src="static/img/bg-img/c2.jpg" alt="">
+              <img :src="hotHost.two.avatarUrl" alt="">
               <div class="course-content">
-                <h4>词汇</h4>
-                <div class="meta d-flex align-items-center">
-                  <a href="#">Tanma</a>
-                  <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                  <a href="#">艺术 &amp; 设计</a>
-                </div>
-                <p>专业英语词汇培训辅导班，系统方法帮您高效提升英语词汇培训成绩</p>
-              </div>
-              <div class="seat-rating-fee d-flex justify-content-between">
-                <div class="seat-rating h-100 d-flex align-items-center">
-                  <div class="seat">
-                    <i class="el-icon-user-solid" aria-hidden="true"></i> 10
-                  </div>
-                  <div class="rating">
-                    <i class="el-icon-star-on" aria-hidden="true"></i> 4.5
-                  </div>
-                </div>
-                <div class="course-fee h-100">
-                  <a href="#">免费</a>
-                </div>
+                <h4>{{hotHost.two.name}}</h4>
+                <p>{{`老师数：${hotHost.two.teacher}`}}</p>
+                <p>{{`学生数：${hotHost.two.student}`}}</p>
+                <p>{{`课程数：${hotHost.two.course}`}}</p>
               </div>
             </div>
           </transition>
@@ -137,28 +105,12 @@
         <el-col :span="6">
           <transition name="fade-transform" mode="out-in">
             <div class="single-popular-course mb-80" v-show="showCourses">
-              <img src="static/img/bg-img/c3.jpg" alt="">
+              <img :src="hotHost.three.avatarUrl" alt="">
               <div class="course-content">
-                <h4>说明文写作</h4>
-                <div class="meta d-flex align-items-center">
-                  <a href="#">Tanma</a>
-                  <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                  <a href="#">艺术 &amp; 设计</a>
-                </div>
-                <p>精选辅导教程，训练学生阅读和写作说明文的能力</p>
-              </div>
-              <div class="seat-rating-fee d-flex justify-content-between">
-                <div class="seat-rating h-100 d-flex align-items-center">
-                  <div class="seat">
-                    <i class="el-icon-user-solid" aria-hidden="true"></i> 10
-                  </div>
-                  <div class="rating">
-                    <i class="el-icon-star-on" aria-hidden="true"></i> 4.5
-                  </div>
-                </div>
-                <div class="course-fee h-100">
-                  <a href="#">免费</a>
-                </div>
+                <h4>{{hotHost.three.name}}</h4>
+                <p>{{`老师数：${hotHost.three.teacher}`}}</p>
+                <p>{{`学生数：${hotHost.three.student}`}}</p>
+                <p>{{`课程数：${hotHost.three.course}`}}</p>
               </div>
             </div>
           </transition>
@@ -166,53 +118,6 @@
       </el-row>
     </div>
 
-    <div class="blog-area padding-80-0">
-      <el-row>
-        <el-col :span="24">
-          <div class="section-heading">
-            <h3>博客分享</h3>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row type="flex" justify="center" :gutter="50">
-        <el-col :span="10">
-          <transition name="fade-transform" mode="out-in">
-            <div class="single-blog-area mb-80" v-show="showBlog">
-              <img src="static/img/blog-img/1.jpg" alt="">
-              <div class="blog-content">
-                <a href="#" class="blog-headline">
-                  <h4>英语语法师</h4>
-                </a>
-                <div class="meta d-flex align-items-center">
-                  <a href="#">Tanma</a>
-                  <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                  <a href="#">艺术 &amp; 设计</a>
-                </div>
-                <p>7天搞定英语语法，一线名师带你突破英语基础语法困境，扎实提升。</p>
-              </div>
-            </div>
-          </transition>
-        </el-col>
-        <el-col :span="10">
-          <transition name="fade-transform" mode="out-in">
-            <div class="single-blog-area mb-80" v-show="showBlog">
-              <img src="static/img/blog-img/2.jpg" alt="">
-              <div class="blog-content">
-                <a href="#" class="blog-headline">
-                  <h4>英语语法师</h4>
-                </a>
-                <div class="meta d-flex align-items-center">
-                  <a href="#">Tanma</a>
-                  <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                  <a href="#">艺术 &amp; 设计</a>
-                </div>
-                <p>7天搞定英语语法，一线名师带你突破英语基础语法困境，扎实提升。</p>
-              </div>
-            </div>
-          </transition>
-        </el-col>
-      </el-row>
-    </div>
     <div v-if="isActive" class="go-top-box" @click="goTop(step)">
       <i class="top-icon el-icon-caret-top"></i>
     </div>
@@ -236,7 +141,36 @@ export default {
       isActive: false,
       showFacts: false,
       showCourses: false,
-      showBlog: false
+      showBlog: false,
+      counts: {
+        host: 200,
+        exam: 300,
+        course: 233,
+        question: 600
+      },
+      hotHost: {
+        one: {
+          name: '北郊大',
+          avatarUrl: 'static/img/bg-img/c1.jpeg',
+          teacher: 100,
+          student: 100,
+          course: 200
+        },
+        two: {
+          name: '北脚大',
+          avatarUrl: 'static/img/bg-img/c2.jpeg',
+          teacher: 100,
+          student: 100,
+          course: 200
+        },
+        three: {
+          name: '北蕉大',
+          avatarUrl: 'static/img/bg-img/c3.jpeg',
+          teacher: 100,
+          student: 100,
+          course: 200
+        }
+      }
     }
   },
   components: {
@@ -250,10 +184,20 @@ export default {
       if (document.documentElement.scrollTop > 0) {
         setTimeout(() => this.goTop(i), 16)
       }
+    },
+    // 请求总的数据
+    fetchCounts: () => {
+      console.log('请求了一次counts数据')
+    },
+    // 请求热门租户数据
+    fetchHotHost: () => {
+      console.log('请求了一次热门租户数据')
     }
   },
   created () {
     let vm = this
+    this.fetchCounts()
+    this.fetchHotHost()
     window.onscroll = function () {
       vm.isActive = document.documentElement.scrollTop > 60
       if (document.documentElement.scrollTop > 250) {
